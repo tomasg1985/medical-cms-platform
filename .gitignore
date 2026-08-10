@@ -1,17 +1,28 @@
+# Entornos virtuales
+
+.venv/
+venv/
+env/
+
 # Python
+
 __pycache__/
 *.py[cod]
 
-# Virtual Environments
-backend/.venv/
+# Testing
 
-# Environment
+.pytest_cache/
+
+# Variables de entorno
+
 .env
 
 # IDE
+
 .vscode/
 .idea/
 
-# OS
+# Sistema operativo
+
 Thumbs.db
 .DS_Store
