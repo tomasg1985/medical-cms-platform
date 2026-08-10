@@ -26,6 +26,6 @@ def root():
     """
 
     return {
-        "message": "Medical CMS API funcionando correctamente",
-        "status": "online",
+        "message": "✅ Medical CMS API funcionando correctamente",
+        "status": "🟢 Online",
     }
