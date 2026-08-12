@@ -17,6 +17,12 @@ class Settings(BaseSettings):
     app_version: str = "0.1.0"
     debug: bool = True
 
+    db_host: str = "localhost"
+    db_port: int = 5432
+    db_name: str = "medical_cms"
+    db_user: str = "postgres"
+    db_password: str = "postgres"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
