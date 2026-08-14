@@ -4,9 +4,11 @@ Punto de entrada principal de la aplicación.
 Medical CMS Platform API
 """
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from sqlalchemy.orm import Session
 
 from app.config.settings import settings
+from app.database import get_db
 
 
 app = FastAPI(
@@ -18,7 +20,7 @@ app = FastAPI(
 
 
 @app.get("/")
-def root():
+def root(db: Session = Depends(get_db)):
     """
     Endpoint inicial de prueba.
 
