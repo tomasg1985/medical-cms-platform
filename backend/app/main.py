@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 
 from app.config.settings import settings
 from app.database import get_db
+from app.routes.clinic import router as clinic_router
 
 
 app = FastAPI(
@@ -18,6 +19,7 @@ app = FastAPI(
     debug=settings.debug,
 )
 
+app.include_router(clinic_router)
 
 @app.get("/")
 def root(db: Session = Depends(get_db)):
