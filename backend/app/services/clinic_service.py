@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.clinic import Clinic
@@ -18,3 +19,21 @@ def create_clinic(db: Session, name: str) -> Clinic:
     except Exception:
         db.rollback()
         raise
+
+
+def get_clinics(db: Session) -> list[Clinic]:
+    statement = select(Clinic)
+    result = db.execute(statement)
+    clinics = result.scalars().all()
+
+    return clinics
+
+
+def get_clinic(db: Session, clinic_id: int) -> Clinic | None:
+    statement = select(Clinic).where(Clinic.id == clinic_id)
+
+    result = db.execute(statement)
+
+    clinic = result.scalar_one_or_none()
+
+    return clinic
