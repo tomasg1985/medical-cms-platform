@@ -38,9 +38,11 @@ def get_clinic(db: Session, clinic_id: int) -> Clinic | None:
 
 
 def update_clinic(db: Session, clinic_id: int, name: str) -> Clinic | None:
-    statement = select(Clinic).where(Clinic.id == clinic_id)
-    result = db.execute(statement)
-    clinic = result.scalar_one_or_none()
+
+    clinic = get_clinic(
+        db=db,
+        clinic_id=clinic_id,
+    )
 
     if clinic is None:
         return None
@@ -59,9 +61,11 @@ def update_clinic(db: Session, clinic_id: int, name: str) -> Clinic | None:
 
 
 def delete_clinic(db: Session, clinic_id: int) -> bool:
-    statement = select(Clinic).where(Clinic.id == clinic_id)
-    result = db.execute(statement)
-    clinic = result.scalar_one_or_none()
+
+    clinic = get_clinic(
+        db=db,
+        clinic_id=clinic_id,
+    )
 
     if clinic is None:
         return False

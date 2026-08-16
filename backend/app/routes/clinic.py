@@ -93,9 +93,9 @@ def update_clinic_endpoint(
 @router.delete(
     "/{clinic_id}",
     status_code=204,
-        responses={
-            404: {
-                "description": "No se encontró la clínica solicitada",
+    responses={
+        404: {
+            "description": "No se encontró la clínica solicitada",
         }
     },
 )
