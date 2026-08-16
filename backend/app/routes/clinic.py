@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.schemas.clinic import ClinicCreate, ClinicResponse
-from app.services.clinic_service import create_clinic, get_clinic, get_clinics
+from app.schemas.clinic import ClinicCreate, ClinicResponse, ClinicUpdate
+from app.services.clinic_service import create_clinic, get_clinic, get_clinics, update_clinic
 
 
 router = APIRouter(
@@ -50,6 +50,35 @@ def get_clinic_endpoint(
     clinic = get_clinic(
         db=db,
         clinic_id=clinic_id,
+    )
+
+    if clinic is None:
+        raise HTTPException(
+            status_code=404,
+            detail="No se encontró la clínica solicitada",
+        )
+
+    return clinic
+
+
+@router.put(
+    "/{clinic_id}",
+    response_model=ClinicResponse,
+    responses={
+        404: {
+            "description": "No se encontró la clínica solicitada",
+        }
+    },
+)
+def update_clinic_endpoint(
+    clinic_id: int,
+    clinic_data: ClinicUpdate,
+    db: Session = Depends(get_db),
+):
+    clinic = update_clinic(
+        db=db,
+        clinic_id=clinic_id,
+        name=clinic_data.name,
     )
 
     if clinic is None:

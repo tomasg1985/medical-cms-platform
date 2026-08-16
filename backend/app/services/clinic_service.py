@@ -31,9 +31,28 @@ def get_clinics(db: Session) -> list[Clinic]:
 
 def get_clinic(db: Session, clinic_id: int) -> Clinic | None:
     statement = select(Clinic).where(Clinic.id == clinic_id)
-
     result = db.execute(statement)
-
     clinic = result.scalar_one_or_none()
 
     return clinic
+
+
+def update_clinic(db: Session, clinic_id: int, name: str) -> Clinic | None:
+    statement = select(Clinic).where(Clinic.id == clinic_id)
+    result = db.execute(statement)
+    clinic = result.scalar_one_or_none()
+
+    if clinic is None:
+        return None
+
+    clinic.name = name
+
+    try:
+        db.commit()
+        db.refresh(clinic)
+
+        return clinic
+
+    except Exception:
+        db.rollback()
+        raise
