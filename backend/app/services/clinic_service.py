@@ -56,3 +56,22 @@ def update_clinic(db: Session, clinic_id: int, name: str) -> Clinic | None:
     except Exception:
         db.rollback()
         raise
+
+
+def delete_clinic(db: Session, clinic_id: int) -> bool:
+    statement = select(Clinic).where(Clinic.id == clinic_id)
+    result = db.execute(statement)
+    clinic = result.scalar_one_or_none()
+
+    if clinic is None:
+        return False
+
+    try:
+        db.delete(clinic)
+        db.commit()
+
+        return True
+
+    except Exception:
+        db.rollback()
+        raise

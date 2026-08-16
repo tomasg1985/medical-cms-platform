@@ -5,10 +5,6 @@ class ClinicCreate(BaseModel):
     name: str
 
 
-class ClinicUpdate(BaseModel):
-    name: str
-
-
 class ClinicResponse(BaseModel):
     id: int
     name: str

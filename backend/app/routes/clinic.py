@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.schemas.clinic import ClinicCreate, ClinicResponse, ClinicUpdate
-from app.services.clinic_service import create_clinic, get_clinic, get_clinics, update_clinic
+from app.services.clinic_service import create_clinic, get_clinic, get_clinics, update_clinic, delete_clinic
 
 
 router = APIRouter(
@@ -88,3 +88,28 @@ def update_clinic_endpoint(
         )
 
     return clinic
+
+
+@router.delete(
+    "/{clinic_id}",
+    status_code=204,
+        responses={
+            404: {
+                "description": "No se encontró la clínica solicitada",
+        }
+    },
+)
+def delete_clinic_endpoint(
+    clinic_id: int,
+    db: Session = Depends(get_db),
+):
+    deleted = delete_clinic(
+        db=db,
+        clinic_id=clinic_id,
+    )
+
+    if not deleted:
+        raise HTTPException(
+            status_code=404,
+            detail="No se encontró la clínica solicitada",
+        )
