@@ -1,10 +1,14 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.clinic import Clinic
+from app.models.clinic_model import Clinic
 
 
-def create_clinic(db: Session, name: str) -> Clinic:
+def create_clinic(
+    db: Session,
+    name: str
+) -> Clinic:
+    
     clinic = Clinic(
         name=name
     )

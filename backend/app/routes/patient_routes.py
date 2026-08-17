@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.schemas.patient import PatientCreate, PatientResponse, PatientUpdate
+from app.schemas.patient_schema import PatientCreate, PatientResponse, PatientUpdate
 from app.services.patient_service import create_patient, get_patient, get_patients, update_patient, delete_patient
 
 

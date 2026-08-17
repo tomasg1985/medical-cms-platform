@@ -1,8 +1,8 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.patient import Patient
-from app.schemas.patient import PatientCreate, PatientUpdate
+from app.models.patient_model import Patient
+from app.schemas.patient_schema import PatientCreate, PatientUpdate
 
 def create_patient(
     db: Session, 
