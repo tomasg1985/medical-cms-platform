@@ -27,9 +27,13 @@ def create_patient_endpoint(
 
 @router.get("/", response_model=list[PatientResponse])
 def get_patients_endpoint(
+    clinic_id: int | None = None,
     db: Session = Depends(get_db),
 ):
-    patients = get_patients(db)
+    patients = get_patients(
+        db=db,
+        clinic_id=clinic_id,
+    )
 
     return patients
 

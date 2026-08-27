@@ -5,10 +5,7 @@ from sqlalchemy.orm import Session
 from app.models.professional_model import Professional
 from app.schemas.professional_schema import ProfessionalCreate, ProfessionalUpdate
 
-def create_professional(
-    db: Session,
-    professional_data: ProfessionalCreate
-) ->Professional:
+def create_professional(db: Session, professional_data: ProfessionalCreate) ->Professional:
     
     professional = Professional(
         name=professional_data.name,

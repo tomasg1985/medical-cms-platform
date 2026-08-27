@@ -2,6 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.clinic_model import Clinic
+from app.models.patient_model import Patient
 
 
 def create_clinic(
@@ -39,6 +40,21 @@ def get_clinic(db: Session, clinic_id: int) -> Clinic | None:
     clinic = result.scalar_one_or_none()
 
     return clinic
+
+
+def get_patients_by_clinic(
+    db: Session,
+    clinic_id: int,
+) -> list[Patient]:
+
+    statement = select(Patient).where(
+        Patient.clinic_id == clinic_id
+    )
+
+    result = db.execute(statement)
+    patients = result.scalars().all()
+
+    return patients
 
 
 def update_clinic(db: Session, clinic_id: int, name: str) -> Clinic | None:

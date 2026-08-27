@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.schemas.clinic_schema import ClinicCreate, ClinicResponse, ClinicUpdate
-from app.services.clinic_service import create_clinic, get_clinic, get_clinics, update_clinic, delete_clinic
+from app.services.clinic_service import create_clinic, get_clinic, get_clinics, update_clinic, delete_clinic, get_patients_by_clinic
 
 
 router = APIRouter(
@@ -59,6 +59,21 @@ def get_clinic_endpoint(
         )
 
     return clinic
+
+
+@router.get(
+    "/{clinic_id}/patients",
+)
+def get_clinic_patients_endpoint(
+    clinic_id: int,
+    db: Session = Depends(get_db),
+):
+    patients = get_patients_by_clinic(
+        db=db,
+        clinic_id=clinic_id,
+    )
+
+    return patients
 
 
 @router.put(

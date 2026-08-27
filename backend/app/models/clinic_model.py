@@ -1,8 +1,17 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from typing import TYPE_CHECKING
+
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base
+
+if TYPE_CHECKING:
+    from app.models.patient_model import Patient
 
 class Clinic(Base):
     __tablename__ = "clinics"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(nullable=False)
+    
+    patients: Mapped[list["Patient"]] = relationship(
+        back_populates="clinic"
+    )
