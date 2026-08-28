@@ -53,7 +53,7 @@ class PatientRepository:
             raise
 
 
-    def delete(self, db: Session, patient: Patient) :
+    def delete(self, db: Session, patient: Patient) -> bool:
 
         try:
             db.delete(patient)

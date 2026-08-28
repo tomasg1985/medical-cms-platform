@@ -1,60 +1,46 @@
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.clinic_model import Clinic
-from app.models.patient_model import Patient
+from app.repositories.clinic_repository import ClinicRepository
+
+clinic_repository = ClinicRepository()
 
 
 def create_clinic(
     db: Session,
     name: str
 ) -> Clinic:
-    
+
     clinic = Clinic(
         name=name
     )
 
-    try:
-        db.add(clinic)
-        db.commit()
-        db.refresh(clinic)
+    clinic = clinic_repository.create(
+            db=db,
+            clinic=clinic
+        )
 
-        return clinic
+    return clinic
 
-    except Exception:
-        db.rollback()
-        raise
 
 
 def get_clinics(db: Session) -> list[Clinic]:
-    statement = select(Clinic)
-    result = db.execute(statement)
-    clinics = result.scalars().all()
+
+    clinics = clinic_repository.get_clinics(
+        db=db
+    )
 
     return clinics
 
 
 def get_clinic(db: Session, clinic_id: int) -> Clinic | None:
-    statement = select(Clinic).where(Clinic.id == clinic_id)
-    result = db.execute(statement)
-    clinic = result.scalar_one_or_none()
 
-    return clinic
-
-
-def get_patients_by_clinic(
-    db: Session,
-    clinic_id: int,
-) -> list[Patient]:
-
-    statement = select(Patient).where(
-        Patient.clinic_id == clinic_id
+    clinic = clinic_repository.get_by_id(
+        db=db,
+        clinic_id=clinic_id
     )
 
-    result = db.execute(statement)
-    patients = result.scalars().all()
-
-    return patients
+    return clinic
 
 
 def update_clinic(db: Session, clinic_id: int, name: str) -> Clinic | None:
@@ -69,15 +55,13 @@ def update_clinic(db: Session, clinic_id: int, name: str) -> Clinic | None:
 
     clinic.name = name
 
-    try:
-        db.commit()
-        db.refresh(clinic)
+    clinic = clinic_repository.update(
+            db=db,
+            clinic=clinic
+        )
 
-        return clinic
+    return clinic
 
-    except Exception:
-        db.rollback()
-        raise
 
 
 def delete_clinic(db: Session, clinic_id: int) -> bool:
@@ -90,12 +74,7 @@ def delete_clinic(db: Session, clinic_id: int) -> bool:
     if clinic is None:
         return False
 
-    try:
-        db.delete(clinic)
-        db.commit()
-
-        return True
-
-    except Exception:
-        db.rollback()
-        raise
+    return clinic_repository.delete(
+        db=db,
+        clinic=clinic
+    )
