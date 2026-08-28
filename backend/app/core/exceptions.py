@@ -1,0 +1,2 @@
+class ClinicNotFoundError(Exception):
+    pass

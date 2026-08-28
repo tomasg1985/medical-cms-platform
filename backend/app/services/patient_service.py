@@ -3,15 +3,27 @@ from sqlalchemy.orm import Session
 from app.models.patient_model import Patient
 from app.schemas.patient_schema import PatientCreate, PatientUpdate
 from app.repositories.patient_repository import PatientRepository
+from app.repositories.clinic_repository import ClinicRepository
+
+from app.core.exceptions import ClinicNotFoundError
 
 patient_repository = PatientRepository()
+clinic_repository = ClinicRepository()
 
 
 def create_patient(
     db: Session, 
     patient_data: PatientCreate
 ) -> Patient:
+
+    clinic = clinic_repository.get_by_id(
+        db=db,
+        clinic_id=patient_data.clinic_id
+    )
     
+    if clinic is None:
+        raise ClinicNotFoundError
+
     patient = Patient(
         name=patient_data.name,
         last_name=patient_data.last_name,

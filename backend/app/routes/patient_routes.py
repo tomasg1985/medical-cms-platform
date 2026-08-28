@@ -5,6 +5,7 @@ from app.database import get_db
 from app.schemas.patient_schema import PatientCreate, PatientResponse, PatientUpdate
 from app.services.patient_service import create_patient, get_patient, get_patients, update_patient, delete_patient
 
+from app.core.exceptions import ClinicNotFoundError
 
 router = APIRouter(
     prefix="/patients",
@@ -17,12 +18,19 @@ def create_patient_endpoint(
     patient_data: PatientCreate,
     db: Session = Depends(get_db),
 ):
-    patient = create_patient(
-        db=db,
-        patient_data=patient_data,
+    try:
+        patient = create_patient(
+            db=db,
+            patient_data=patient_data,
+        )
+
+        return patient
+    except ClinicNotFoundError:
+        raise HTTPException(
+        status_code=404,
+        detail="No se encontró la clínica solicitada",
     )
 
-    return patient
 
 
 @router.get("/", response_model=list[PatientResponse])
