@@ -1,10 +1,14 @@
+from typing import TYPE_CHECKING
+
 from datetime import date
 
 from sqlalchemy import Date
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
 
+if TYPE_CHECKING:
+    from app.models.clinic_model import Clinic
 class Professional(Base):
     __tablename__ = "professionals"
     
@@ -22,3 +26,8 @@ class Professional(Base):
     address: Mapped[str] = mapped_column(nullable=False)
     medical_facility: Mapped[str] = mapped_column(nullable=False)
     working_insurance: Mapped[str] = mapped_column(nullable=False)
+
+    clinics: Mapped[list["Clinic"]] = relationship(
+        secondary="professional_clinics",
+        back_populates="professionals"
+    )

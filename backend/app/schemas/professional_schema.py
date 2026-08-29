@@ -4,6 +4,14 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+class ClinicResponse(BaseModel):
+    id: int
+    name: str
+
+    model_config = {
+        "from_attributes": True
+    }
+
 class ProfessionalCreate(BaseModel):
     name: str
     last_name: str
@@ -49,6 +57,8 @@ class ProfessionalResponse(BaseModel):
     address: str
     medical_facility: str
     working_insurance: str
+    
+    clinics: list["ClinicResponse"]
 
     model_config = {
             "from_attributes": True
