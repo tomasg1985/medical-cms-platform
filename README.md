@@ -1,285 +1,45 @@
-# Medical CMS Platform
-
-> Plataforma SaaS para la gestión integral de clínicas, consultorios y profesionales de la salud.
-
----
-
-2. Instalar dependencias
-Bash
-# Con npm
-npm install
-
-# O con pnpm
-pnpm install
-3. Configurar variables de entorno
-Copia el archivo de ejemplo .env.example y renómbralo a .env:
-
-Bash
-cp .env.example .env
-4. Configurar la Base de Datos y Ejecutar Migraciones
-Bash
-# Ejecutar migraciones (Ejemplo con Prisma)
-npx prisma migrate dev
-5. Iniciar en modo desarrollo
-Bash
-npm run dev
-La aplicación estará disponible en http://localhost:3000.
-
-🔐 Variables de Entorno
-Crea un archivo .env en la raíz del proyecto con el siguiente formato:
-
-Fragmento de código
-# Servidor
-PORT=5000
-NODE_ENV=development
-
-# Base de Datos
-DATABASE_URL="postgresql://usuario:password@localhost:5432/medical_cms?schema=public"
-
-# Autenticación
-JWT_SECRET=tu_secreto_super_seguro
-JWT_EXPIRES_IN=7d
-
-# Servicios Cloud (Opcional)
-AWS_S3_BUCKET_NAME=tu-bucket
-AWS_ACCESS_KEY_ID=tu-key
-AWS_SECRET_ACCESS_KEY=tu-secret
-📁 Estructura del Proyecto
-Plaintext
-medical-cms-platform/
-├── 📁 public/            # Archivos estáticos
-├── 📁 src/
-│   ├── 📁 assets/        # Imágenes y estilos globales
-│   ├── 📁 components/    # Componentes reutilizables de UI
-│   ├── 📁 config/        # Configuraciones de app/servicios
-│   ├── 📁 controllers/   # Controladores de backend
-│   ├── 📁 hooks/         # Custom hooks de React
-│   ├── 📁 models/        # Modelos / Schemas de Base de Datos
-│   ├── 📁 pages/         # Páginas / Rutas principales
-│   ├── 📁 services/      # Llamadas a API / Lógica de negocio
-│   └── 📁 utils/         # Funciones auxiliares
-├── 📜 .env.example       # Plantilla de variables de entorno
-├── 📜 docker-compose.yml # Configuración de Docker
-├── 📜 package.json       # Dependencias y scripts
-└── 📜 README.md          # Documentación del proyecto
-📦 Despliegue / Deployment
-Despliegue con Docker
-Para construir y levantar la aplicación mediante Docker Compose:
-
-Bash
-docker-compose up -d --build
-🤝 Contribución
-Las contribuciones son lo que hacen a la comunidad de código abierto un lugar increíble para aprender, inspirar y crear. ¡Cualquier contribución que hagas es muy apreciada!
-
-Haz un Fork del proyecto.
-
-Crea tu Feature Branch (git checkout -b feature/NuevaCaracteristica).
-
-Realiza tus cambios y haz Commit (git commit -m 'Add: Nueva Caracteristica').
-
-Sube tus cambios a tu rama (git push origin feature/NuevaCaracteristica).
-
-Abre un Pull Request.
-
-📄 Licencia
-Distribuido bajo la Licencia MIT. Consulta el archivo LICENSE para obtener más información.
-
-✉️ Contacto
-Tomás - @tomasg1985
-
-Link del Proyecto: https://github.com/tomasg1985/medical-cms-platform
-"""
-
-with open("README.md", "w", encoding="utf-8") as f:
-f.write(content)
-
-print("README.md generado con éxito.")
-
-
-```text?code_stdout&code_event_index=1
-README.md generado con éxito.
-
-He diseñado y generado una plantilla completa de README.md profesional para tu repositorio en GitHub: medical-cms-platform.
-
-[file-tag: code-generated-file-6a2bb45f-b4dc-4bd2-b364-e0ca88e954f6]
-
-📋 Previsualización del Contenido del README.md
-Markdown
 # 🏥 Medical CMS Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D%2018.0.0-brightgreen.svg)](https://nodejs.org/)
-[![React](https://img.shields.io/badge/React-18.x-61dafb?logo=react)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?logo=typescript)](https://www.typescriptlang.org/)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688?logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Una plataforma de gestión de contenidos y registros médicos (CMS/EMR) moderna, segura y escalable diseñada para clínicas, hospitales y profesionales de la salud independientes.
-
----
-
-## 📑 Tabla de Contenidos
-
-- [Características Principales](#-características-principales)
-- [Arquitectura y Stack Tecnológico](#-arquitectura-y-stack-tecnológico)
-- [Vista Previa / Screenshots](#-vista-previa--screenshots)
-- [Prerrequisitos](#-prerrequisitos)
-- [Instalación y Configuración](#-instalación-y-configuración)
-- [Variables de Entorno](#-variables-de-entorno)
-- [Estructura del Proyecto](#-estructura-del-proyecto)
-- [Despliegue / Deployment](#-despliegue--deployment)
-- [Contribución](#-contribución)
-- [Licencia](#-licencia)
-- [Contacto](#-contacto)
+Sistema de gestión médica (CMS/EMR) desarrollado en **Python**, diseñado con **arquitectura limpia**, **programación defensiva** y **validación robusta de datos** para garantizar la integridad de la información clínica y la mantenibilidad a largo plazo.
 
 ---
 
-## ✨ Características Principales
+### 🛠️ Tecnologías y Herramientas
 
-- **Gestión de Pacientes:** Expediente clínico electrónico, historial de consultas, alergias y antecedentes.
-- **Agenda y Citas Médicas:** Calendario interactivo con recordatorios automáticos e integración para telemedicina.
-- **Gestión de Recetas e Historiales:** Generación de recetas digitales (PDF/QR) y seguimiento de tratamientos.
-- **Control de Roles y Permisos (RBAC):** Accesos diferenciados para Administradores, Médicos, Recepcionistas y Pacientes.
-- **Cumplimiento y Seguridad:** Encriptación de datos sensibles de salud (HIPAA / GDPR compliant ready).
-- **Dashboard y Analíticas:** Métricas en tiempo real de consultas, ingresos y flujo de pacientes.
+`Python` • `FastAPI` • `Pydantic` • `SQLAlchemy` • `PostgreSQL` • `Git` • `GitHub` • `Markdown`
+
+*Otras competencias:* Arquitectura Limpia (Clean Architecture), Programación Orientada a Objetos (POO), Validación de Datos (Data Cleaning), Persistencia de Datos, Módulos Independientes.
 
 ---
 
-## 🛠️ Arquitectura y Stack Tecnológico
+### 🎯 Objetivos Técnicos (A Mediano Plazo)
 
-### Frontend
-- **Framework:** React / Next.js
-- **Lenguaje:** TypeScript
-- **Estilos:** Tailwind CSS / Shadcn UI
-- **Estado:** React Query / Zustand
-
-### Backend
-- **Core:** Node.js / Express (o NestJS)
-- **Base de Datos:** PostgreSQL (con Prisma ORM) / MongoDB
-- **Autenticación:** JWT / Auth0 / NextAuth
-
-### Infraestructura & DevOps
-- **Contenedores:** Docker & Docker Compose
-- **CI/CD:** GitHub Actions
-- **Almacenamiento de Archivos:** AWS S3 / Cloudinary (para imágenes/estudios médicos)
+Para escalar este sistema de gestión al siguiente nivel, las próximas metas de desarrollo son:
+1. **Desarrollo Web / APIs:** Exponer la lógica de dominio del sistema a través de una **REST API** asíncrona y documentada automáticamente con Swagger/OpenAPI usando **FastAPI**.
+2. **Seguridad y Cumplimiento:** Implementar autenticación JWT y encriptación de datos médicos sensibles.
 
 ---
 
-## 📸 Vista Previa / Screenshots
+### 📂 Proyectos Destacados (Módulos de la Plataforma)
 
-| Dashboard Principal | Historia Clínica |
-| :---: | :---: |
-| ![Dashboard](https://via.placeholder.com/400x220?text=Dashboard+UI) | ![Historia Clínica](https://via.placeholder.com/400x220?text=Medical+Record+UI) |
+#### 📋 [Gestión de Pacientes y Clinical Data](https://github.com/tomasg1985/medical-cms-platform)
+Módulo central para la administración de historias clínicas y expedientes médicos.
+* **Foco técnico:** Limpieza y validación rigurosa de datos (Data Cleaning) en el ingreso de antecedentes médicos mediante Pydantic y programación defensiva.
+* **Paradigma:** Aplicación estricta de arquitectura limpia y separación de responsabilidades para aislar la lógica de dominio de los componentes externos.
 
----
+#### 📅 [Agenda y Control de Turnos](https://github.com/tomasg1985/medical-cms-platform)
+Sistema de programación y asignación de citas médicas.
+* **Foco técnico:** Lógica modular para la prevención de solapamientos horarios y persistencia de datos relacionales, garantizando un flujo sin conflictos.
 
-## ⚙️ Prerrequisitos
+#### 🔐 [Control de Acceso y Roles (RBAC)](https://github.com/tomasg1985/medical-cms-platform)
+Módulo de seguridad local para la administración segura de permisos de médicos, recepcionistas y administradores.
+* **Foco técnico:** Implementación de principios de POO y separación de capas para el manejo independiente de autenticación y autorización.
 
-Asegúrate de tener instalados los siguientes componentes antes de comenzar:
-
-- [Node.js](https://nodejs.org/) `>= 18.x`
-- [npm](https://www.npmjs.com/) / [yarn](https://yarnpkg.com/) / [pnpm](https://pnpm.io/)
-- [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/)
-- Instancia activa de **PostgreSQL** o la base de datos de tu elección.
-
----
-
-## 🚀 Instalación y Configuración
-
-Sigue estos pasos para ejecutar la aplicación de forma local:
-
-### 1. Clonar el repositorio
-```bash
-git clone [https://github.com/tomasg1985/medical-cms-platform.git](https://github.com/tomasg1985/medical-cms-platform.git)
-cd medical-cms-platform
-2. Instalar dependencias
-Bash
-# Con npm
-npm install
-
-# O con pnpm
-pnpm install
-3. Configurar variables de entorno
-Copia el archivo de ejemplo .env.example y renómbralo a .env:
-
-Bash
-cp .env.example .env
-4. Configurar la Base de Datos y Ejecutar Migraciones
-Bash
-npx prisma migrate dev
-5. Iniciar en modo desarrollo
-Bash
-npm run dev
-La aplicación estará disponible en http://localhost:3000.
-
-🔐 Variables de Entorno
-Crea un archivo .env en la raíz del proyecto con el siguiente formato:
-
-Fragmento de código
-# Servidor
-PORT=5000
-NODE_ENV=development
-
-# Base de Datos
-DATABASE_URL="postgresql://usuario:password@localhost:5432/medical_cms?schema=public"
-
-# Autenticación
-JWT_SECRET=tu_secreto_super_seguro
-JWT_EXPIRES_IN=7d
-
-# Servicios Cloud
-AWS_S3_BUCKET_NAME=tu-bucket
-AWS_ACCESS_KEY_ID=tu-key
-AWS_SECRET_ACCESS_KEY=tu-secret
-📁 Estructura del Proyecto
-Plaintext
-medical-cms-platform/
-├── 📁 public/            # Archivos estáticos
-├── 📁 src/
-│   ├── 📁 assets/        # Imágenes y estilos globales
-│   ├── 📁 components/    # Componentes reutilizables de UI
-│   ├── 📁 config/        # Configuraciones de app/servicios
-│   ├── 📁 controllers/   # Controladores de backend
-│   ├── 📁 hooks/         # Custom hooks de React
-│   ├── 📁 models/        # Modelos / Schemas de Base de Datos
-│   ├── 📁 pages/         # Páginas / Rutas principales
-│   ├── 📁 services/      # Llamadas a API / Lógica de negocio
-│   └── 📁 utils/         # Funciones auxiliares
-├── 📜 .env.example       # Plantilla de variables de entorno
-├── 📜 docker-compose.yml # Configuración de Docker
-├── 📜 package.json       # Dependencias y scripts
-└── 📜 README.md          # Documentación del proyecto
-📦 Despliegue / Deployment
-Despliegue con Docker
-Para construir y levantar la aplicación mediante Docker Compose:
-
-Bash
-docker-compose up -d --build
-🤝 Contribución
-Haz un Fork del proyecto.
-
-Crea tu Feature Branch (git checkout -b feature/NuevaCaracteristica).
-
-Realiza tus cambios y haz Commit (git commit -m 'Add: Nueva Caracteristica').
-
-Sube tus cambios a tu rama (git push origin feature/NuevaCaracteristica).
-
-Abre un Pull Request.
-
-📄 Licencia
-Distribuido bajo la Licencia MIT. Consulta el archivo LICENSE para obtener más información.
-
-✉️ Contacto
-Tomás - @tomasg1985
-
-Link del Proyecto: https://github.com/tomasg1985/medical-cms-platform
-
-
----
-
-### 💡 Puntos clave optimizados en este README:
-1. **Badges / Escudos visuales:** Aportan credibilidad inmediata al indicar licencias, versión de Node y tecnologías principales.
-2. **Tabla de contenidos con anclas:** Facilita la navegación dentro del repositorio.
-3. **Sección de Stack Tecnológico y Arquitectura:** Separa claramente Frontend, Backend y DevOps.
-4. **Instrucciones de instalación unificadas:** Bloques de código listos para copiar y pegar en la terminal.
-5. **Estructura de variables de entorno (`.env`):** Crucial para evitar exponer llaves en el código público.
-```
+#### 📊 [Dashboard y Métricas Médicas](https://github.com/tomasg1985/medical-cms-platform)
+Herramienta de análisis para el seguimiento de consultas e indicadores clave de la clínica.
+* **Foco técnico:** Automatización de cálculos estadísticos e interfaces estructuradas por línea de comandos/API para la generación de reportes clínicos.
