@@ -1,12 +1,12 @@
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 
 from app.models.clinic_model import Clinic
 
 
 class ClinicRepository:
     def get_by_id(self, db: Session, clinic_id: int) -> Clinic | None:
-        statement = select(Clinic).where(Clinic.id == clinic_id)
+        statement = select(Clinic).options(selectinload(Clinic.professionals)).where(Clinic.id == clinic_id)
         result = db.execute(statement)
         clinic = result.scalar_one_or_none()
 
@@ -14,7 +14,7 @@ class ClinicRepository:
 
 
     def get_clinics(self, db: Session) -> list[Clinic]:
-        statement = select(Clinic)
+        statement = select(Clinic).options(selectinload(Clinic.professionals))
         result = db.execute(statement)
         clinics = result.scalars().all()
 
