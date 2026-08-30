@@ -11,6 +11,14 @@ class ClinicResponse(BaseModel):
         "from_attributes": True
     }
 
+class PatientClinicResponse(BaseModel):
+    patient_id: int
+    clinic_id: int
+
+    model_config = {
+        "from_attributes": True
+    }
+
 class PatientCreate(BaseModel):
     name: str
     last_name: str
@@ -43,8 +51,7 @@ class PatientResponse(BaseModel):
     phone: str
     address: str
     insurance: str
-    clinic_id: int
-    clinic: ClinicResponse
+    clinics: list["ClinicResponse"]
 
     model_config = {
         "from_attributes": True

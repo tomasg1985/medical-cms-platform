@@ -1,11 +1,12 @@
 from sqlalchemy import select
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session, selectinload
 
 from app.models.patient_model import Patient
+from app.models.clinic_model import Clinic
 
 class PatientRepository:
     def get_by_id(self, db: Session, patient_id: int) -> Patient | None:
-        statement = select(Patient).options(joinedload(Patient.clinic)).where(Patient.id == patient_id)
+        statement = select(Patient).options(selectinload(Patient.clinics)).where(Patient.id == patient_id)
         result = db.execute(statement)
         patient = result.scalar_one_or_none()
         
@@ -13,11 +14,11 @@ class PatientRepository:
 
 
     def get_patients(self, db: Session, clinic_id: int | None = None) -> list[Patient]:
-        statement = select(Patient).options(joinedload(Patient.clinic))
+        statement = select(Patient).options(selectinload(Patient.clinics))
         
         if clinic_id is not None:
             statement = statement.where(
-                Patient.clinic_id == clinic_id
+                Patient.clinics.any(Clinic.id == clinic_id)
             )
 
         result = db.execute(statement)
@@ -39,6 +40,10 @@ class PatientRepository:
             db.rollback()
             raise
 
+
+        except Exception:
+            db.rollback()
+            raise
 
     def update(self, db: Session, patient: Patient) -> Patient:
 

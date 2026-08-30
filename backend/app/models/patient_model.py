@@ -3,7 +3,6 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base
-from sqlalchemy import ForeignKey
 
 if TYPE_CHECKING:
     from app.models.clinic_model import Clinic
@@ -20,13 +19,9 @@ class Patient(Base):
     address: Mapped[str] = mapped_column(nullable=False)
     insurance: Mapped[str] = mapped_column(nullable=False)
 
-    clinic_id: Mapped[int] = mapped_column(
-        ForeignKey("clinics.id"),
-        nullable=False
-    )
-
     birth_date: Mapped[date | None] = mapped_column(nullable=True)
 
-    clinic: Mapped["Clinic"] = relationship(
+    clinics: Mapped [list["Clinic"]] = relationship(
+        secondary="patient_clinics",
         back_populates="patients"
     )

@@ -14,7 +14,8 @@ class Clinic(Base):
     name: Mapped[str] = mapped_column(nullable=False)
     
     patients: Mapped[list["Patient"]] = relationship(
-        back_populates="clinic"
+        secondary="patient_clinics",
+        back_populates="clinics"
     )
     
     professionals: Mapped[list["Professional"]] = relationship(
