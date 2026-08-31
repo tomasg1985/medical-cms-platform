@@ -1,14 +1,7 @@
 from pydantic import BaseModel
 
-class ProfessionalResponse(BaseModel):
-    id: int
-    name: str
-    last_name: str
-    specialty: str
-
-    model_config = {
-            "from_attributes": True
-        }
+from app.schemas.patient_schema import PatientSummary
+from app.schemas.professional_schema import ProfessionalSummary
 
 class ClinicCreate(BaseModel):
     name: str
@@ -21,7 +14,8 @@ class ClinicUpdate(BaseModel):
 class ClinicResponse(BaseModel):
     id: int
     name: str
-    professionals: list["ProfessionalResponse"]
+    professionals: list["ProfessionalSummary"]
+    patients: list["PatientSummary"]
 
     model_config = {
         "from_attributes": True

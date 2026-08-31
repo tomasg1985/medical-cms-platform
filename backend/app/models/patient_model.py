@@ -21,7 +21,7 @@ class Patient(Base):
 
     birth_date: Mapped[date | None] = mapped_column(nullable=True)
 
-    clinics: Mapped [list["Clinic"]] = relationship(
+    clinics: Mapped[list["Clinic"]] = relationship(
         secondary="patient_clinics",
         back_populates="patients"
     )

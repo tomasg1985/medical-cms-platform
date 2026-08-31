@@ -2,7 +2,6 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
 from app.models.professional_model import Professional
-from app.models.clinic_model import Clinic
 
 class ProfessionalRepository:
     def get_by_id(self, db: Session, professional_id: int) -> Professional | None:
@@ -28,21 +27,6 @@ class ProfessionalRepository:
             db.commit()
             db.refresh(professional)
             
-            return professional
-
-        except Exception:
-            db.rollback()
-            raise
-
-
-    def add_clinic(self, db: Session, professional: Professional, clinic: Clinic) -> Professional:
-
-        try:
-            professional.clinics.append(clinic)
-
-            db.commit()
-            db.refresh(professional)
-
             return professional
 
         except Exception:

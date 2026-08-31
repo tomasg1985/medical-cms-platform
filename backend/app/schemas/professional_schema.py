@@ -4,6 +4,24 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+class ProfessionalSummary(BaseModel):
+    id: int
+    name: str
+    last_name: str
+    specialty: str
+
+    model_config = {
+        "from_attributes": True
+    }
+
+class ProfessionalClinicResponse(BaseModel):
+    professional_id: int
+    clinic_id: int
+
+    model_config = {
+        "from_attributes": True
+    }
+
 class ClinicResponse(BaseModel):
     id: int
     name: str

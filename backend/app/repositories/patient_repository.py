@@ -41,10 +41,6 @@ class PatientRepository:
             raise
 
 
-        except Exception:
-            db.rollback()
-            raise
-
     def update(self, db: Session, patient: Patient) -> Patient:
 
         try:

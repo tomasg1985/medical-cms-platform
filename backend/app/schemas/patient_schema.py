@@ -3,6 +3,16 @@ from datetime import date
 from pydantic import BaseModel
 from typing import Optional
 
+class PatientSummary(BaseModel):
+    id: int
+    name: str
+    last_name: str
+    dni: str
+
+    model_config = {
+        "from_attributes": True
+    }
+
 class ClinicResponse(BaseModel):
     id: int
     name: str
@@ -28,8 +38,7 @@ class PatientCreate(BaseModel):
     phone: str
     address: str
     insurance: str
-    clinic_id: int
-    
+
 class PatientUpdate(BaseModel):
     name: Optional[str] = None
     last_name: Optional[str] = None
@@ -39,7 +48,6 @@ class PatientUpdate(BaseModel):
     phone: Optional[str] = None
     address: Optional[str] = None
     insurance: Optional[str] = None
-    clinic_id: Optional[int] = None
 
 class PatientResponse(BaseModel):
     id: int

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.schemas.professional_schema import ProfessionalCreate, ProfessionalResponse, ProfessionalUpdate
+from app.schemas.professional_schema import ProfessionalCreate, ProfessionalResponse, ProfessionalUpdate, ProfessionalClinicResponse
 from app.services.professional_service import create_professional, get_professional, get_professionals, update_professional, delete_professional, add_clinic_to_professional
 
 from app.core.exceptions import ProfessionalNotFoundError, ClinicNotFoundError, ProfessionalAlreadyAssociatedError
@@ -26,20 +26,20 @@ def create_professional_endpoint(
     return professional
 
 
-@router.post("/{professional_id}/clinics/{clinic_id}")
+@router.post("/{professional_id}/clinics/{clinic_id}", response_model=ProfessionalClinicResponse)
 def add_clinic_to_professional_endpoint(
     professional_id: int,
     clinic_id: int,
     db: Session = Depends(get_db)
 ):
     try:
-        professional = add_clinic_to_professional(
+        professional_clinic = add_clinic_to_professional(
             db=db,
             professional_id=professional_id,
             clinic_id = clinic_id
         )
 
-        return professional
+        return professional_clinic
 
     except ProfessionalNotFoundError:
         raise HTTPException(

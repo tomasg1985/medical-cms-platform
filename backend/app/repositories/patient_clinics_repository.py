@@ -1,4 +1,4 @@
-from sqlalchemy import select, and_
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.patient_clinics_model import PatientClinic
@@ -21,7 +21,7 @@ class PatientClinicRepository:
 
 
     def get_by_patient_and_clinic(self, db: Session, patient_id: int, clinic_id: int) -> PatientClinic | None:
-        statement = select(PatientClinic).where(and_(PatientClinic.patient_id == patient_id, PatientClinic.clinic_id == clinic_id))
+        statement = select(PatientClinic).where(PatientClinic.patient_id == patient_id, PatientClinic.clinic_id == clinic_id)
         result = db.execute(statement)
         patient_clinic = result.scalar_one_or_none()
         

@@ -1,20 +1,28 @@
 from sqlalchemy.orm import Session
 
 from app.models.professional_model import Professional
+from app.models.professional_clinic_model import ProfessionalClinic
+
 from app.schemas.professional_schema import ProfessionalCreate, ProfessionalUpdate
 
 from app.repositories.professional_repository import ProfessionalRepository
 from app.repositories.clinic_repository import ClinicRepository
+from app.repositories.professional_clinic_repository import ProfessionalClinicRepository
 
 from app.core.exceptions import ProfessionalNotFoundError
 from app.core.exceptions import ClinicNotFoundError
 from app.core.exceptions import ProfessionalAlreadyAssociatedError
 
+
 professional_repository = ProfessionalRepository()
 clinic_repository = ClinicRepository()
+professional_clinic_repository = ProfessionalClinicRepository()
 
 
-def create_professional(db: Session, professional_data: ProfessionalCreate) ->Professional:
+def create_professional(
+    db: Session,
+    professional_data: ProfessionalCreate
+) -> Professional:
 
     professional = Professional(
         name=professional_data.name,
@@ -49,8 +57,11 @@ def get_professionals(db: Session) -> list[Professional]:
     return professionals
 
 
+def get_professional(
+    db: Session,
+    professional_id: int
+) -> Professional | None:
 
-def get_professional(db: Session, professional_id: int) -> Professional | None:
     professional = professional_repository.get_by_id(
         db=db,
         professional_id=professional_id
@@ -59,18 +70,21 @@ def get_professional(db: Session, professional_id: int) -> Professional | None:
     return professional
 
 
-
-def update_professional(db: Session, professional_id: int, professional_data: ProfessionalUpdate) -> Professional | None:
+def update_professional(
+    db: Session,
+    professional_id: int,
+    professional_data: ProfessionalUpdate
+) -> Professional | None:
 
     professional = get_professional(
-            db=db,
-            professional_id=professional_id,
-        )
+        db=db,
+        professional_id=professional_id,
+    )
 
     if professional is None:
-            return None
+        return None
 
-    data= professional_data.model_dump(exclude_unset=True)
+    data = professional_data.model_dump(exclude_unset=True)
 
     for field, value in data.items():
         setattr(professional, field, value)
@@ -83,8 +97,10 @@ def update_professional(db: Session, professional_id: int, professional_data: Pr
     return professional
 
 
-
-def delete_professional(db: Session, professional_id: int) -> bool:
+def delete_professional(
+    db: Session,
+    professional_id: int
+) -> bool:
 
     professional = get_professional(
         db=db,
@@ -100,33 +116,43 @@ def delete_professional(db: Session, professional_id: int) -> bool:
     )
 
 
-def add_clinic_to_professional(db: Session, professional_id: int, clinic_id: int) -> Professional:
+def add_clinic_to_professional(
+    db: Session,
+    professional_id: int,
+    clinic_id: int
+) -> ProfessionalClinic:
 
     professional = get_professional(
         db=db,
         professional_id=professional_id,
     )
-    
+
     if professional is None:
-            raise ProfessionalNotFoundError
+        raise ProfessionalNotFoundError
 
     clinic = clinic_repository.get_by_id(
-            db=db,
-            clinic_id=clinic_id
-        )
+        db=db,
+        clinic_id=clinic_id,
+    )
 
     if clinic is None:
         raise ClinicNotFoundError
 
-    if clinic in professional.clinics:
-        raise ProfessionalAlreadyAssociatedError
-    else:
-        professional.clinics.append(clinic)
-
-    professional = professional_repository.add_clinic(
+    existing = professional_clinic_repository.get_by_professional_and_clinic(
         db=db,
-        professional=professional,
-        clinic=clinic,
+        professional_id=professional_id,
+        clinic_id=clinic_id,
     )
 
-    return professional
+    if existing is not None:
+        raise ProfessionalAlreadyAssociatedError
+
+    professional_clinic = professional_clinic_repository.create(
+        db=db,
+        professional_clinic=ProfessionalClinic(
+            professional_id=professional_id,
+            clinic_id=clinic_id,
+        ),
+    )
+
+    return professional_clinic

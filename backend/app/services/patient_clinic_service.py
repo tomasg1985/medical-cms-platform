@@ -25,6 +25,14 @@ def create(db: Session, patient_id: int, clinic_id: int) -> PatientClinic:
     if patient is None:
         raise PatientNotFoundError
 
+    clinic = clinic_repository.get_by_id(
+        db=db,
+        clinic_id=clinic_id
+    )
+
+    if clinic is None:
+        raise ClinicNotFoundError
+
     existing = patient_clinics_repository.get_by_patient_and_clinic(
         db=db,
         patient_id=patient_id,
@@ -34,13 +42,6 @@ def create(db: Session, patient_id: int, clinic_id: int) -> PatientClinic:
     if existing is not None:
         raise PatientAlreadyAssociatedError
 
-    clinic = clinic_repository.get_by_id(
-        db=db,
-        clinic_id=clinic_id
-    )
-
-    if clinic is None:
-        raise ClinicNotFoundError
 
     patient_clinic = PatientClinic(
         patient_id=patient_id,
