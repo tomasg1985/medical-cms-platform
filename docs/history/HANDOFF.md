@@ -5511,3 +5511,1693 @@ La nueva información estratégica amplía la visión del producto.
 NO reemplaza las decisiones técnicas ya tomadas.
 
 Las nuevas ideas deberán integrarse progresivamente cuando exista una necesidad concreta y después de la correspondiente evaluación y autorización.
+
+1. Estado del aprendizaje y metodología incorporada
+
+Durante esta etapa se profundizó el aprendizaje práctico de la arquitectura del backend mediante la implementación completa de CRUD para Patient y Professional, utilizando Clinic como referencia.
+
+Se mantuvo la metodología:
+
+Explicación
+    ↓
+Implementación
+    ↓
+Prueba
+    ↓
+Revisión
+    ↓
+Corrección
+    ↓
+Reflexión arquitectónica
+    ↓
+Siguiente bloque
+
+El objetivo no es solamente conseguir que el código funcione, sino comprender por qué está estructurado de esa manera y cuándo conviene modificarlo.
+
+Se comenzó a incorporar explícitamente el estudio de:
+
+Refactorización.
+DRY.
+YAGNI.
+SRP.
+Patrones de diseño.
+Arquitectura de software.
+Decisiones sobre abstracción.
+Trade-offs entre reutilización y claridad.
+Introducción futura del patrón Repository cuando realmente sea necesario.
+
+Se acordó utilizar Refactoring.Guru como material paralelo para estudiar estos conceptos mientras se continúa desarrollando Medical CMS Platform.
+
+2. CRUD de Patient completado
+
+Se implementó el CRUD completo de Patient.
+
+Model
+
+Patient quedó definido con:
+
+id
+name
+last_name
+age
+dni
+email
+phone
+address
+insurance
+
+El modelo utiliza SQLAlchemy 2.0 con:
+
+Mapped
+mapped_column
+
+y hereda de:
+
+Base
+Schemas
+
+Se crearon:
+
+PatientCreate
+PatientUpdate
+PatientResponse
+PatientCreate
+
+Contiene todos los campos necesarios para crear un paciente.
+
+PatientUpdate
+
+Utiliza campos opcionales:
+
+Optional[...]
+
+para permitir actualizaciones parciales.
+
+Se utiliza:
+
+patient_data.model_dump(exclude_unset=True)
+
+para obtener únicamente los campos que realmente fueron enviados.
+
+Posteriormente:
+
+for field, value in data.items():
+    setattr(patient, field, value)
+
+permite aplicar dinámicamente los cambios al objeto SQLAlchemy.
+
+PatientResponse
+
+Contiene los datos devueltos por la API y utiliza:
+
+model_config = {
+    "from_attributes": True
+}
+
+para permitir que Pydantic construya la respuesta a partir del objeto SQLAlchemy.
+
+3. Service de Patient
+
+Se implementaron:
+
+create_patient()
+get_patients()
+get_patient()
+update_patient()
+delete_patient()
+Create
+
+Flujo:
+
+PatientCreate
+    ↓
+create_patient()
+    ↓
+Patient(...)
+    ↓
+db.add()
+    ↓
+db.commit()
+    ↓
+db.refresh()
+    ↓
+return patient
+
+Se mantuvo manejo de errores mediante:
+
+try:
+    ...
+except Exception:
+    db.rollback()
+    raise
+Get all
+
+Se utiliza:
+
+statement = select(Patient)
+result = db.execute(statement)
+patients = result.scalars().all()
+
+scalars().all() devuelve todos los objetos Patient.
+
+Get one
+
+Se utiliza:
+
+statement = select(Patient).where(Patient.id == patient_id)
+result = db.execute(statement)
+patient = result.scalar_one_or_none()
+
+scalar_one_or_none() devuelve:
+
+el objeto si existe;
+None si no existe.
+Update
+
+Se utiliza:
+
+data = patient_data.model_dump(exclude_unset=True)
+
+y posteriormente:
+
+for field, value in data.items():
+    setattr(patient, field, value)
+
+Esto permitió implementar actualización parcial sin escribir manualmente:
+
+if name:
+    ...
+if email:
+    ...
+if phone:
+    ...
+
+para cada campo.
+
+Delete
+
+Se implementó:
+
+db.delete(patient)
+db.commit()
+
+y la función devuelve:
+
+True
+
+si el registro fue eliminado y:
+
+False
+
+si no existe.
+
+4. Router de Patient completado
+
+Se implementaron:
+
+POST   /patients/
+GET    /patients/
+GET    /patients/{patient_id}
+PUT    /patients/{patient_id}
+DELETE /patients/{patient_id}
+
+Los endpoints delegan la lógica al Service.
+
+El Router se ocupa principalmente de:
+
+recibir la petición HTTP;
+validar mediante Pydantic;
+obtener la sesión mediante Depends(get_db);
+llamar al Service;
+devolver respuestas;
+manejar 404.
+
+Se corrigieron durante el proceso errores iniciales como:
+
+nombres incorrectos de funciones;
+delete_patients vs delete_patient;
+clinic_id utilizado accidentalmente en el delete de Patient;
+nombres de endpoints que todavía decían clinic.
+5. Conceptos revisados con Patient
+
+Se profundizó en la diferencia entre:
+
+Model
+
+Representa la estructura persistente de la entidad en la base de datos.
+
+Schema
+
+Define qué datos entran y salen de la API según la operación.
+
+Service
+
+Contiene la lógica de trabajo con los datos y utiliza la sesión SQLAlchemy.
+
+Router
+
+Expone las operaciones mediante HTTP y delega el trabajo al Service.
+
+Se reforzó especialmente la separación de responsabilidades:
+
+Router
+   ↓
+Service
+   ↓
+SQLAlchemy
+   ↓
+PostgreSQL
+
+No se quiere colocar toda la lógica directamente dentro del Router porque dificultaría:
+
+mantenimiento;
+pruebas;
+reutilización;
+refactorización;
+separación de responsabilidades.
+6. CRUD de Professional iniciado y completado
+
+Después de terminar Patient se implementó Professional siguiendo el patrón aprendido.
+
+Model Professional
+
+Se creó:
+
+class Professional(Base):
+    __tablename__ = "professionals"
+
+con:
+
+id
+name
+last_name
+gender
+birth_date
+phone
+email
+credential
+credential_expiration
+dni
+specialty
+address
+medical_facility
+working_insurance
+
+Las fechas se corrigieron para utilizar:
+
+from datetime import date
+from sqlalchemy import Date
+
+y:
+
+birth_date: Mapped[date] = mapped_column(Date, nullable=False)
+credential_expiration: Mapped[date] = mapped_column(Date, nullable=False)
+
+Esto permite trabajar con fechas reales en PostgreSQL en lugar de tratarlas como strings.
+
+7. Professional — decisiones sobre Update
+
+Se discutió que determinados datos de un profesional no deberían modificarse libremente.
+
+En particular:
+
+birth_date
+
+se consideró un dato que no debería formar parte de una actualización normal.
+
+Respecto de:
+
+dni
+
+se estableció como criterio de negocio que su modificación solamente debería producirse bajo una condición específica: cuando el profesional cambia su situación de nacionalidad y se naturaliza como ciudadano del país donde ejerce.
+
+Esto deberá reflejarse posteriormente en la lógica de negocio correspondiente, en lugar de tratar el DNI como un campo comúnmente editable.
+
+Importante: esta regla todavía no está implementada como una lógica específica de negocio; fue definida como criterio funcional.
+
+8. Professional Schemas
+
+Se crearon:
+
+ProfessionalCreate
+ProfessionalUpdate
+ProfessionalResponse
+
+ProfessionalResponse utiliza:
+
+model_config = {
+    "from_attributes": True
+}
+
+Los campos de fecha utilizan:
+
+date
+
+tanto en entrada como en salida.
+
+9. Professional Service
+
+Se implementaron:
+
+create_professional()
+get_professionals()
+get_professional()
+update_professional()
+delete_professional()
+
+Se siguió el mismo patrón aprendido con Patient.
+
+Para Update:
+
+data = professional_data.model_dump(exclude_unset=True)
+
+
+for field, value in data.items():
+    setattr(professional, field, value)
+
+Para Get individual se identificó y corrigió un error:
+
+Se había escrito:
+
+result.scalar().all()
+
+cuando lo correcto era:
+
+result.scalar_one_or_none()
+
+porque se está buscando un único profesional por ID.
+
+10. Professional Router
+
+Se implementaron:
+
+POST   /professionals/
+GET    /professionals/
+GET    /professionals/{professional_id}
+PUT    /professionals/{professional_id}
+DELETE /professionals/{professional_id}
+
+Se probaron correctamente:
+
+creación;
+listado;
+búsqueda por ID;
+actualización;
+eliminación.
+11. Verificación directa de PostgreSQL
+
+Durante la implementación apareció inicialmente:
+
+psycopg.errors.UndefinedTable:
+relation "professionals" does not exist
+
+Se determinó que la tabla professionals todavía no había sido creada.
+
+Después de registrar correctamente el modelo y ejecutar la inicialización de metadata, la tabla fue creada.
+
+Se verificó directamente PostgreSQL mediante:
+
+python -c "from sqlalchemy import text; from app.database import engine; print(engine.connect().execute(text('SELECT * FROM professionals')).fetchall())"
+
+El resultado confirmó que el registro estaba realmente persistido:
+
+[(1, ...)]
+
+También se comprobó mediante FastAPI:
+
+GET /professionals/
+GET /professionals/1
+
+y se obtuvo correctamente el profesional.
+
+Esto confirmó el flujo completo:
+
+POST
+ ↓
+Service
+ ↓
+SQLAlchemy
+ ↓
+PostgreSQL
+ ↓
+GET
+ ↓
+Response Schema
+12. Renombrado de archivos para mejorar claridad
+
+Se decidió comenzar a diferenciar los nombres de archivos porque tener:
+
+professional.py
+professional.py
+professional.py
+
+en distintas carpetas podía dificultar la identificación del módulo.
+
+La intención es utilizar nombres más explícitos, por ejemplo:
+
+professional_model.py
+professional_schema.py
+professional_service.py
+professional_routes.py
+
+La motivación es mejorar la legibilidad y facilitar la navegación del proyecto.
+
+13. Problema generado por el renombrado
+
+Al renombrar archivos aparecieron errores de imports.
+
+Primer error:
+
+ModuleNotFoundError:
+No module named 'app.models.professional'
+
+Se encontró que:
+
+app/models/__init__.py
+
+todavía tenía:
+
+from app.models.professional import Professional
+
+aunque el archivo había sido renombrado.
+
+Se actualizó el import al nuevo nombre.
+
+Posteriormente apareció:
+
+ModuleNotFoundError:
+No module named 'backend'
+
+porque main.py había quedado con imports del tipo:
+
+from backend.app.routes...
+
+cuando Uvicorn se ejecuta desde:
+
+medical-cms-platform/backend>
+
+utilizando:
+
+uvicorn app.main:app --reload
+
+Por lo tanto los imports internos deben utilizar:
+
+from app.routes...
+
+y no:
+
+from backend.app.routes...
+
+Este incidente sirvió como aprendizaje práctico sobre:
+
+imports de Python;
+paquetes;
+directorio de trabajo;
+dependencias entre módulos;
+consecuencias de renombrar archivos.
+14. Refactorización — nuevo enfoque arquitectónico
+
+Después de completar los CRUD de:
+
+Clinic
+Patient
+Professional
+
+se comenzó una revisión de duplicación de código.
+
+Se observó que muchas funciones tienen prácticamente la misma estructura.
+
+Ejemplo:
+
+get_clinic()
+get_patient()
+get_professional()
+
+Todas realizan conceptualmente:
+
+select(ENTITY)
+    ↓
+where(ENTITY.id == ID)
+    ↓
+db.execute()
+    ↓
+scalar_one_or_none()
+
+Se planteó la posibilidad de crear una función genérica como:
+
+get_by_id(db, model, object_id)
+
+pero no se decidió implementarla todavía.
+
+15. Decisión arquitectónica sobre reutilización
+
+Se estableció una regla importante para el proyecto:
+
+No se debe refactorizar simplemente porque existe código repetido.
+
+Antes de abstraer se debe analizar:
+
+¿La lógica realmente es la misma?
+¿Existe una verdadera abstracción?
+¿La reutilización mejora el diseño?
+¿Se mantiene la claridad?
+¿La abstracción introduce complejidad innecesaria?
+¿Existe suficiente evidencia de que necesitamos esa abstracción?
+
+Se prioriza:
+
+Claridad
++
+Mantenibilidad
++
+Responsabilidades claras
+
+antes que reducir artificialmente la cantidad de líneas de código.
+
+16. DRY
+
+Se introdujo el principio:
+
+DRY — Don't Repeat Yourself
+
+Pero se estableció que DRY no significa simplemente eliminar cualquier código repetido.
+
+La idea relevante es evitar duplicar el mismo conocimiento o regla de negocio cuando debería existir una única fuente de verdad.
+
+Por lo tanto:
+
+Código parecido
+
+no implica automáticamente:
+
+→ Crear abstracción
+17. YAGNI
+
+Se introdujo:
+
+YAGNI — You Aren't Gonna Need It
+
+Aplicación al proyecto:
+
+No crear abstracciones, capas o patrones solamente porque:
+
+"quizás los necesitemos en el futuro."
+
+Esto se relaciona directamente con la decisión anterior de no introducir Repository todavía.
+
+18. Repository Pattern — decisión actual
+
+Se discutió si sacar las consultas SQLAlchemy de los Services y colocarlas en una capa:
+
+Service
+   ↓
+Repository
+   ↓
+SQLAlchemy
+
+La decisión actual es:
+
+No introducir Repository todavía.
+
+Motivo:
+
+Con el tamaño actual del proyecto, agregar una capa adicional podría aumentar la complejidad sin aportar suficiente beneficio.
+
+La intención es reconsiderar Repository cuando:
+
+aumente considerablemente el número de modelos;
+las consultas se vuelvan más complejas;
+exista una necesidad real de reutilización;
+el Service empiece a acumular demasiada lógica de persistencia;
+la separación aporte una mejora arquitectónica real.
+19. SRP — siguiente concepto
+
+Se identificó como siguiente principio a estudiar:
+
+SRP — Single Responsibility Principle
+
+Se aplicará directamente a:
+
+Model
+Schema
+Service
+Router
+
+La intención es comprender que la arquitectura actual ya representa una forma práctica de separación de responsabilidades:
+
+Model
+→ persistencia / estructura de datos
+
+
+Schema
+→ entrada y salida de datos de API
+
+
+Service
+→ lógica de aplicación y operaciones
+
+
+Router
+→ HTTP / endpoints
+20. Refactoring.Guru como material paralelo
+
+El usuario solicitó incorporar contenidos de:
+
+Refactoring.Guru en español
+
+como material de estudio paralelo al desarrollo.
+
+La intención no es estudiar patrones de manera teórica y aislada, sino:
+
+Problema real del proyecto
+        ↓
+Identificar repetición / smell / diseño
+        ↓
+Estudiar concepto
+        ↓
+Evaluar alternativas
+        ↓
+Refactorizar solamente si tiene sentido
+        ↓
+Probar que el comportamiento se mantiene
+
+Se busca aprender arquitectura de software a medida que se construye el sistema.
+
+21. Estado actual del proyecto al finalizar esta conversación
+CRUD
+Clinic
+    ✅ CRUD
+
+
+Patient
+    ✅ CRUD
+
+
+Professional
+    ✅ CRUD
+Professional
+Model             ✅
+Schemas           ✅
+Service           ✅
+Routes            ✅
+Tabla PostgreSQL  ✅
+POST              ✅
+GET ALL           ✅
+GET BY ID         ✅
+PUT               ✅
+DELETE            ✅
+Arquitectura
+Frontend
+   ↓
+FastAPI Router
+   ↓
+Service
+   ↓
+SQLAlchemy
+   ↓
+PostgreSQL
+
+Actualmente Repository no está incorporado.
+
+22. Próximo bloque recomendado
+
+El siguiente bloque de aprendizaje debe continuar con:
+
+Principios de diseño
+DRY
+↓
+YAGNI
+↓
+SRP
+
+y después realizar una evaluación de:
+
+Clinic
+Patient
+Professional
+
+para identificar:
+
+duplicación real;
+responsabilidades;
+posibles code smells;
+abstracciones candidatas;
+abstracciones que todavía NO conviene crear.
+
+Luego se podrá realizar el primer refactor controlado del proyecto, verificando que el comportamiento no cambie.
+
+Punto de continuidad para el nuevo chat
+
+El nuevo chat debe asumir que no estamos comenzando el CRUD desde cero.
+
+El estado conceptual es:
+
+Clinic CRUD       → terminado
+Patient CRUD      → terminado
+Professional CRUD → terminado
+
+
+             ↓
+
+
+Ahora estamos entrando en:
+
+
+Arquitectura
+Refactorización
+DRY
+YAGNI
+SRP
+Patrones de diseño
+
+La prioridad continúa siendo aprender mientras construimos Medical CMS Platform, evitando sobrearquitectura y sin incorporar nuevas tecnologías o patrones sin justificar previamente su necesidad.
+
+## Actualización de continuidad — Patient CRUD + separación Service/Repository
+
+**Fecha:** 2026-08-27
+
+### Patient Model
+
+Se completó la evolución del modelo `Patient`:
+
+* Se eliminó el campo `age`, ya que representa un dato estático y puede quedar desactualizado.
+* Se mantiene `birth_date` como fuente de información para determinar dinámicamente la edad del paciente.
+* `birth_date` pasó de `String` a `date` en Python/SQLAlchemy.
+* La columna `birth_date` fue convertida de `VARCHAR` a `DATE` en PostgreSQL.
+* Se mantiene `birth_date` como campo opcional (`nullable=True`).
+* Se mantiene la relación `Patient → Clinic` mediante `clinic_id` y `Patient.clinic`.
+
+### Pydantic Schemas
+
+Se actualizaron los schemas de Patient:
+
+* `PatientCreate` utiliza `birth_date: Optional[date]`.
+* `PatientUpdate` utiliza `birth_date: Optional[date]`.
+* `PatientResponse` utiliza `birth_date: Optional[date]`.
+* Se eliminó `age` de los schemas.
+* `PatientResponse` incorpora `clinic: ClinicResponse`.
+* `ClinicResponse` contiene `id` y `name`.
+* Se mantiene `model_config = {"from_attributes": True}` para permitir la conversión desde objetos SQLAlchemy.
+
+La respuesta de Patient ahora incluye la información estructurada de la clínica:
+
+```json
+"clinic": {
+    "id": 2,
+    "name": "Clínica del Oeste"
+}
+```
+
+### Alembic
+
+Se creó y aplicó la migración:
+
+* Revision: `69a19fdf25d3`
+* Previous revision: `4806aec454fe`
+* Descripción: `remove age and convert birth date to date`
+
+Cambios ejecutados:
+
+* Eliminación de la columna `age` de `patients`.
+* Conversión de `birth_date` de `String` a `DATE`.
+* Conversión realizada mediante `postgresql_using="birth_date::date"`.
+
+La migración quedó aplicada correctamente y la estructura de PostgreSQL fue verificada:
+
+```text
+birth_date | date | YES
+```
+
+### Patient Repository
+
+Se completó `PatientRepository` con las operaciones de persistencia y consulta:
+
+* `get_by_id()`
+* `get_patients()`
+* `create()`
+* `update()`
+* `delete()`
+
+Las consultas de pacientes utilizan:
+
+```python
+joinedload(Patient.clinic)
+```
+
+para cargar la clínica asociada junto con el paciente.
+
+`get_by_id()` continúa utilizando:
+
+```python
+scalar_one_or_none()
+```
+
+para obtener un único paciente o `None`.
+
+### Separación Service / Repository
+
+Se realizó una separación explícita de responsabilidades.
+
+El `PatientService` mantiene la lógica de aplicación y delega las operaciones de persistencia al `PatientRepository`.
+
+El Repository concentra las operaciones de interacción con SQLAlchemy/Session:
+
+* `db.add()`
+* `db.delete()`
+* `db.commit()`
+* `db.refresh()`
+* `db.rollback()`
+
+El Service ya no ejecuta directamente estas operaciones de persistencia.
+
+#### CREATE
+
+El Service construye el objeto `Patient` y delega la persistencia:
+
+```python
+patient = patient_repository.create(
+    db=db,
+    patient=patient
+)
+```
+
+#### UPDATE
+
+El Service obtiene el paciente, aplica los campos recibidos mediante `model_dump(exclude_unset=True)` y `setattr()`, y luego delega la persistencia:
+
+```python
+patient = patient_repository.update(
+    db=db,
+    patient=patient
+)
+```
+
+El Repository realiza `commit()`, `refresh()` y `rollback()` cuando corresponde.
+
+No se utiliza `db.add()` durante UPDATE porque el objeto `Patient` ya está asociado a la Session y SQLAlchemy realiza el seguimiento de sus modificaciones.
+
+#### DELETE
+
+El Service obtiene el paciente y verifica su existencia. Si existe, delega la eliminación:
+
+```python
+return patient_repository.delete(
+    db=db,
+    patient=patient
+)
+```
+
+El Repository ejecuta:
+
+```python
+db.delete(patient)
+db.commit()
+```
+
+con manejo de `rollback()` ante excepciones.
+
+### Validaciones realizadas
+
+Se realizaron pruebas funcionales contra PostgreSQL:
+
+* Creación de un paciente mediante `POST /patients`.
+* Consulta individual mediante `GET /patients/{id}`.
+* Consulta de múltiples pacientes mediante `GET /patients`.
+* Verificación de la relación `Patient → Clinic`.
+* Verificación de `joinedload(Patient.clinic)`.
+* Actualización de pacientes.
+* Eliminación de pacientes mediante `DELETE /patients/{id}`.
+* Confirmación posterior de eliminación mediante `GET /patients/{id}`, obteniendo `404`.
+
+Paciente de prueba utilizado para validar DELETE:
+
+```text
+id: 8
+name: Paciente
+last_name: Repository
+```
+
+La eliminación devolvió `204` y la consulta posterior devolvió:
+
+```json
+{
+    "detail": "No se encontró ningún paciente"
+}
+```
+
+confirmando que el registro fue eliminado correctamente.
+
+### Estado actual
+
+El módulo `Patient` tiene actualmente:
+
+* CRUD funcional.
+* Service y Repository separados.
+* Persistencia centralizada en Repository.
+* Relación con Clinic funcional.
+* Carga de Clinic mediante `joinedload`.
+* Respuesta anidada con `ClinicResponse`.
+* `birth_date` almacenado como `DATE`.
+* Campo `age` eliminado.
+* Migración Alembic aplicada.
+* CRUD probado contra PostgreSQL.
+
+### Principio arquitectónico consolidado
+
+Se establece como criterio para el desarrollo posterior:
+
+> **El Service procesa la lógica de la operación y el Repository se encarga de la interacción con la base de datos y la persistencia.**
+
+9. Modelo Clinic
+
+El modelo Clinic está implementado.
+
+Representa:
+
+clinics
+
+con:
+
+id
+name
+
+El CRUD de Clinic está implementado.
+
+Actualmente existen:
+
+creación;
+listado;
+búsqueda individual;
+actualización;
+eliminación.
+
+También se implementaron schemas:
+
+ClinicCreate
+ClinicResponse
+ClinicUpdate
+
+El primer endpoint real fue:
+
+POST /clinics/
+
+y se verificó mediante Swagger con persistencia real en PostgreSQL. El flujo HTTP → FastAPI → Service → SQLAlchemy → PostgreSQL → Response fue probado satisfactoriamente.
+
+10. Modelo Patient
+
+El modelo Patient fue creado y posteriormente ampliado para soportar las relaciones con clínicas.
+
+Actualmente incluye conceptualmente:
+
+Patient
+├── id
+├── name
+├── last_name
+├── birth_date
+├── dni
+├── email
+├── phone
+├── address
+├── insurance
+└── relaciones con Clinic
+
+La relación inicial mediante clinic_id fue posteriormente complementada con una relación muchos-a-muchos utilizando tabla intermedia.
+
+11. CRUD de Patient
+
+Se implementó el CRUD de pacientes.
+
+Existen:
+
+POST /patients/
+GET /patients/
+GET /patients/{patient_id}
+PUT /patients/{patient_id}
+DELETE /patients/{patient_id}
+
+El listado permite filtrar por clínica:
+
+GET /patients/?clinic_id=...
+
+Se utilizó:
+
+select()
+
+y carga anticipada de relaciones mediante:
+
+selectinload()
+
+También se estudió previamente la diferencia entre:
+
+lazy loading
+selectinload()
+joinedload()
+
+y el problema N+1.
+
+12. Schemas de Patient
+
+Actualmente tenemos:
+
+PatientCreate
+PatientUpdate
+PatientResponse
+ClinicResponse
+PatientClinicResponse
+
+PatientResponse utiliza:
+
+model_config = {
+    "from_attributes": True
+}
+
+y expone las clínicas relacionadas:
+
+clinics: list["ClinicResponse"]
+
+Se corrigió anteriormente un problema donde la respuesta esperaba campos que no coincidían con el objeto ORM.
+
+La respuesta actual de pacientes incluye las clínicas asociadas.
+
+Ejemplo conceptual:
+
+{
+  "id": 3,
+  "name": "Lisseth Coromoto",
+  "last_name": "Pulido Blanco",
+  "clinics": [
+    {
+      "id": 2,
+      "name": "Clínica del Oeste"
+    }
+  ]
+}
+13. Migración de Patient
+
+Se creó una migración que agregó:
+
+patients.clinic_id
+
+con:
+
+ForeignKey → clinics.id
+
+Para los pacientes existentes se realizó la estrategia necesaria para completar los datos antes de convertir la columna en NOT NULL.
+
+Esto permitió sincronizar correctamente:
+
+Modelo SQLAlchemy
+        ↕
+Alembic
+        ↕
+PostgreSQL
+14. Relaciones Clinic ↔ Patient
+
+Se implementaron relaciones ORM.
+
+Conceptualmente:
+
+Clinic
+   │
+   └── patients
+          ↓
+       Patient
+          │
+          └── clinic
+
+También se trabajó con:
+
+back_populates
+
+para establecer navegación bidireccional.
+
+Se solucionó un problema de importación circular utilizando TYPE_CHECKING.
+
+15. Nueva necesidad: paciente asociado a múltiples clínicas
+
+Durante el desarrollo se detectó que el modelo debía soportar una relación más flexible:
+
+Patient ↔ Clinic
+
+de tipo:
+
+muchos a muchos
+
+Por eso se creó una tabla intermedia:
+
+patient_clinics
+16. Modelo PatientClinic
+
+Se creó:
+
+app/models/patient_clinics_model.py
+
+con la clase:
+
+PatientClinic
+
+La clase representa la tabla:
+
+patient_clinics
+
+y contiene:
+
+patient_id
+clinic_id
+
+La idea mental que se consolidó durante el aprendizaje fue:
+
+PatientClinic
+      ↓
+representación ORM
+      ↓
+patient_clinics
+      ↓
+tabla real en PostgreSQL
+
+Y cada registro representa una asociación:
+
+patient_id | clinic_id
+-----------+----------
+    3      |     1
+17. Concepto importante comprendido
+
+Se trabajó específicamente la comprensión de:
+
+PatientClinic.patient_id
+PatientClinic.clinic_id
+
+Estos atributos no consultan un Repository.
+
+Son atributos del modelo SQLAlchemy.
+
+Cuando construimos:
+
+PatientClinic.patient_id == patient_id
+
+estamos construyendo una condición para SQLAlchemy.
+
+SQLAlchemy posteriormente la traduce a SQL para PostgreSQL.
+
+Conceptualmente:
+
+Python
+PatientClinic.patient_id == 3
+        ↓
+SQLAlchemy
+        ↓
+SQL
+        ↓
+PostgreSQL
+18. PatientClinicRepository
+
+Se creó:
+
+app/repositories/patient_clinics_repository.py
+
+con:
+
+class PatientClinicRepository:
+
+Métodos implementados:
+
+create()
+get_by_patient_and_clinic()
+
+La consulta fundamental es:
+
+statement = select(PatientClinic).where(
+    and_(
+        PatientClinic.patient_id == patient_id,
+        PatientClinic.clinic_id == clinic_id
+    )
+)
+
+Después:
+
+result = db.execute(statement)
+patient = result.scalar_one_or_none()
+
+Y:
+
+registro encontrado
+    ↓
+PatientClinic
+
+sin registro
+    ↓
+None
+
+Este concepto fue explicado y comprobado paso a paso.
+
+19. PatientClinicService
+
+Se creó:
+
+app/services/patient_clinic_service.py
+
+El Service actualmente realiza las validaciones de negocio principales.
+
+Flujo:
+
+patient_id
+    ↓
+¿Existe paciente?
+    ↓
+NO → PatientNotFoundError
+    ↓
+SÍ
+    ↓
+¿Existe asociación?
+    ↓
+SÍ → PatientAlreadyAssociatedError
+    ↓
+NO
+    ↓
+¿Existe clínica?
+    ↓
+NO → ClinicNotFoundError
+    ↓
+SÍ
+    ↓
+Crear PatientClinic
+
+La creación finalmente delega en:
+
+patient_clinics_repository.create()
+20. Excepciones
+
+En:
+
+app/core/exceptions.py
+
+se agregaron:
+
+class ClinicNotFoundError(Exception):
+    pass
+
+
+class ProfessionalNotFoundError(Exception):
+    pass
+
+
+class ProfessionalAlreadyAssociatedError(Exception):
+    pass
+
+
+class PatientAlreadyAssociatedError(Exception):
+    pass
+
+Y también se incorporó:
+
+PatientNotFoundError
+
+para distinguir correctamente el caso de paciente inexistente.
+
+21. Endpoint de asociación
+
+Se creó:
+
+POST /patients/{patient_id}/clinics/{clinic_id}
+
+En:
+
+patient_routes.py
+
+La Route utiliza:
+
+from app.services.patient_clinic_service import create as create_patient_clinic
+
+y:
+
+@router.post(
+    "/{patient_id}/clinics/{clinic_id}",
+    response_model=PatientClinicResponse
+)
+
+La Route captura:
+
+PatientNotFoundError
+ClinicNotFoundError
+PatientAlreadyAssociatedError
+
+y los transforma en:
+
+404
+404
+409
+
+respectivamente.
+
+22. PatientClinicResponse
+
+Se creó:
+
+class PatientClinicResponse(BaseModel):
+    patient_id: int
+    clinic_id: int
+
+    model_config = {
+        "from_attributes": True
+    }
+
+Se decidió correctamente no introducirlo dentro de PatientResponse.
+
+La separación conceptual es:
+
+PatientResponse
+    ↓
+respuesta de un paciente
+    ↓
+incluye sus clinics
+
+
+PatientClinicResponse
+    ↓
+respuesta de una asociación
+    ↓
+patient_id + clinic_id
+23. Pruebas realizadas en Swagger
+
+Se probaron las tres situaciones fundamentales.
+
+Paciente inexistente
+
+Ejemplo:
+
+POST /patients/20/clinics/50
+
+Resultado:
+
+404
+
+con:
+
+{
+  "detail": "El paciente que busca no se encuentra registrado"
+}
+Asociación existente
+
+Ejemplo:
+
+POST /patients/2/clinics/1
+
+Resultado:
+
+409
+
+con:
+
+{
+  "detail": "El paciente ya se encuentra asociado a la clínica solicitada"
+}
+Asociación nueva
+
+Ejemplo:
+
+POST /patients/3/clinics/1
+
+Resultado:
+
+200
+
+con:
+
+{
+  "patient_id": 3,
+  "clinic_id": 1
+}
+
+Posteriormente se verificó directamente PostgreSQL.
+
+24. Verificación real en PostgreSQL
+
+Antes de la última prueba teníamos:
+
+(2, 1)
+(2, 2)
+(3, 2)
+(4, 2)
+(7, 2)
+(9, 3)
+
+Después de crear:
+
+POST /patients/3/clinics/1
+
+PostgreSQL devolvió:
+
+(2, 1)
+(2, 2)
+(3, 1)
+(3, 2)
+(4, 2)
+(7, 2)
+(9, 3)
+
+Después también se creó:
+
+POST /patients/4/clinics/1
+
+y el registro quedó:
+
+(4, 1)
+
+Por lo tanto actualmente la tabla contiene:
+
+patient_id | clinic_id
+-----------+----------
+2          | 1
+2          | 2
+3          | 1
+3          | 2
+4          | 1
+4          | 2
+7          | 2
+9          | 3
+
+Esto confirma que la persistencia funciona realmente en PostgreSQL.
+
+25. Problemas encontrados y solucionados
+Error patient_clinics no definido
+
+SQLAlchemy mostró:
+
+NameError: name 'patient_clinics' is not defined
+
+La causa fue una referencia incorrecta a una tabla/modelo de asociación.
+
+Se solucionó registrando/importando correctamente el modelo.
+
+Error de nombre de archivo
+
+Se detectó:
+
+patient_clinic_model
+
+cuando el archivo real era:
+
+patient_clinics_model.py
+
+Se corrigió el nombre.
+
+Error conceptual con selectinload
+
+Se intentaron expresiones incorrectas como:
+
+selectinload(Patient.clinics.any(...))
+
+Se comprendió que:
+
+selectinload(Patient.clinics)
+
+sirve para cargar la relación, mientras que:
+
+Patient.clinics.any(...)
+
+se utiliza como condición de filtrado.
+
+La consulta final de pacientes quedó conceptualmente separada:
+
+select(Patient).options(
+    selectinload(Patient.clinics)
+)
+
+y cuando corresponde:
+
+.where(
+    Patient.clinics.any(Clinic.id == clinic_id)
+)
+26. Estado actual del bloque Patient ↔ Clinic
+Modelo PatientClinic              ✅
+Tabla patient_clinics             ✅
+Repository                        ✅
+Service                           ✅
+Patient validation                ✅
+Clinic validation                 ✅
+Duplicate validation              ✅
+Exceptions                        ✅
+Endpoint                          ✅
+Response schema                   ✅
+Swagger                            ✅
+404                               ✅
+409                               ✅
+200                               ✅
+Persistencia PostgreSQL           ✅
+Estado:
+
+COMPLETADO
+
+No quedan tareas funcionales pendientes dentro de este bloque.
+
+27. Estado general de desarrollo
+Medical CMS Platform
+
+Infraestructura
+├── Docker                         ✅
+├── Docker Compose                 ✅
+└── PostgreSQL 17                  ✅
+
+Base
+├── Engine                         ✅
+├── Base                            ✅
+├── SessionLocal                    ✅
+└── get_db()                        ✅
+
+ORM
+├── SQLAlchemy 2.0                 ✅
+├── Clinic                          ✅
+├── Patient                         ✅
+├── Professional                    ✅
+└── PatientClinic                   ✅
+
+Migraciones
+└── Alembic                         ✅
+
+Clinic
+├── Model                           ✅
+├── CRUD                            ✅
+├── Schemas                         ✅
+├── Repository                      ✅
+├── Service                         ✅
+└── Routes                          ✅
+
+Patient
+├── Model                           ✅
+├── CRUD                            ✅
+├── Schemas                         ✅
+├── Repository                      ✅
+├── Service                         ✅
+└── Routes                          ✅
+
+Patient ↔ Clinic
+├── Tabla intermedia                ✅
+├── Repository                      ✅
+├── Service                         ✅
+├── Endpoint                        ✅
+├── Validaciones                    ✅
+└── Pruebas                         ✅
+
+Professional
+├── Model                           ✅
+├── CRUD                            ✅
+├── Asociación con Clinic           ✅
+└── Manejo de errores               ✅
+
+Authentication
+└── Pendiente                       ⏳
+
+Users
+└── Pendiente                       ⏳
+
+JWT
+└── Pendiente                       ⏳
+
+Permissions
+└── Pendiente                       ⏳
+
+Automated tests
+└── Pendiente                       ⏳
+
+Frontend funcional
+└── Pendiente                       ⏳
+28. Próximo punto de continuación
+
+No debemos continuar modificando PatientClinic por ahora.
+
+El bloque quedó funcionalmente cerrado.
+
+El próximo trabajo debe partir del estado actual del proyecto y decidir el siguiente bloque según el roadmap existente, sin asumir que debemos volver a hacer CRUD de Patient o Clinic que ya están implementados.
+
+29. Metodología de aprendizaje
+
+Se mantiene como regla:
+
+Necesidad del sistema
+        ↓
+¿Qué concepto necesitamos?
+        ↓
+Explicación sencilla
+        ↓
+Sintaxis mínima
+        ↓
+Aplicación inmediata
+        ↓
+Prueba
+        ↓
+Corrección de errores
+        ↓
+Verificación real
+        ↓
+Cierre del bloque
+        ↓
+HANDOFF
+        ↓
+Siguiente bloque
+
+No buscamos memorizar toda la sintaxis.
+
+La meta es reconocer:
+
+¿Qué quiero hacer?
+        ↓
+¿En qué capa corresponde?
+        ↓
+¿Qué herramienta necesito?
+        ↓
+¿Por qué funciona así?
+30. Principio de trabajo para las próximas conversaciones
+
+Cuando se abra una nueva conversación dentro del proyecto:
+
+tomar este HANDOFF como estado de continuidad;
+no repetir bloques ya terminados;
+no asumir que estamos en el estado de un HANDOFF anterior;
+verificar el estado real del código cuando sea necesario;
+continuar desde Patient ↔ Clinic ya completado;
+mantener Python + FastAPI + SQLAlchemy 2.0 + Psycopg 3 + PostgreSQL 17 + Docker;
+explicar solamente lo necesario para el siguiente avance;
+probar cada bloque antes de cerrarlo;
+actualizar nuevamente el HANDOFF al terminar bloques importantes.
+Estado de cierre actual
+┌──────────────────────────────────────────┐
+│       MEDICAL CMS PLATFORM               │
+├──────────────────────────────────────────┤
+│ Stack                 ✅                 │
+│ PostgreSQL            ✅                 │
+│ SQLAlchemy            ✅                 │
+│ Alembic               ✅                 │
+│ Clinic CRUD           ✅                 │
+│ Patient CRUD          ✅                 │
+│ Professional CRUD     ✅                 │
+│ Patient ↔ Clinic      ✅ COMPLETADO      │
+│ Authentication        ⏳                 │
+│ Users                 ⏳                 │
+│ JWT                   ⏳                 │
+│ Permissions           ⏳                 │
+│ Tests                 ⏳                 │
+│ Frontend              ⏳                 │
+└──────────────────────────────────────────┘
+
+Punto exacto para continuar:
+después del cierre del bloque Patient ↔ Clinic, sin tareas funcionales pendientes dentro de ese bloque.
