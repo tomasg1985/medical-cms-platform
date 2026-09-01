@@ -9,6 +9,8 @@ from app.database import Base
 
 if TYPE_CHECKING:
     from app.models.clinic_model import Clinic
+    from app.models.specialty_model import Specialty
+
 class Professional(Base):
     __tablename__ = "professionals"
     
@@ -22,7 +24,6 @@ class Professional(Base):
     credential: Mapped[str] = mapped_column(nullable=False)
     credential_expiration: Mapped[date] = mapped_column(Date, nullable=False)
     dni: Mapped[str] = mapped_column(nullable=False)
-    specialty: Mapped[str] = mapped_column(nullable=False)
     address: Mapped[str] = mapped_column(nullable=False)
     medical_facility: Mapped[str] = mapped_column(nullable=False)
     working_insurance: Mapped[str] = mapped_column(nullable=False)
@@ -31,3 +32,8 @@ class Professional(Base):
         secondary="professional_clinics",
         back_populates="professionals"
     )
+
+    specialties: Mapped[list["Specialty"]] = relationship(
+                    secondary="professional_specialties",
+                    back_populates="professionals"
+                )
