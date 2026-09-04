@@ -6,3 +6,5 @@ from app.models.patient_clinics_model import PatientClinic
 from app.models.specialty_model import Specialty
 from app.models.medical_specialty_model import ProfessionalSpecialty
 from app.models.clinic_specialty_model import ClinicSpecialty
+from app.models.appointment_model import Appointment
+from app.models.schedule_availability_model import ScheduleAvailability
