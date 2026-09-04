@@ -26,5 +26,5 @@ class Clinic(Base):
     
     specialties: Mapped[list["Specialty"]] = relationship(
                 secondary="clinic_specialties",
-                back_populates="specialties"
+                back_populates="clinics"
             )

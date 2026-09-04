@@ -5,7 +5,7 @@ from app.models.clinic_specialty_model import ClinicSpecialty
 
 class ClinicSpecialtyRepository:
     
-    def create(self, db: Session, clinic_specialty: ClinicSpecialty) -> ClinicSpecialty:
+    def create_clinic_specialty(self, db: Session, clinic_specialty: ClinicSpecialty) -> ClinicSpecialty:
         
         try:
             db.add(clinic_specialty)

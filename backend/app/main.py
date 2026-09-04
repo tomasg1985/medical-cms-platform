@@ -12,6 +12,8 @@ from app.database import get_db
 from app.routes.clinic_routes import router as clinic_router
 from app.routes.patient_routes import router as patient_router
 from app.routes.professional_routes import router as professional_router
+from app.routes.specialty_routes import router as specialty_router
+from app.routes.professional_specialty_routes import router as professional_specialty_router
 
 
 app = FastAPI(
@@ -24,6 +26,9 @@ app = FastAPI(
 app.include_router(clinic_router)
 app.include_router(patient_router)
 app.include_router(professional_router)
+app.include_router(specialty_router)
+app.include_router(professional_specialty_router)
+
 
 @app.get("/")
 def root(db: Session = Depends(get_db)):

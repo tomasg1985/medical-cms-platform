@@ -4,11 +4,13 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from app.schemas.specialty_schema import SpecialtyResponse
+
 class ProfessionalSummary(BaseModel):
     id: int
     name: str
     last_name: str
-    specialty: str
+    specialties: list["SpecialtyResponse"]
 
     model_config = {
         "from_attributes": True
@@ -40,7 +42,6 @@ class ProfessionalCreate(BaseModel):
     credential: str
     credential_expiration: date
     dni: str
-    specialty: str
     address: str
     medical_facility: str
     working_insurance: str
@@ -54,7 +55,6 @@ class ProfessionalUpdate(BaseModel):
     email: Optional[str] = None
     credential: Optional[str] = None
     credential_expiration: Optional[date] = None
-    specialty: Optional[str] = None
     address: Optional[str] = None
     medical_facility: Optional[str] = None
     working_insurance: Optional[str] = None
@@ -71,7 +71,7 @@ class ProfessionalResponse(BaseModel):
     credential: str
     credential_expiration: date
     dni: str
-    specialty: str
+    specialties: list["SpecialtyResponse"]
     address: str
     medical_facility: str
     working_insurance: str

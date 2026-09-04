@@ -34,7 +34,6 @@ def create_professional(
         credential=professional_data.credential,
         credential_expiration=professional_data.credential_expiration,
         dni=professional_data.dni,
-        specialty=professional_data.specialty,
         address=professional_data.address,
         medical_facility=professional_data.medical_facility,
         working_insurance=professional_data.working_insurance

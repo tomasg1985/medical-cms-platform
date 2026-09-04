@@ -15,7 +15,7 @@ class Specialty(Base):
     official_name: Mapped[str] = mapped_column(nullable=False)
     alternative_name: Mapped[str] = mapped_column(nullable=False)
     short_description: Mapped[str] = mapped_column(nullable=False)
-    snomed_code: Mapped[str] = mapped_column(nullable=False)
+    snomed_code: Mapped[str] = mapped_column(nullable=False, unique=True)
     medical_exercise: Mapped[str] = mapped_column(nullable=False)
 
 
