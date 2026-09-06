@@ -7,6 +7,8 @@ if TYPE_CHECKING:
     from app.models.patient_model import Patient
     from app.models.professional_model import Professional
     from app.models.specialty_model import Specialty
+    from app.models.appointment_model import Appointment
+    from app.models.schedule_availability_model import ScheduleAvailability
 
 class Clinic(Base):
     __tablename__ = "clinics"
@@ -28,3 +30,11 @@ class Clinic(Base):
                 secondary="clinic_specialties",
                 back_populates="clinics"
             )
+    
+    appointments: Mapped[list["Appointment"]] = relationship(
+        back_populates="clinic"
+    )
+    
+    schedule_availabilities: Mapped[list["ScheduleAvailability"]] = relationship(
+        back_populates="clinic"
+    )

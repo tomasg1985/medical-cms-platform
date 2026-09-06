@@ -1,9 +1,17 @@
+from typing import TYPE_CHECKING
+
 from datetime import date, time
 
 from sqlalchemy import Date, ForeignKey, Time
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
+
+if TYPE_CHECKING:
+    from app.models.appointment_model import Appointment
+    from app.models.clinic_model import Clinic
+    from app.models.specialty_model import Specialty
+    from app.models.professional_model import Professional
 
 class ScheduleAvailability(Base):
     __tablename__ = "schedule_availabilities"
@@ -31,4 +39,20 @@ class ScheduleAvailability(Base):
     specialty_id: Mapped[int] = mapped_column(
         ForeignKey("specialties.id"),
         nullable=False
+    )
+
+    professional: Mapped["Professional"] = relationship(
+        back_populates="schedule_availabilities"
+    )
+
+    clinic: Mapped["Clinic"] = relationship(
+        back_populates="schedule_availabilities"
+    )
+
+    specialty: Mapped["Specialty"] = relationship(
+        back_populates="schedule_availabilities"
+    )
+
+    appointments: Mapped[list["Appointment"]] = relationship(
+        back_populates="schedule_availability"
     )

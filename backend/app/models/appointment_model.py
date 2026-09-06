@@ -1,10 +1,19 @@
+from typing import TYPE_CHECKING
+
 from datetime import date, time
 from decimal import Decimal
 
 from sqlalchemy import Date, ForeignKey, Numeric, Time
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
+
+if TYPE_CHECKING:
+    from app.models.clinic_model import Clinic
+    from app.models.specialty_model import Specialty
+    from app.models.professional_model import Professional
+    from app.models.patient_model import Patient
+    from app.models.schedule_availability_model import ScheduleAvailability
 
 class Appointment(Base):
     __tablename__ = "appointments"
@@ -16,8 +25,8 @@ class Appointment(Base):
     consulting_duration: Mapped[int] = mapped_column(nullable=False)
     consulting_mode: Mapped[str] = mapped_column(nullable=False)
     appointment_state: Mapped[str] = mapped_column(nullable=False)
-    consulting_reason: Mapped[str] = mapped_column(nullable=True)
-    cancelation_reason: Mapped[str] = mapped_column(nullable=True)
+    consulting_reason: Mapped[str] = mapped_column(nullable=False)
+    cancelation_reason: Mapped[str] = mapped_column(nullable=False)
     amount_paid: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False, default=0)
     payment_status: Mapped[str] = mapped_column(nullable=False)
 
@@ -40,4 +49,29 @@ class Appointment(Base):
     specialty_id: Mapped[int] = mapped_column(
         ForeignKey("specialties.id"),
         nullable=False
+    )
+    
+    schedule_availability_id: Mapped[int] = mapped_column(
+        ForeignKey("schedule_availabilities.id"),
+        nullable=False
+    )
+    
+    clinic: Mapped["Clinic"] = relationship(
+        back_populates="appointments"
+    )
+    
+    patient: Mapped["Patient"] = relationship(
+        back_populates="appointments"
+    )
+    
+    professional: Mapped["Professional"] = relationship(
+        back_populates="appointments"
+    )
+    
+    specialty: Mapped["Specialty"] = relationship(
+        back_populates="appointments"
+    )
+    
+    schedule_availability: Mapped["ScheduleAvailability"] = relationship(
+        back_populates="appointments"
     )

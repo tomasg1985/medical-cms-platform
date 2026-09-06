@@ -6,6 +6,7 @@ from app.database import Base
 
 if TYPE_CHECKING:
     from app.models.clinic_model import Clinic
+    from app.models.appointment_model import Appointment
 
 class Patient(Base):
     __tablename__ = "patients"
@@ -24,4 +25,8 @@ class Patient(Base):
     clinics: Mapped[list["Clinic"]] = relationship(
         secondary="patient_clinics",
         back_populates="patients"
+    )
+    
+    appointments: Mapped[list["Appointment"]] = relationship(
+        back_populates="patient"
     )
