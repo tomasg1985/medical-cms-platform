@@ -11,7 +11,7 @@ class AppointmentCreate(BaseModel):
     appointment_hour: time
     consulting_mode: str
     appointment_state: str
-    consulting_reason: Optional[str] = None
+    consulting_reason: str
     cancelation_reason: Optional[str] = None
     amount_paid: Decimal
     payment_status: str
@@ -20,14 +20,12 @@ class AppointmentCreate(BaseModel):
     patient_id: int
     professional_id: int
     specialty_id: int
-    schedule_availability_id: int
 
 
 class AppointmentUpdate(BaseModel):
     reservation_code: Optional[str] = None
     appointment_date: Optional[date] = None
     appointment_hour: Optional[time] = None
-    consulting_duration: Optional[int] = None
     consulting_mode: Optional[str] = None
     appointment_state: Optional[str] = None
     consulting_reason: Optional[str] = None
@@ -44,9 +42,15 @@ class AppointmentResponse(BaseModel):
     consulting_mode: str
     appointment_state: str
     consulting_reason: str
-    cancelation_reason: str
+    cancelation_reason: Optional[str] = None
     amount_paid: Decimal
     payment_status: str
+    
+    clinic_id: int
+    patient_id: int
+    professional_id: int
+    specialty_id: int
+    schedule_availability_id: int
     
     model_config = {
         "from_attributes": True

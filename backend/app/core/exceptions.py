@@ -24,3 +24,15 @@ class ClinicSpecialtyAlreadyAssociatedError(Exception):
 
 class SpecialtySNOMEDAlreadyExistsError(Exception):
     pass
+
+class AppointmentNotFoundError(Exception):
+    pass
+
+class AppointmentAvailabilityError(Exception):
+    pass
+
+class AppointmentConflictError(Exception):
+    pass
+
+class AppointmentCancelledError(Exception):
+    pass

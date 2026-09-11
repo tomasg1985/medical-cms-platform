@@ -14,6 +14,7 @@ from app.routes.patient_routes import router as patient_router
 from app.routes.professional_routes import router as professional_router
 from app.routes.specialty_routes import router as specialty_router
 from app.routes.professional_specialty_routes import router as professional_specialty_router
+from app.routes.appointment_routes import router as appointment_router
 
 
 app = FastAPI(
@@ -28,6 +29,7 @@ app.include_router(patient_router)
 app.include_router(professional_router)
 app.include_router(specialty_router)
 app.include_router(professional_specialty_router)
+app.include_router(appointment_router)
 
 
 @app.get("/")

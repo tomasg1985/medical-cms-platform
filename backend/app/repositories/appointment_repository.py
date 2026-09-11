@@ -1,3 +1,5 @@
+from datetime import date
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
@@ -11,7 +13,8 @@ class AppointmentRepository:
                 selectinload(Appointment.patient),
                 selectinload(Appointment.professional),
                 selectinload(Appointment.clinic),
-                selectinload(Appointment.specialty)
+                selectinload(Appointment.specialty),
+                selectinload(Appointment.schedule_availability)
             )
             .where(Appointment.id == appointment_id)
             )
@@ -75,3 +78,24 @@ class AppointmentRepository:
         except Exception:
             db.rollback()
             raise
+
+
+    def get_appointments_by_professional_and_date(
+        self,
+        db: Session,
+        professional_id: int,
+        appointment_date: date
+    ) -> list[Appointment]:
+        
+        statement = (
+            select(Appointment)
+            .where(
+                Appointment.professional_id == professional_id, 
+                Appointment.appointment_date == appointment_date,
+                Appointment.appointment_state != "cancelled"
+            )
+        )
+        result = db.execute(statement)
+        professional_appointments = result.scalars().all()
+        
+        return professional_appointments

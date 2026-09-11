@@ -26,7 +26,7 @@ class Appointment(Base):
     consulting_mode: Mapped[str] = mapped_column(nullable=False)
     appointment_state: Mapped[str] = mapped_column(nullable=False)
     consulting_reason: Mapped[str] = mapped_column(nullable=False)
-    cancelation_reason: Mapped[str] = mapped_column(nullable=False)
+    cancelation_reason: Mapped[str | None] = mapped_column(nullable=True)
     amount_paid: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False, default=0)
     payment_status: Mapped[str] = mapped_column(nullable=False)
 
