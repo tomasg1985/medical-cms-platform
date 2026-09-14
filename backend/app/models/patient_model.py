@@ -1,11 +1,13 @@
 from datetime import date
 from typing import TYPE_CHECKING
 
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base
 
 if TYPE_CHECKING:
     from app.models.clinic_model import Clinic
+    from app.models.user_model import User
     from app.models.appointment_model import Appointment
 
 class Patient(Base):
@@ -21,6 +23,16 @@ class Patient(Base):
     insurance: Mapped[str] = mapped_column(nullable=False)
 
     birth_date: Mapped[date | None] = mapped_column(nullable=True)
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey('users.id'),
+        nullable=True,
+        unique=True
+    )
+
+    user: Mapped["User"] = relationship(
+        back_populates="patient"
+    )
 
     clinics: Mapped[list["Clinic"]] = relationship(
         secondary="patient_clinics",

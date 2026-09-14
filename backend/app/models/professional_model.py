@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 
 from datetime import date
 
-from sqlalchemy import Date
+from sqlalchemy import Date, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from app.models.clinic_model import Clinic
     from app.models.specialty_model import Specialty
     from app.models.appointment_model import Appointment
+    from app.models.user_model import User
     from app.models.schedule_availability_model import ScheduleAvailability
 
 class Professional(Base):
@@ -29,6 +30,17 @@ class Professional(Base):
     address: Mapped[str] = mapped_column(nullable=False)
     medical_facility: Mapped[str] = mapped_column(nullable=False)
     working_insurance: Mapped[str] = mapped_column(nullable=False)
+    
+    
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey('users.id'),
+        nullable=True,
+        unique=True
+    )
+    
+    user: Mapped["User"] = relationship(
+        back_populates="professional"
+    )
 
     clinics: Mapped[list["Clinic"]] = relationship(
         secondary="professional_clinics",

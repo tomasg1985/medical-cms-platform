@@ -8,3 +8,9 @@ from app.models.medical_specialty_model import ProfessionalSpecialty
 from app.models.clinic_specialty_model import ClinicSpecialty
 from app.models.appointment_model import Appointment
 from app.models.schedule_availability_model import ScheduleAvailability
+from app.models.user_model import User
+from app.models.user_clinic_model import UserClinic
+from app.models.role_model import Role
+from app.models.permission_model import Permission
+from app.models.user_role_model import UserRole
+from app.models.role_permission_model import RolePermission
