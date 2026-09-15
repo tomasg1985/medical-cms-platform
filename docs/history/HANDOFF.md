@@ -7201,3 +7201,132 @@ Estado de cierre actual
 
 Punto exacto para continuar:
 después del cierre del bloque Patient ↔ Clinic, sin tareas funcionales pendientes dentro de ese bloque.
+
+## Appointment
+
+**Estado: COMPLETADO**
+
+Se completó el módulo de Appointment con modelo, schemas, repository, service, routes y excepciones de negocio.
+
+### Modelo
+
+Se implementó `Appointment` con:
+
+* `reservation_code` único.
+* Fecha y hora del turno.
+* Duración de la consulta.
+* Modalidad y estado.
+* Motivo de consulta.
+* Motivo de cancelación nullable.
+* Importe abonado.
+* Estado de pago.
+* FK a `Clinic`.
+* FK a `Patient`.
+* FK a `Professional`.
+* FK a `Specialty`.
+* FK a `ScheduleAvailability`.
+
+Relaciones ORM implementadas con `back_populates`.
+
+### ScheduleAvailability
+
+La creación y reprogramación del turno determinan automáticamente la disponibilidad correspondiente.
+
+El cliente no envía `schedule_availability_id`.
+
+La disponibilidad se determina mediante:
+
+* profesional;
+* clínica;
+* especialidad;
+* día de la semana;
+* rango de vigencia;
+* horario;
+* estado activo.
+
+La duración del turno se obtiene de `ScheduleAvailability`.
+
+### Reglas de negocio implementadas
+
+* Verificación de existencia de paciente.
+* Verificación de existencia de profesional.
+* Verificación de existencia de clínica.
+* Verificación de existencia de especialidad.
+* Validación de relación profesional-clínica.
+* Validación de relación profesional-especialidad.
+* Validación de relación clínica-especialidad.
+* Validación de disponibilidad.
+* Validación de duración dentro del horario disponible.
+* Detección de solapamiento de turnos.
+* Los turnos cancelados no bloquean horarios.
+* Un turno no genera conflicto consigo mismo durante una actualización.
+* Al cambiar fecha u hora se obtiene nuevamente la disponibilidad.
+* Al cambiar fecha u hora se actualizan `schedule_availability_id` y `consulting_duration`.
+* Un turno cancelado no puede ser modificado.
+
+### API
+
+Se implementaron:
+
+```text
+POST   /appointments/
+GET    /appointments/
+GET    /appointments/{appointment_id}
+PUT    /appointments/{appointment_id}
+PATCH  /appointments/{appointment_id}
+DELETE /appointments/{appointment_id}
+```
+
+Se implementó manejo de errores HTTP para:
+
+```text
+404 → recurso inexistente
+400 → disponibilidad inválida
+409 → conflicto de horario / turno cancelado
+```
+
+### Repository
+
+El repository contiene:
+
+* búsqueda por ID;
+* listado;
+* creación;
+* actualización;
+* eliminación;
+* búsqueda de turnos de un profesional por fecha.
+
+Se utiliza `selectinload()` para cargar las relaciones necesarias.
+
+La consulta utilizada para detectar conflictos excluye turnos cancelados.
+
+### Pruebas realizadas
+
+Se verificaron:
+
+* creación de turnos;
+* búsqueda automática de disponibilidad;
+* asignación automática de `schedule_availability_id`;
+* asignación de duración desde la disponibilidad;
+* actualización de campos individuales;
+* reprogramación a otra disponibilidad;
+* actualización del `schedule_availability_id`;
+* validación de horario fuera de disponibilidad;
+* detección de conflictos;
+* exclusión de turnos cancelados en la detección de conflictos;
+* protección contra modificación de turnos cancelados;
+* respuesta 404 para turnos inexistentes;
+* eliminación mediante DELETE;
+* verificación de eliminación directamente en PostgreSQL.
+
+### Estado actual
+
+Appointment queda **funcionalmente completado para esta etapa del proyecto**.
+
+La implementación de historial/auditoría de cambios queda como una evolución futura. Modificar el registro actual no constituye por sí mismo un historial de versiones.
+
+También queda pendiente para una etapa posterior definir reglas más avanzadas relacionadas con estados, cancelaciones, eliminación física y auditoría.
+
+### Próximo paso
+
+Realizar commit y push del bloque Appointment a `develop` y continuar con el siguiente módulo del proyecto.
