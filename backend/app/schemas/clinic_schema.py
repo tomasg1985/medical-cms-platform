@@ -2,6 +2,7 @@ from pydantic import BaseModel
 
 from app.schemas.patient_schema import PatientSummary
 from app.schemas.professional_schema import ProfessionalSummary
+from app.schemas.user_schema import UserSummary
 
 class ClinicCreate(BaseModel):
     name: str
@@ -16,7 +17,8 @@ class ClinicResponse(BaseModel):
     name: str
     professionals: list["ProfessionalSummary"]
     patients: list["PatientSummary"]
-
+    users: list["UserSummary"]
+    
     model_config = {
         "from_attributes": True
     }

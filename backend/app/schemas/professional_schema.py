@@ -5,6 +5,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 from app.schemas.specialty_schema import SpecialtyResponse
+from app.schemas.user_schema import UserSummary
 
 class ProfessionalSummary(BaseModel):
     id: int
@@ -77,6 +78,7 @@ class ProfessionalResponse(BaseModel):
     working_insurance: str
     
     clinics: list["ClinicResponse"]
+    user: Optional["UserSummary"] = None
 
     model_config = {
             "from_attributes": True
