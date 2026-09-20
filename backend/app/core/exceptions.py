@@ -36,3 +36,18 @@ class AppointmentConflictError(Exception):
 
 class AppointmentCancelledError(Exception):
     pass
+
+class UserClinicAlreadyAssociatedError(Exception):
+    pass
+
+class UserRoleAlreadyAssociatedError(Exception):
+    pass
+
+class RolePermissionAlreadyAssociatedError(Exception):
+    pass
+
+class RoleNotAuthorizedError(Exception):
+    pass
+
+class DepartmentMissmatchError(Exception):
+    pass

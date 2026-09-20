@@ -15,6 +15,12 @@ from app.routes.professional_routes import router as professional_router
 from app.routes.specialty_routes import router as specialty_router
 from app.routes.professional_specialty_routes import router as professional_specialty_router
 from app.routes.appointment_routes import router as appointment_router
+from app.routes.user_routes import router as user_router
+from app.routes.role_routes import router as role_router
+from app.routes.permission_routes import router as permission_router
+from app.routes.role_permission_routes import router as role_permission_router
+from app.routes.user_role_routes import router as user_role_router
+from app.routes.user_clinic_routes import router as user_clinic_router
 
 
 app = FastAPI(
@@ -30,6 +36,13 @@ app.include_router(professional_router)
 app.include_router(specialty_router)
 app.include_router(professional_specialty_router)
 app.include_router(appointment_router)
+app.include_router(user_router)
+app.include_router(role_router)
+app.include_router(permission_router)
+app.include_router(role_permission_router)
+app.include_router(user_role_router)
+app.include_router(user_clinic_router)
+
 
 
 @app.get("/")
