@@ -9,6 +9,8 @@ if TYPE_CHECKING:
     from app.models.clinic_model import Clinic
     from app.models.user_model import User
     from app.models.appointment_model import Appointment
+    from app.models.patient_insurance_plan_model import PatientInsurancePlan
+    from app.models.patient_contacts_model import PatientContact
 
 class Patient(Base):
     __tablename__ = "patients"
@@ -40,5 +42,13 @@ class Patient(Base):
     )
     
     appointments: Mapped[list["Appointment"]] = relationship(
+        back_populates="patient"
+    )
+    
+    patient_insurance_plans: Mapped[list["PatientInsurancePlan"]] = relationship(
+    back_populates="patient"
+    )
+    
+    patient_contacts: Mapped[list["PatientContact"]] = relationship(
         back_populates="patient"
     )

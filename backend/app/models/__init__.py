@@ -14,3 +14,8 @@ from app.models.role_model import Role
 from app.models.permission_model import Permission
 from app.models.user_role_model import UserRole
 from app.models.role_permission_model import RolePermission
+from app.models.insurance_model import Insurance
+from app.models.insurance_plan_model import InsurancePlan
+from app.models.plan_model import Plan
+from app.models.patient_insurance_plan_model import PatientInsurancePlan
+from app.models.patient_contacts_model import PatientContact
