@@ -1,6 +1,12 @@
 class PatientNotFoundError(Exception):
     pass
 
+class PatientContactNotFoundException(Exception):
+    pass
+
+class PatientContactAlreadyExistsException(Exception):
+    pass
+
 class ClinicNotFoundError(Exception):
     pass
 
@@ -50,4 +56,25 @@ class RoleNotAuthorizedError(Exception):
     pass
 
 class DepartmentMissmatchError(Exception):
+    pass
+
+class InsuranceNotFoundException(Exception):
+    pass
+
+class InsuranceAlreadyExistsException(Exception):
+    pass
+
+class InsuranceDeleteConflictException(Exception):
+    pass
+
+class PlanNotFoundException(Exception):
+    pass
+
+class InsurancePlanAlreadyExistsException(Exception):
+    pass
+
+class InsurancePlanNotFoundException(Exception):
+    pass
+
+class PatientInsurancePlanNotFoundException(Exception):
     pass
