@@ -19,3 +19,4 @@ from app.models.insurance_plan_model import InsurancePlan
 from app.models.plan_model import Plan
 from app.models.patient_insurance_plan_model import PatientInsurancePlan
 from app.models.patient_contacts_model import PatientContact
+from app.models.medical_record_model import MedicalRecord

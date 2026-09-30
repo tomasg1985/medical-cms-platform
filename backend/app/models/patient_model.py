@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from app.models.appointment_model import Appointment
     from app.models.patient_insurance_plan_model import PatientInsurancePlan
     from app.models.patient_contacts_model import PatientContact
+    from app.models.medical_record_model import MedicalRecord
 
 class Patient(Base):
     __tablename__ = "patients"
@@ -39,6 +40,10 @@ class Patient(Base):
     clinics: Mapped[list["Clinic"]] = relationship(
         secondary="patient_clinics",
         back_populates="patients"
+    )
+    
+    medical_records: Mapped[list["MedicalRecord"]] = relationship(
+        back_populates="patient"
     )
     
     appointments: Mapped[list["Appointment"]] = relationship(
