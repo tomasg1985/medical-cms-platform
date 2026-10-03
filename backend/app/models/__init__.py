@@ -20,3 +20,6 @@ from app.models.plan_model import Plan
 from app.models.patient_insurance_plan_model import PatientInsurancePlan
 from app.models.patient_contacts_model import PatientContact
 from app.models.medical_record_model import MedicalRecord
+from app.models.clinical_access_grant_model import ClinicalAccessGrant
+from app.models.clinical_access_scope_model import ClinicalAccessScope
+from app.models.clinical_access_grant_scope_model import ClinicalAccessGrantScope

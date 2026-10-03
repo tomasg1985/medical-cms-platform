@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from app.models.user_model import User
     from app.models.schedule_availability_model import ScheduleAvailability
     from app.models.medical_record_model import MedicalRecord
+    from app.models.clinical_access_grant_model import ClinicalAccessGrant
 
 class Clinic(Base):
     __tablename__ = "clinics"
@@ -47,5 +48,9 @@ class Clinic(Base):
     )
     
     schedule_availabilities: Mapped[list["ScheduleAvailability"]] = relationship(
+        back_populates="clinic"
+    )
+    
+    clinical_access_grants: Mapped[list["ClinicalAccessGrant"]] = relationship(
         back_populates="clinic"
     )
