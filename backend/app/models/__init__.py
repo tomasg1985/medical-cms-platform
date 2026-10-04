@@ -23,3 +23,12 @@ from app.models.medical_record_model import MedicalRecord
 from app.models.clinical_access_grant_model import ClinicalAccessGrant
 from app.models.clinical_access_scope_model import ClinicalAccessScope
 from app.models.clinical_access_grant_scope_model import ClinicalAccessGrantScope
+from app.models.clinical_evolution_model import ClinicalEvolution
+from app.models.medical_document_model import MedicalDocument
+from app.models.study_model import Study
+from app.models.prescription_model import Prescription
+from app.models.prescription_item_model import PrescriptionItem
+from app.models.medication_model import Medication 
+from app.models.medication_presentation_model import MedicationPresentation
+from app.models.active_ingredient_model import ActiveIngredients
+from app.models.medication_active_ingredient_model import MedicationActiveIngredient

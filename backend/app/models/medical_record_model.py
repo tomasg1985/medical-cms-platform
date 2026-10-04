@@ -37,4 +37,4 @@ class MedicalRecord(Base):
 
     clinic: Mapped["Clinic"] = relationship(
         back_populates="medical_records"
-        )
+    )

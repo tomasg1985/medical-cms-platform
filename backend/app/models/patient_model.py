@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from app.models.patient_contacts_model import PatientContact
     from app.models.medical_record_model import MedicalRecord
     from app.models.clinical_access_grant_model import ClinicalAccessGrant
+    from app.models.medical_document_model import MedicalDocument
 
 class Patient(Base):
     __tablename__ = "patients"
@@ -60,5 +61,9 @@ class Patient(Base):
     )
     
     clinical_access_grants: Mapped[list["ClinicalAccessGrant"]] = relationship(
+        back_populates="patient"
+    )
+    
+    medical_documents: Mapped[list["MedicalDocument"]] = relationship(
         back_populates="patient"
     )
