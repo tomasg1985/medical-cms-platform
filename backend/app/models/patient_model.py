@@ -14,6 +14,8 @@ if TYPE_CHECKING:
     from app.models.medical_record_model import MedicalRecord
     from app.models.clinical_access_grant_model import ClinicalAccessGrant
     from app.models.medical_document_model import MedicalDocument
+    from app.models.study_model import Study
+    from app.models.prescription_model import Prescription
 
 class Patient(Base):
     __tablename__ = "patients"
@@ -45,6 +47,14 @@ class Patient(Base):
     )
     
     medical_records: Mapped[list["MedicalRecord"]] = relationship(
+        back_populates="patient"
+    )
+
+    studies: Mapped[list["Study"]] = relationship(
+        back_populates="patient"
+    )
+
+    prescriptions: Mapped[list["Prescription"]] = relationship(
         back_populates="patient"
     )
     

@@ -77,13 +77,13 @@ def delete_plan(
     plan_id: int
 ) -> bool:
     
-    plan= plan_repository.delete(
+    plan = plan_repository.get_by_id(
         db=db,
-        plan=plan
+        plan_id=plan_id
     )
     
     if plan is None:
-        return None
+        return False
     
     return plan_repository.delete(
         db=db,

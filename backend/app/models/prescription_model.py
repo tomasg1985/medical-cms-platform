@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from app.models.medical_record_model import MedicalRecord
     from app.models.professional_model import Professional
     from app.models.appointment_model import Appointment
+    from app.models.prescription_item_model import PrescriptionItem
 
 
 class Prescription(Base):
@@ -57,4 +58,8 @@ class Prescription(Base):
     
     appointment: Mapped["Appointment"] = relationship(
         back_populates="prescriptions"
+    )
+
+    prescription_items: Mapped[list["PrescriptionItem"]] = relationship(
+        back_populates="prescription"
     )

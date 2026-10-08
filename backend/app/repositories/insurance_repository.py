@@ -64,12 +64,12 @@ class InsuranceRepository:
 
 
     def delete(self, db: Session, insurance: Insurance) -> bool:
-            try:
-                db.delete(insurance)
-                db.commit()
-                
-                return True
+        try:
+            db.delete(insurance)
+            db.commit()
             
-            except Exception:
-                db.rollback()
-                raise
+            return True
+        
+        except Exception:
+            db.rollback()
+            raise

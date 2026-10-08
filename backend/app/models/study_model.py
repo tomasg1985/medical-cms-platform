@@ -36,7 +36,7 @@ class Study(Base):
         nullable=False
     )
 
-    medical_record: Mapped[int] = mapped_column(
+    medical_record_id: Mapped[int] = mapped_column(
         ForeignKey("medical_records.id"),
         nullable=False
     )

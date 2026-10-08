@@ -12,10 +12,10 @@ class PatientInsurancePlanCreate(BaseModel):
     status: str
 
 class PatientInsurancePlanUpdate(BaseModel):
-    policy_number: Optional[str]
-    is_primary: Optional[bool]
-    expiration_date: Optional[date]
-    status: Optional[str]
+    policy_number: Optional[str] = None
+    is_primary: Optional[bool] = None
+    expiration_date: Optional[date] = None
+    status: Optional[str] = None
 
 class PatientInsurancePlanResponse(BaseModel):
     id: int

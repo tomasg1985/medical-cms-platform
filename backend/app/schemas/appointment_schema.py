@@ -11,7 +11,6 @@ class AppointmentCreate(BaseModel):
     appointment_date: date
     appointment_hour: time
     consulting_mode: str
-    consulting_duration: int
     appointment_state: str
     consulting_reason: str
     cancelation_reason: Optional[str] = None
@@ -30,15 +29,12 @@ class AppointmentUpdate(BaseModel):
     appointment_date: Optional[date] = None
     appointment_hour: Optional[time] = None
     consulting_mode: Optional[str] = None
-    consulting_duration: int
     appointment_state: Optional[str] = None
     consulting_reason: Optional[str] = None
     cancelation_reason: Optional[str] = None
     amount_paid: Optional[Decimal] = None
     payment_status: Optional[str] = None
     
-    schedule_availability_id: int
-
 class AppointmentResponse(BaseModel):
     id: int
     reservation_code: str

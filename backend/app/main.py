@@ -24,6 +24,15 @@ from app.routes.user_clinic_routes import router as user_clinic_router
 from app.routes.insurance_routes import router as insurance_router
 from app.routes.plan_routes import router as plan_router
 from app.routes.insurance_plan_routes import router as insurance_plan_router
+from app.routes.active_ingredient_routes import router as active_ingredient_router
+from app.routes.medical_document_routes import router as medical_document_router
+from app.routes.medical_record_routes import router as medical_record_router
+from app.routes.medication_active_ingredient_routes import router as medication_active_ingredient_router
+from app.routes.medication_presentation_routes import router as medication_presentation_router
+from app.routes.medication_routes import router as medication_router
+from app.routes.prescription_item_routes import router as prescription_item_router
+from app.routes.prescription_routes import router as prescription_router
+from app.routes.study_routes import router as study_router
 
 
 app = FastAPI(
@@ -48,6 +57,15 @@ app.include_router(user_clinic_router)
 app.include_router(insurance_router)
 app.include_router(plan_router)
 app.include_router(insurance_plan_router)
+app.include_router(active_ingredient_router)
+app.include_router(medical_document_router)
+app.include_router(medical_record_router)
+app.include_router(medication_active_ingredient_router)
+app.include_router(medication_presentation_router)
+app.include_router(medication_router)
+app.include_router(prescription_item_router)
+app.include_router(prescription_router)
+app.include_router(study_router)
 
 
 

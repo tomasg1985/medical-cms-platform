@@ -30,5 +30,5 @@ from app.models.prescription_model import Prescription
 from app.models.prescription_item_model import PrescriptionItem
 from app.models.medication_model import Medication 
 from app.models.medication_presentation_model import MedicationPresentation
-from app.models.active_ingredient_model import ActiveIngredients
+from app.models.active_ingredient_model import ActiveIngredient
 from app.models.medication_active_ingredient_model import MedicationActiveIngredient

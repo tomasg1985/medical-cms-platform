@@ -14,7 +14,10 @@ if TYPE_CHECKING:
     from app.models.user_model import User
     from app.models.schedule_availability_model import ScheduleAvailability
     from app.models.clinical_access_grant_model import ClinicalAccessGrant
-    from backend.app.models.medical_document_model import MedicalDocument
+    from app.models.medical_document_model import MedicalDocument
+    from app.models.clinical_evolution_model import ClinicalEvolution
+    from app.models.study_model import Study
+    from app.models.prescription_model import Prescription
 
 class Professional(Base):
     __tablename__ = "professionals"
@@ -57,6 +60,14 @@ class Professional(Base):
     appointments: Mapped[list["Appointment"]] = relationship(
         back_populates="professional"
     )
+
+    studies: Mapped[list["Study"]] = relationship(
+        back_populates="professional"
+    )
+
+    prescriptions: Mapped[list["Prescription"]] = relationship(
+        back_populates="professional"
+    )
     
     schedule_availabilities: Mapped[list["ScheduleAvailability"]] = relationship(
         back_populates="professional"
@@ -67,5 +78,9 @@ class Professional(Base):
     )
     
     medical_documents: Mapped[list["MedicalDocument"]] = relationship(
+        back_populates="professional"
+    )
+    
+    clinical_evolutions: Mapped[list["ClinicalEvolution"]] = relationship(
         back_populates="professional"
     )

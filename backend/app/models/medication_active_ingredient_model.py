@@ -7,7 +7,7 @@ from app.database import Base
 
 if TYPE_CHECKING:
     from app.models.medication_model import Medication
-    from app.models.active_ingredient_model import ActiveIngredients
+    from app.models.active_ingredient_model import ActiveIngredient
 
 class MedicationActiveIngredient(Base):
     __tablename__ = "medication_active_ingredients"
@@ -28,6 +28,6 @@ class MedicationActiveIngredient(Base):
         back_populates="medication_active_ingredients"
     )
     
-    active_ingredient: Mapped["ActiveIngredients"] = relationship(
+    active_ingredient: Mapped["ActiveIngredient"] = relationship(
         back_populates="medication_active_ingredients"
     )

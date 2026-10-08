@@ -8,7 +8,7 @@ from app.database import Base
 if TYPE_CHECKING:
     from app.models.prescription_item_model import PrescriptionItem
     from app.models.medication_presentation_model import MedicationPresentation
-    from app.models.medication_active_ingredient_model import MedicationActiveIngredients
+    from app.models.medication_active_ingredient_model import MedicationActiveIngredient
 
 class Medication(Base):
     __tablename__ = "medications"
@@ -30,6 +30,6 @@ class Medication(Base):
         back_populates="medication"
     )
     
-    medication_active_ingredients: Mapped[list["MedicationActiveIngredients"]] = relationship(
+    medication_active_ingredients: Mapped[list["MedicationActiveIngredient"]] = relationship(
         back_populates="medication"
     )

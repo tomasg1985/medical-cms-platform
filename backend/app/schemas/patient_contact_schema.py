@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 class PatientContactCreate(BaseModel):
+    patient_id: int
     first_name: str
     last_name: str
     relationship_type: str
@@ -16,6 +17,7 @@ class PatientContactUpdate(BaseModel):
     relationship_type: Optional[str] =None
     phone: Optional[str] =None
     email: Optional[str] =None
+    is_emergency: Optional[bool] = None
 
 class PatientContactResponse(BaseModel):
     id: int
