@@ -7,6 +7,10 @@ class StudyCreate(BaseModel):
     status: str
     requested_at: datetime
     completed_at: datetime
+    patient_id: int
+    professional_id: int
+    medical_record_id: int
+    appointment_id: int
 
 class StudyUpdate(BaseModel):
     study_type: str | None = None

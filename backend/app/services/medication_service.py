@@ -5,6 +5,8 @@ from app.models.medication_model import Medication
 from app.repositories.medication_repository import MedicationRepository
 from app.schemas.medication_schema import MedicationUpdate
 
+from app.core.exceptions import MedicationNotFoundException
+
 medication_repository = MedicationRepository()
 
 def create_medication(
@@ -66,7 +68,7 @@ def update_medication(
     )
     
     if medication is None:
-        return None
+        raise MedicationNotFoundException()
     
     medication.name = medication_data.name
     medication.description = medication_data.description
@@ -92,7 +94,7 @@ def delete_medication(
     )
     
     if medication is None:
-        return False
+        raise MedicationNotFoundException()
     
     return medication_repository.delete(
         db=db,

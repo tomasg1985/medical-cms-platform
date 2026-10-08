@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.schemas.medication_presentation_schema import MedicationPresentationCreate, MedicationPresentationResponse, MedicationPresentationUpdate
-from app.services.medication_presentation_service import create_medical_presentation, get_medication_presentation, get_medication_presentations, update_medication_presentation, delete_medication_presentation
+from app.services.medication_presentation_service import create_medication_presentation, get_medication_presentation, get_medication_presentations, update_medication_presentation, delete_medication_presentation
 
 
 router = APIRouter(
@@ -16,7 +16,7 @@ def create_medical_presentation_endpoint(
     medication_presentation_data: MedicationPresentationCreate,
     db: Session = Depends(get_db)
 ):
-    return create_medical_presentation(
+    return create_medication_presentation(
         db=db,
         medication_presentation_data=medication_presentation_data
     )

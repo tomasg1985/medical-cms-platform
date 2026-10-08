@@ -5,6 +5,8 @@ from app.models.active_ingredient_model import ActiveIngredient
 from app.repositories.active_ingredient_repository import ActiveIngredientRepository
 from app.schemas.active_ingredient_schema import ActiveIngredientCreate, ActiveIngredientPatch, ActiveIngredientUpdate
 
+from app.core.exceptions import ActiveIngredientNotFoundException
+
 active_ingredient_repository = ActiveIngredientRepository()
 
 def create_active_ingredient(
@@ -13,7 +15,7 @@ def create_active_ingredient(
 ) -> ActiveIngredient:
 
     active_ingredient = ActiveIngredient(
-        **active_ingredient_data.model_dump()
+        active_ingredient_data.model_dump()
     )
 
     active_ingredient = active_ingredient_repository.create(
@@ -60,7 +62,7 @@ def update_active_ingredient(
     )
 
     if active_ingredient is None:
-        return None
+        raise ActiveIngredientNotFoundException()
 
     for field, value in active_ingredient_data.model_dump(exclude_unset=True).items():
         setattr(active_ingredient, field, value)
@@ -84,7 +86,7 @@ def delete_active_ingredient(
     )
 
     if active_ingredient is None:
-        return False
+        raise ActiveIngredientNotFoundException()
 
     return active_ingredient_repository.delete(
         db=db,

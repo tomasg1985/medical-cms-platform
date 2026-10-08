@@ -7,6 +7,10 @@ class MedicalDocumentCreate(BaseModel):
     name: str
     file_path: str
     document_type: str
+    patient_id: int
+    medical_record_id: int
+    professional_id: int
+    clinic_id: int
 
 class MedicalDocumentUpdate(BaseModel):
     name: str

@@ -8,6 +8,8 @@ from app.schemas.prescription_item_schema import PrescriptionItemCreate, Prescri
 
 from app.repositories.prescription_item_repository import PrescriptionItemRepository
 
+from app.core.exceptions import PrescriptionNotFoundException, PrescriptionItemNotFoundException, MedicationNotFoundException
+
 prescription_item_repository = PrescriptionItemRepository()
 
 def create_prescription_item(
@@ -19,11 +21,11 @@ def create_prescription_item(
 
     prescription = db.get(Prescription, prescription_id)
     if prescription is None:
-        return None
+        raise PrescriptionNotFoundException()
 
     medication = db.get(Medication, medication_id)
     if medication is None:
-        return None
+        raise MedicationNotFoundException()
 
     prescription_item = PrescriptionItem(
         dosage=prescription_item_data.dosage,
@@ -74,7 +76,7 @@ def update_prescription_item(
     )
 
     if prescription_item is None:
-        return None
+        raise PrescriptionItemNotFoundException()
 
     data = prescription_item_data.model_dump(exclude_unset=True)
 
@@ -100,7 +102,7 @@ def delete_prescription_item(
     )
 
     if prescription_item is None:
-        return False
+        raise PrescriptionItemNotFoundException()
 
     return prescription_item_repository.delete(
         db=db,

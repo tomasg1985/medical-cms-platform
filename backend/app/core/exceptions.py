@@ -78,3 +78,45 @@ class InsurancePlanNotFoundException(Exception):
 
 class PatientInsurancePlanNotFoundException(Exception):
     pass
+
+class PrescriptionNotFoundException(Exception):
+    pass
+
+class MedicalRecordNotFoundException(Exception):
+    pass
+
+class MedicalRecordAlreadyExistsException(Exception):
+    pass
+
+class StudyNotFoundException(Exception):
+    pass
+
+class MedicalDocumentNotFoundException(Exception):
+    pass
+
+class MedicalDocumentAlreadyExistsException(Exception):
+    pass
+
+class PrescriptionItemNotFoundException(Exception):
+    pass
+
+class MedicationNotFoundException(Exception):
+    pass
+
+class MedicationNotFoundException(Exception):
+    pass
+
+class MedicationPresentationNotFoundException(Exception):
+    pass
+
+class ActiveIngredientNotFoundException(Exception):
+    pass
+
+class ActiveIngredientAlreadyExistsException(Exception):
+    pass
+
+class MedicationActiveIngredientNotFoundException(Exception):
+    pass
+
+class MedicationActiveIngredientAlreadyExistsException(Exception):
+    pass

@@ -4,16 +4,15 @@ from app.models.medication_presentation_model import MedicationPresentation
 
 from app.repositories.medication_presentation_repository import MedicationPresentationRepository
 from app.repositories.medication_repository import MedicationRepository
-from app.schemas.medication_presentation_schema import (
-    MedicationPresentationCreate,
-    MedicationPresentationUpdate,
-)
+from app.schemas.medication_presentation_schema import MedicationPresentationCreate, MedicationPresentationUpdate
+
+from app.core.exceptions import MedicationPresentationNotFoundException, MedicationNotFoundException
 
 medication_presentation_repository = MedicationPresentationRepository()
 medication_repository = MedicationRepository()
 
 
-def create_medical_presentation(
+def create_medication_presentation(
     db: Session,
     medication_id: int,
     presentation_data: MedicationPresentationCreate,
@@ -25,7 +24,7 @@ def create_medical_presentation(
     )
 
     if medication is None:
-        return None
+        raise MedicationNotFoundException()
 
     medication_presentation = MedicationPresentation(
         presentation=presentation_data.presentation,
@@ -44,7 +43,7 @@ def create_medical_presentation(
     return medication_presentation
 
 
-create_medication_presentation = create_medical_presentation
+create_medication_presentation = create_medication_presentation
 
 
 def get_medication_presentations(
@@ -90,7 +89,7 @@ def update_medication_presentation(
     )
 
     if medication_presentation is None:
-        return None
+        raise MedicationPresentationNotFoundException()
 
     medication_presentation.presentation = medication_presentation_data.presentation
     medication_presentation.concentration = medication_presentation_data.concentration
@@ -117,7 +116,7 @@ def delete_medication_presentation(
     )
 
     if medication_presentation is None:
-        return False
+        raise MedicationPresentationNotFoundException()
 
     return medication_presentation_repository.delete(
         db=db,

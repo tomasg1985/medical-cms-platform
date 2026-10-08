@@ -8,7 +8,8 @@ from app.repositories.professional_repository import ProfessionalRepository
 from app.repositories.clinic_repository import ClinicRepository
 from app.repositories.medical_record_repository import MedicalRecordRepository
 
-from app.schemas.medical_document_schema import MedicalDocumentCreate, MedicalDocumentResponse, MedicalDocumentUpdate
+from app.schemas.medical_document_schema import MedicalDocumentCreate, MedicalDocumentUpdate
+from app.core.exceptions import ClinicNotFoundError, MedicalDocumentAlreadyExistsException, MedicalDocumentNotFoundException, MedicalRecordNotFoundException, PatientNotFoundError, ProfessionalNotFoundError
 
 medical_document_repository = MedicalDocumentRepository()
 patient_repository = PatientRepository()
@@ -18,14 +19,12 @@ medical_record_repository = MedicalRecordRepository()
 
 def create_medical_document(
     db: Session,
-    name: str,
-    file_path: str,
-    document_type: str,
-    patient_id: int,
-    professional_id: int,
-    clinic_id: int,
-    medical_record_id: int
-) -> MedicalDocument | None:
+    medical_document_data: MedicalDocumentCreate,
+) -> MedicalDocument:
+    patient_id = medical_document_data.patient_id
+    professional_id = medical_document_data.professional_id
+    clinic_id = medical_document_data.clinic_id
+    medical_record_id = medical_document_data.medical_record_id
 
     patient = patient_repository.get_by_id(
         db=db,
@@ -33,7 +32,7 @@ def create_medical_document(
     )
     
     if patient is None:
-        return None
+        raise PatientNotFoundError()
     
     
     professional = professional_repository.get_by_id(
@@ -42,7 +41,7 @@ def create_medical_document(
     )
     
     if professional is None:
-        return None
+        raise ProfessionalNotFoundError()
     
     clinic = clinic_repository.get_by_id(
         db=db,
@@ -50,7 +49,7 @@ def create_medical_document(
     )
     
     if clinic is None:
-        return None
+        raise ClinicNotFoundError()
     
     medical_record = medical_record_repository.get_by_id(
         db=db,
@@ -58,7 +57,7 @@ def create_medical_document(
     )
     
     if medical_record is None:
-        return None
+        raise MedicalRecordNotFoundException()
     
     existing = medical_document_repository.get_by_patient_professional_clinic_medical_record(
         db=db,
@@ -69,12 +68,12 @@ def create_medical_document(
     )
     
     if existing is not None:
-        return None
+        raise MedicalDocumentAlreadyExistsException()
     
     medical_document = MedicalDocument(
-        name=name,
-        file_path=file_path,
-        document_type=document_type,
+        name=medical_document_data.name,
+        file_path=medical_document_data.file_path,
+        document_type=medical_document_data.document_type,
         patient_id=patient_id,
         professional_id=professional_id,
         clinic_id=clinic_id,
@@ -102,13 +101,16 @@ def get_medical_documents(
 def get_medical_document(
     db: Session,
     medical_document_id: int
-) -> MedicalDocument | None:
+) -> MedicalDocument:
     
     medical_document = medical_document_repository.get_by_id(
         db=db,
         medical_document_id=medical_document_id
     )
     
+    if medical_document is None:
+        raise MedicalDocumentNotFoundException()
+
     return medical_document
 
 
@@ -122,9 +124,6 @@ def update_medical_document(
         db=db,
         medical_document_id=medical_document_id
     )
-    
-    if medical_document is None:
-        return None
     
     medical_document.name = medical_document_data.name
     medical_document.file_path = medical_document_data.file_path
@@ -143,13 +142,10 @@ def delete_medical_document(
     medical_document_id: int
 ) -> bool:
     
-    medical_document = medical_document_repository.get_by_id(
+    medical_document = get_medical_document(
         db=db,
         medical_document_id=medical_document_id
     )
-    
-    if medical_document is None:
-        return False
     
     return medical_document_repository.delete(
         db=db,

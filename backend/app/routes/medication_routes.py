@@ -5,6 +5,8 @@ from app.database import get_db
 from app.schemas.medication_schema import MedicationCreate, MedicationResponse, MedicationUpdate
 from app.services.medication_service import create_medication, get_medication, get_medications, update_medication, delete_medication
 
+from app.core.exceptions import MedicationNotFoundException
+
 router = APIRouter(
     prefix="/medications",
     tags=["Medications"]
@@ -44,18 +46,24 @@ def get_medication_endpoint(
     medication_id: int,
     db: Session = Depends(get_db)
 ):
-    medication = get_medication(
-        db=db,
-        medication_id=medication_id
-    )
-    
-    if medication is None:
+    try:
+        medication = get_medication(
+            db=db,
+            medication_id=medication_id
+        )
+        
+        if medication is None:
+            raise HTTPException(
+                status_code=404,
+                detail="No se encontró ninguna medicación asociada a su busqueda."
+            )
+
+        return medication
+    except MedicationNotFoundException:
         raise HTTPException(
             status_code=404,
             detail="No se encontró ninguna medicación asociada a su busqueda."
         )
-        
-    return medication
 
 
 @router.put(
@@ -72,19 +80,19 @@ def update_medication_endpoint(
     medication_data: MedicationUpdate,
     db: Session = Depends(get_db)
 ):
-    medication = update_medication(
-        db=db,
-        medication_id=medication_id,
-        medication_data=medication_data
-    )
-    
-    if medication is None:
+    try:
+        medication = update_medication(
+            db=db,
+            medication_id=medication_id,
+            medication_data=medication_data
+        )
+
+        return medication
+    except MedicationNotFoundException:
         raise HTTPException(
             status_code=404,
             detail="No se encontró ninguna medicación asociada a su busqueda."
         )
-    
-    return medication
 
 
 @router.delete(
@@ -100,14 +108,20 @@ def delete_medication_endpoint(
     medication_id: int,
     db: Session = Depends(get_db)
 ):
-    deleted = delete_medication(
-        db=db,
-        medication_id=medication_id
-    )
+    try:
+        deleted = delete_medication(
+            db=db,
+            medication_id=medication_id
+        )
 
-    if not deleted:
+        if not deleted:
+            raise HTTPException(
+                status_code=404,
+                detail="No se encontró ninguna presentacion médica asociada a su busqueda."
+            )
+    except MedicationNotFoundException:
         raise HTTPException(
             status_code=404,
-            detail="No se encontró ninguna presentacion médica asociada a su busqueda."
+            detail="No se encontró ninguna medicación asociada a su busqueda."
         )
 

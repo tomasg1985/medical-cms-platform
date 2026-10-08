@@ -5,18 +5,6 @@ from app.models.medication_active_ingredient_model import MedicationActiveIngred
 
 
 class MedicationActiveIngredientRepository:
-    
-    def get_by_id(self, db: Session, medication_active_ingredient_id: int) -> MedicationActiveIngredient | None:
-        statement = (
-            select(MedicationActiveIngredient)
-            .where(MedicationActiveIngredient.id == medication_active_ingredient_id)
-        )
-        result = db.execute(statement)
-        medication_active_ingredient = result.scalar_one_or_none()
-        
-        return medication_active_ingredient
-
-
     def create(self, db: Session, medication_active_ingredient: MedicationActiveIngredient) -> MedicationActiveIngredient:
         try:
             db.add(medication_active_ingredient)

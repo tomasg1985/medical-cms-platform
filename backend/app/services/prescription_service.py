@@ -10,6 +10,8 @@ from app.schemas.prescription_schema import PrescriptionUpdate, PrescriptionCrea
 
 from app.repositories.prescription_repository import PrescriptionRepository
 
+from app.core.exceptions import PrescriptionNotFoundException, PatientNotFoundError, ProfessionalNotFoundError, MedicalRecordNotFoundException, AppointmentNotFoundError
+
 prescription_repository = PrescriptionRepository()
 
 def create_prescription(
@@ -23,19 +25,19 @@ def create_prescription(
     
     patient = db.get(Patient, patient_id)
     if patient is None:
-        return None
+        raise PatientNotFoundError()
     
     professional = db.get(Professional, professional_id)
     if professional is None:
-        return None
+        raise ProfessionalNotFoundError()
     
     medical_record = db.get(MedicalRecord, medical_record_id)
     if medical_record is None:
-        return None
+        raise MedicalRecordNotFoundException()
     
     appointment = db.get(Appointment, appointment_id)
     if appointment is None:
-        return None
+        raise AppointmentNotFoundError()
     
     prescription = Prescription(
         prescription_date=prescription_data.prescription_date,
@@ -92,7 +94,7 @@ def update_prescription(
     )
     
     if prescription is None:
-        return None
+        raise PrescriptionNotFoundException()
     
     data = prescription_data.model_dump(
         exclude_unset=True
@@ -120,7 +122,7 @@ def delete_prescription(
     )
     
     if prescription is None:
-        return None
+        raise PrescriptionNotFoundException()
     
     return prescription_repository.delete(
         db=db,

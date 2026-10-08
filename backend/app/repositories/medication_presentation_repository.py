@@ -19,9 +19,9 @@ class MedicationPresentationRepository:
     def get_medication_presentations(self, db: Session) -> list[MedicationPresentation]:
         statement = select(MedicationPresentation)
         result = db.execute(statement)
-        medical_presentations = result.scalars().all()
+        medication_presentations = result.scalars().all()
 
-        return medical_presentations
+        return medication_presentations
 
 
     def get_by_medication_id(
