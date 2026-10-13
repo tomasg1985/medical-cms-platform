@@ -32,3 +32,6 @@ from app.models.medication_model import Medication
 from app.models.medication_presentation_model import MedicationPresentation
 from app.models.active_ingredient_model import ActiveIngredient
 from app.models.medication_active_ingredient_model import MedicationActiveIngredient
+from app.models.tenant_model import Tenant
+from app.models.clinic_modules_model import ClinicModule
+from app.models.module_model import Module

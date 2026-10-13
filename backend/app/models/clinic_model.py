@@ -1,5 +1,7 @@
 from typing import TYPE_CHECKING
 
+from sqlalchemy import ForeignKey
+
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base
 
@@ -13,12 +15,19 @@ if TYPE_CHECKING:
     from app.models.medical_record_model import MedicalRecord
     from app.models.clinical_access_grant_model import ClinicalAccessGrant
     from app.models.medical_document_model import MedicalDocument
+    from app.models.clinic_modules_model import ClinicModule
+    from app.models.tenant_model import Tenant
 
 class Clinic(Base):
     __tablename__ = "clinics"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(nullable=False)
+    
+    tenant_id: Mapped[int] = mapped_column(
+        ForeignKey("tenants.id"),
+        nullable=False
+    )
     
     patients: Mapped[list["Patient"]] = relationship(
         secondary="patient_clinics",
@@ -58,4 +67,12 @@ class Clinic(Base):
     
     medical_documents: Mapped[list["MedicalDocument"]] = relationship(
         back_populates="clinic"
+    )
+    
+    clinic_modules: Mapped[list["ClinicModule"]] = relationship(
+        back_populates="clinic"
+    )
+    
+    tenant: Mapped["Tenant"] = relationship(
+        back_populates="clinics"
     )
