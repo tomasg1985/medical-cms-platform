@@ -1,16 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.core.exceptions import (
-    AppointmentNotFoundError,
-    MedicalRecordNotFoundException,
-    PatientNotFoundError,
-    ProfessionalNotFoundError,
-    StudyNotFoundException,
-)
 from app.database import get_db
 from app.schemas.study_schema import StudyCreate, StudyResponse, StudyUpdate
 from app.services.study_service import create_study, delete_study, get_studies, get_study, update_study
+
+from app.core.exceptions import AppointmentNotFoundError, MedicalRecordNotFoundException, PatientNotFoundError, ProfessionalNotFoundError, StudyNotFoundException
 
 router = APIRouter(
     prefix="/studies",
@@ -68,7 +63,11 @@ def get_studies_endpoint(
 @router.get(
     "/{study_id}",
     response_model=StudyResponse,
-    responses={404: {"description": "No se encontró el estudio solicitado."}},
+    responses={
+        404: {
+            "description": "No se encontró el estudio solicitado."
+        }
+    },
 )
 def get_study_endpoint(
     study_id: int,

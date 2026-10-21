@@ -5,10 +5,7 @@ from app.models.clinic_modules_model import ClinicModule
 from app.repositories.clinic_modules_repository import ClinicModuleRepository
 from app.repositories.clinic_repository import ClinicRepository
 from app.repositories.module_repository import ModuleRepository
-from app.schemas.clinic_modules_schema import (
-    ClinicModuleCreate,
-    ClinicModuleUpdate,
-)
+from app.schemas.clinic_modules_schema import ClinicModuleCreate, ClinicModuleUpdate
 
 clinic_module_repository = ClinicModuleRepository()
 clinic_repository = ClinicRepository()
@@ -88,7 +85,6 @@ def update_clinic_module(
         exclude_unset=True
     )
 
-    # status es obligatorio en el modelo; no permitimos actualizarlo a None.
     if "status" in update_data and update_data["status"] is None:
         raise ValueError("El estado no puede ser nulo.")
 

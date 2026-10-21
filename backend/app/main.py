@@ -35,6 +35,8 @@ from app.routes.prescription_routes import router as prescription_router
 from app.routes.study_routes import router as study_router
 from app.routes.clinic_modules_routes import router as clinic_module_router
 from app.routes.module_routes import router as module_router
+from app.routes.system_logs_routes import router as system_logs_router
+from app.routes.audit_log_routes import router as audit_log_router
 
 
 app = FastAPI(
@@ -70,6 +72,8 @@ app.include_router(prescription_router)
 app.include_router(study_router)
 app.include_router(clinic_module_router)
 app.include_router(module_router)
+app.include_router(system_logs_router)
+app.include_router(audit_log_router)
 
 
 
