@@ -16,15 +16,8 @@ class ClinicModule(Base):
     __tablename__ = "clinic_modules"
 
     status: Mapped[str] = mapped_column(nullable=False)
-
-    activated_at: Mapped[datetime] = mapped_column(
-        default=datetime.now,
-        nullable=False
-    )
-
-    deactivated_at: Mapped[datetime | None] = mapped_column(
-        nullable=True
-    )
+    activated_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+    deactivated_at: Mapped[datetime | None] = mapped_column(nullable=True)
 
     clinic_id: Mapped[int] = mapped_column(
         ForeignKey("clinics.id"),

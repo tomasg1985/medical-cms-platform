@@ -11,6 +11,8 @@ if TYPE_CHECKING:
     from app.models.patient_model import Patient
     from app.models.clinic_model import Clinic
     from app.models.role_model import Role
+    from app.models.audit_logs_model import AuditLog
+    from app.models.system_logs_model import SystemLog
 
 class User(Base):
     __tablename__ = "users"
@@ -38,4 +40,12 @@ class User(Base):
     roles: Mapped[list["Role"]] =relationship(
         secondary="user_roles",
         back_populates="users"
+    )
+    
+    audit_logs: Mapped[list["AuditLog"]] = relationship(
+        back_populates="user"
+    )
+    
+    system_logs: Mapped[list["SystemLog"]] = relationship(
+        back_populates="user"
     )

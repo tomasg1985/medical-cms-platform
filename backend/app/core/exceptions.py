@@ -120,3 +120,19 @@ class MedicationActiveIngredientNotFoundException(Exception):
 
 class MedicationActiveIngredientAlreadyExistsException(Exception):
     pass
+
+
+class ModuleNotFoundException(Exception):
+    pass
+
+
+class ModuleAlreadyExistsException(Exception):
+    pass
+
+
+class ClinicModuleNotFoundException(Exception):
+    pass
+
+
+class ClinicModuleAlreadyExistsException(Exception):
+    pass

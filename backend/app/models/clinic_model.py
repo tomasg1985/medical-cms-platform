@@ -17,6 +17,8 @@ if TYPE_CHECKING:
     from app.models.medical_document_model import MedicalDocument
     from app.models.clinic_modules_model import ClinicModule
     from app.models.tenant_model import Tenant
+    from app.models.audit_logs_model import AuditLog
+    from app.models.system_logs_model import SystemLog
 
 class Clinic(Base):
     __tablename__ = "clinics"
@@ -75,4 +77,12 @@ class Clinic(Base):
     
     tenant: Mapped["Tenant"] = relationship(
         back_populates="clinics"
+    )
+    
+    audit_logs: Mapped[list["AuditLog"]] = relationship(
+        back_populates="clinic"
+    )
+    
+    system_logs: Mapped[list["SystemLog"]] = relationship(
+        back_populates="clinic"
     )

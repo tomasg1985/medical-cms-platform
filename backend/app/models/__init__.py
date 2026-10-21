@@ -35,3 +35,5 @@ from app.models.medication_active_ingredient_model import MedicationActiveIngred
 from app.models.tenant_model import Tenant
 from app.models.clinic_modules_model import ClinicModule
 from app.models.module_model import Module
+from app.models.audit_logs_model import AuditLog
+from app.models.system_logs_model import SystemLog

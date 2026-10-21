@@ -4,18 +4,21 @@ from sqlalchemy.orm import Session
 from app.models.clinic_modules_model import ClinicModule
 
 class ClinicModuleRepository:
-    def get_by_id(self, db: Session, clinic_modules_id: int) -> ClinicModule | None:
+    def get_by_id(self, db: Session, clinic_id: int, module_id: int) -> ClinicModule | None:
         statement = (
             select(ClinicModule)
-            .where(ClinicModule.id == clinic_modules_id)
+            .where(
+                ClinicModule.clinic_id == clinic_id,
+                ClinicModule.module_id == module_id
+            )
         )
         result = db.execute(statement)
-        statement = result.scalar_one_or_none()
+        clinic_module = result.scalar_one_or_none()
         
-        return statement
+        return clinic_module
 
 
-    def get_clinic_modules(self, db: Session, clinic_module: ClinicModule) -> list[ClinicModule]:
+    def get_clinic_modules(self, db: Session) -> list[ClinicModule]:
         statement = select(ClinicModule)
         result = db.execute(statement)
         clinic_modules = result.scalars().all()

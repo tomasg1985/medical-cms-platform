@@ -22,7 +22,7 @@ def create_patient_contact(
         return None
     
     patient_contact = PatientContact(
-        **patient_contact_data.model_dump()
+        patient_contact_data.model_dump()
     )
     
     patient_contact = patient_contact_repository.create(
@@ -51,7 +51,7 @@ def get_patient_contact(
     
     patient_contact = patient_contact_repository.get_by_id(
         db=db,
-        patient_contacts_id=patient_contact_id
+        patient_contact_id=patient_contact_id
     )
     
     return patient_contact
