@@ -21,7 +21,14 @@ def create_clinic_endpoint(
     clinic = create_clinic(
         db=db,
         name=clinic_data.name,
+        tenant_id=clinic_data.tenant_id,
     )
+
+    if clinic is None:
+        raise HTTPException(
+            status_code=404,
+            detail="No se encontro el tenant solicitado",
+        )
 
     return clinic
 
@@ -40,7 +47,7 @@ def get_clinics_endpoint(
     response_model=ClinicResponse,
     responses={
         404: {
-            "description": "No se encontró la clínica solicitada",
+            "description": "No se encontro la clinica solicitada",
         }
     },
 )
@@ -56,7 +63,7 @@ def get_clinic_endpoint(
     if clinic is None:
         raise HTTPException(
             status_code=404,
-            detail="No se encontró la clínica solicitada",
+            detail="No se encontro la clinica solicitada",
         )
 
     return clinic
@@ -82,7 +89,7 @@ def get_clinic_patients_endpoint(
     response_model=ClinicResponse,
     responses={
         404: {
-            "description": "No se encontró la clínica solicitada",
+            "description": "No se encontro la clinica solicitada",
         }
     },
 )
@@ -100,7 +107,7 @@ def update_clinic_endpoint(
     if clinic is None:
         raise HTTPException(
             status_code=404,
-            detail="No se encontró la clínica solicitada",
+            detail="No se encontro la clinica solicitada",
         )
 
     return clinic
@@ -111,7 +118,7 @@ def update_clinic_endpoint(
     status_code=204,
     responses={
         404: {
-            "description": "No se encontró la clínica solicitada",
+            "description": "No se encontro la clinica solicitada",
         }
     },
 )
@@ -127,5 +134,5 @@ def delete_clinic_endpoint(
     if not deleted:
         raise HTTPException(
             status_code=404,
-            detail="No se encontró la clínica solicitada",
+            detail="No se encontro la clinica solicitada",
         )

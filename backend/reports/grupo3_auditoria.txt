@@ -1,0 +1,3078 @@
+MEDICAL CMS - GROUP 3 STATIC AUDIT
+Date: 2026-10-22 19:04:43
+Read-only inventory. No tests or migrations executed.
+
+============================================================
+ROUTES
+============================================================
+
+FILE: app\routes\active_ingredient_routes.py (5253 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L15: @router.post("/", response_model=ActiveIngredientResponse)
+  L28: raise HTTPException(
+  L29: status_code=409,
+  L34: @router.get("/", response_model=list[ActiveIngredientResponse])
+  L42: @router.get(
+  L44: response_model=ActiveIngredientResponse,
+  L62: raise HTTPException(
+  L63: status_code=404,
+  L69: raise HTTPException(
+  L70: status_code=404,
+  L75: @router.put(
+  L77: response_model=ActiveIngredientResponse,
+  L97: raise HTTPException(
+  L98: status_code=404,
+  L104: raise HTTPException(
+  L105: status_code=404,
+  L110: @router.patch(
+  L112: response_model=ActiveIngredientResponse,
+  L132: raise HTTPException(
+  L133: status_code=404,
+  L139: raise HTTPException(
+  L140: status_code=404,
+  L145: @router.delete(
+  L147: status_code=204,
+  L165: raise HTTPException(
+  L166: status_code=404,
+  L170: raise HTTPException(
+  L171: status_code=404,
+
+FILE: app\routes\appointment_routes.py (5945 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L16: @router.post("/", response_model=AppointmentResponse)
+  L29: raise HTTPException(
+  L30: status_code=404,
+  L35: raise HTTPException(
+  L36: status_code=404,
+  L41: raise HTTPException(
+  L42: status_code=404,
+  L47: raise HTTPException(
+  L48: status_code=404,
+  L53: raise HTTPException(
+  L54: status_code=400,
+  L59: raise HTTPException(
+  L60: status_code=409,
+  L65: @router.get(
+  L67: response_model=list[AppointmentResponse]
+  L77: @router.get(
+  L79: response_model=AppointmentResponse,
+  L96: raise HTTPException(
+  L97: status_code=404,
+  L104: @router.put(
+  L106: response_model=AppointmentResponse,
+  L127: raise HTTPException(
+  L128: status_code=404,
+  L133: raise HTTPException(
+  L134: status_code=400,
+  L139: raise HTTPException(
+  L140: status_code=409,
+  L145: raise HTTPException(
+  L146: status_code=409,
+  L151: @router.patch(
+  L153: response_model=AppointmentResponse,
+  L174: raise HTTPException(
+  L175: status_code=404,
+  L180: raise HTTPException(
+  L181: status_code=400,
+  L186: raise HTTPException(
+  L187: status_code=409,
+  L192: raise HTTPException(
+  L193: status_code=409,
+  L198: @router.delete(
+  L200: status_code=204,
+  L217: raise HTTPException(
+  L218: status_code=404,
+
+FILE: app\routes\audit_log_routes.py (1424 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L13: @router.post(
+  L15: response_model=AuditLogResponse
+  L29: @router.get("/", response_model=list[AuditLogResponse])
+  L38: @router.get(
+  L40: response_model=AuditLogResponse,
+  L57: raise HTTPException(
+  L58: status_code=404,
+
+FILE: app\routes\clinic_modules_routes.py (3109 bytes)
+  L2: from fastapi import APIRouter, Depends, HTTPException
+  L26: @router.post("/", response_model=ClinicModuleResponse, status_code=201)
+  L37: raise HTTPException(
+  L38: status_code=404,
+  L45: @router.get("/", response_model=list[ClinicModuleResponse])
+  L52: @router.get(
+  L54: response_model=ClinicModuleResponse
+  L68: raise HTTPException(
+  L69: status_code=404,
+  L76: @router.put(
+  L78: response_model=ClinicModuleResponse
+  L94: raise HTTPException(
+  L95: status_code=422,
+  L100: raise HTTPException(
+  L101: status_code=404,
+  L108: @router.delete(
+  L110: status_code=204
+  L124: raise HTTPException(
+  L125: status_code=404,
+
+FILE: app\routes\clinic_routes.py (2688 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L16: @router.post("/", response_model=ClinicResponse)
+  L29: @router.get("/", response_model=list[ClinicResponse])
+  L38: @router.get(
+  L40: response_model=ClinicResponse,
+  L57: raise HTTPException(
+  L58: status_code=404,
+  L65: @router.get(
+  L80: @router.put(
+  L82: response_model=ClinicResponse,
+  L101: raise HTTPException(
+  L102: status_code=404,
+  L109: @router.delete(
+  L111: status_code=204,
+  L128: raise HTTPException(
+  L129: status_code=404,
+
+FILE: app\routes\clinical_evolution_routes.py (342 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+
+FILE: app\routes\insurance_plan_routes.py (2407 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L16: @router.post(
+  L18: response_model=InsurancePlanResponse
+  L34: raise HTTPException(
+  L35: status_code=409,
+  L39: raise HTTPException(
+  L40: status_code=404,
+  L44: raise HTTPException(
+  L45: status_code=404,
+  L50: @router.get("/", response_model=list[InsurancePlanResponse])
+  L57: @router.get(
+  L59: response_model=InsurancePlanResponse,
+  L77: raise HTTPException(
+  L78: status_code=404,
+
+FILE: app\routes\insurance_routes.py (3912 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException, status
+  L16: @router.post(
+  L18: response_model=InsuranceResponse,
+  L19: status_code=201,
+  L32: raise HTTPException(
+  L33: status_code=409,
+  L38: @router.get("/", response_model=list[InsuranceResponse])
+  L45: @router.get(
+  L47: response_model=InsuranceResponse,
+  L61: raise HTTPException(
+  L62: status_code=404,
+  L67: raise HTTPException(
+  L68: status_code=404,
+  L73: @router.put(
+  L75: response_model=InsuranceResponse,
+  L94: raise HTTPException(
+  L95: status_code=404,
+  L100: raise HTTPException(
+  L101: status_code=409,
+  L105: raise HTTPException(
+  L106: status_code=404,
+  L111: @router.delete(
+  L113: status_code=204,
+  L130: raise HTTPException(
+  L131: status_code=404,
+  L135: raise HTTPException(
+  L136: status_code=409,
+
+FILE: app\routes\medical_document_routes.py (4726 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L14: @router.post(
+  L16: response_model=MedicalDocumentResponse,
+  L34: raise HTTPException(
+  L35: status_code=404,
+  L39: raise HTTPException(
+  L40: status_code=404,
+  L44: raise HTTPException(
+  L45: status_code=404,
+  L49: raise HTTPException(
+  L50: status_code=404,
+  L54: raise HTTPException(
+  L55: status_code=409,
+  L60: @router.get("/", response_model=list[MedicalDocumentResponse])
+  L67: @router.get(
+  L69: response_model=MedicalDocumentResponse,
+  L88: raise HTTPException(
+  L89: status_code=404,
+  L94: @router.put(
+  L96: response_model=MedicalDocumentResponse,
+  L117: raise HTTPException(
+  L118: status_code=404,
+  L123: @router.delete(
+  L125: status_code=204,
+  L143: raise HTTPException(
+  L144: status_code=404,
+
+FILE: app\routes\medical_record_routes.py (4591 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L20: @router.post(
+  L22: response_model=MedicalRecordResponse,
+  L38: raise HTTPException(
+  L39: status_code=404,
+  L43: raise HTTPException(
+  L44: status_code=404,
+  L48: raise HTTPException(
+  L49: status_code=409,
+  L55: @router.get("/", response_model=list[MedicalRecordResponse])
+  L61: @router.get(
+  L63: response_model=MedicalRecordResponse,
+  L76: raise HTTPException(
+  L77: status_code=404,
+  L83: @router.put(
+  L85: response_model=MedicalRecordResponse,
+  L103: raise HTTPException(
+  L104: status_code=404,
+  L108: raise HTTPException(
+  L109: status_code=404,
+  L113: raise HTTPException(
+  L114: status_code=404,
+  L118: raise HTTPException(
+  L119: status_code=409,
+  L125: @router.patch(
+  L127: response_model=MedicalRecordResponse,
+
+FILE: app\routes\medication_active_ingredient_routes.py (6277 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L15: @router.post("/", response_model=MedicationActiveIngredientResponse)
+  L26: raise HTTPException(
+  L27: status_code=404,
+  L31: raise HTTPException(
+  L32: status_code=404,
+  L36: raise HTTPException(
+  L37: status_code=409,
+  L42: @router.get("/", response_model=list[MedicationActiveIngredientResponse])
+  L49: @router.get(
+  L51: response_model=MedicationActiveIngredientResponse,
+  L72: raise HTTPException(
+  L73: status_code=404,
+  L78: @router.put(
+  L80: response_model=MedicationActiveIngredientResponse,
+  L103: raise HTTPException(
+  L104: status_code=404,
+  L108: raise HTTPException(
+  L109: status_code=404,
+  L113: raise HTTPException(
+  L114: status_code=404,
+  L118: raise HTTPException(
+  L119: status_code=409,
+  L124: @router.patch(
+  L126: response_model=MedicationActiveIngredientResponse,
+  L149: @router.delete(
+  L151: status_code=204,
+  L170: raise HTTPException(
+  L171: status_code=404,
+
+FILE: app\routes\medication_presentation_routes.py (4446 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L14: @router.post("/", response_model=MedicationPresentationResponse)
+  L25: @router.get("/", response_model=list[MedicationPresentationResponse])
+  L32: @router.get(
+  L34: response_model=MedicationPresentationResponse,
+  L51: raise HTTPException(
+  L52: status_code=404,
+  L59: @router.put(
+  L61: response_model=MedicationPresentationResponse,
+  L80: raise HTTPException(
+  L81: status_code=404,
+  L88: @router.patch(
+  L90: response_model=MedicationPresentationResponse,
+  L109: raise HTTPException(
+  L110: status_code=404,
+  L117: @router.delete(
+  L119: status_code=204,
+  L136: raise HTTPException(
+  L137: status_code=404,
+
+FILE: app\routes\medication_routes.py (3410 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L15: @router.post(
+  L17: response_model=MedicationResponse
+  L29: @router.get("/", response_model=list[MedicationResponse])
+  L36: @router.get(
+  L38: response_model=MedicationResponse,
+  L56: raise HTTPException(
+  L57: status_code=404,
+  L63: raise HTTPException(
+  L64: status_code=404,
+  L69: @router.put(
+  L71: response_model= MedicationResponse,
+  L92: raise HTTPException(
+  L93: status_code=404,
+  L98: @router.delete(
+  L100: status_code=204,
+  L118: raise HTTPException(
+  L119: status_code=404,
+  L123: raise HTTPException(
+  L124: status_code=404,
+
+FILE: app\routes\module_routes.py (2661 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L14: @router.post(
+  L16: response_model=ModuleResponse,
+  L17: status_code=201,
+  L29: raise HTTPException(
+  L30: status_code=409,
+  L35: @router.get("/", response_model=list[ModuleResponse])
+  L42: @router.get("/{module_id}", response_model=ModuleResponse)
+  L53: raise HTTPException(
+  L54: status_code=404,
+  L59: @router.put("/{module_id}", response_model=ModuleResponse)
+  L72: raise HTTPException(
+  L73: status_code=409,
+  L77: raise HTTPException(
+  L78: status_code=404,
+  L83: @router.delete("/{module_id}", status_code=204)
+  L94: raise HTTPException(
+  L95: status_code=404,
+
+FILE: app\routes\patient_contact_routes.py (530 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+
+FILE: app\routes\patient_insurance_plan_routes.py (0 bytes)
+WARNING: EMPTY FILE
+
+FILE: app\routes\patient_routes.py (3967 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L17: @router.post("/", response_model=PatientResponse)
+  L30: raise HTTPException(
+  L31: status_code=404,
+  L36: @router.post("/{patient_id}/clinics/{clinic_id}", response_model=PatientClinicResponse)
+  L51: raise HTTPException(
+  L52: status_code=404,
+  L56: raise HTTPException(
+  L57: status_code=404,
+  L61: raise HTTPException(
+  L62: status_code=409,
+  L67: @router.get("/", response_model=list[PatientResponse])
+  L80: @router.get(
+  L82: response_model=PatientResponse,
+  L99: raise HTTPException(
+  L100: status_code=404,
+  L107: @router.put(
+  L109: response_model=PatientResponse,
+  L128: raise HTTPException(
+  L129: status_code=404,
+  L136: @router.delete(
+  L138: status_code=204,
+  L155: raise HTTPException(
+  L156: status_code=404,
+
+FILE: app\routes\permission_routes.py (2918 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L14: @router.post("/", response_model=PermissionResponse)
+  L31: @router.get("/", response_model=list[PermissionResponse])
+  L41: @router.get(
+  L43: response_model=PermissionResponse,
+  L61: raise HTTPException(
+  L62: status_code=404,
+  L69: @router.put(
+  L71: response_model=PermissionResponse,
+  L91: raise HTTPException(
+  L92: status_code=404,
+  L99: @router.delete(
+  L101: status_code=204,
+  L118: raise HTTPException(
+  L119: status_code=404,
+
+FILE: app\routes\plan_routes.py (2557 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L15: @router.post("/",response_model=PlanResponse)
+  L29: @router.get("/", response_model=list[PlanResponse])
+  L38: @router.get(
+  L40: response_model=PlanResponse,
+  L58: raise HTTPException(
+  L59: status_code=404,
+  L65: raise HTTPException(
+  L66: status_code=404,
+  L71: @router.put(
+  L73: response_model=PlanResponse,
+  L98: @router.delete(
+  L100: status_code=204,
+
+FILE: app\routes\prescription_item_routes.py (4691 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L16: @router.post("/", response_model=PrescriptionItemResponse)
+  L32: raise HTTPException(
+  L33: status_code=404,
+  L39: raise HTTPException(
+  L40: status_code=404,
+  L44: raise HTTPException(
+  L45: status_code=404,
+  L50: @router.get("/", response_model=list[PrescriptionItemResponse])
+  L57: @router.get(
+  L59: response_model=PrescriptionItemResponse,
+  L77: raise HTTPException(
+  L78: status_code=404,
+  L84: raise HTTPException(
+  L85: status_code=404,
+  L90: @router.put(
+  L92: response_model=PrescriptionItemResponse,
+  L112: raise HTTPException(
+  L113: status_code=404,
+  L119: raise HTTPException(
+  L120: status_code=404,
+  L125: @router.delete(
+  L127: status_code=204,
+  L145: raise HTTPException(
+  L146: status_code=404,
+  L152: raise HTTPException(
+  L153: status_code=404,
+
+FILE: app\routes\prescription_routes.py (3556 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L15: @router.post("/", response_model=PrescriptionResponse)
+  L28: raise HTTPException(
+  L29: status_code=404,
+  L33: raise HTTPException(
+  L34: status_code=404,
+  L38: raise HTTPException(
+  L39: status_code=404,
+  L43: raise HTTPException(
+  L44: status_code=404,
+  L49: @router.get(
+  L51: response_model=PrescriptionResponse,
+  L68: raise HTTPException(
+  L69: status_code=404,
+  L76: @router.put(
+  L78: response_model=PrescriptionResponse,
+  L97: raise HTTPException(
+  L98: status_code=404,
+  L105: @router.delete(
+  L107: response_model=PrescriptionResponse,
+  L124: raise HTTPException(
+  L125: status_code=404,
+
+FILE: app\routes\professional_routes.py (3978 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L15: @router.post("/", response_model=ProfessionalResponse)
+  L29: @router.post("/{professional_id}/clinics/{clinic_id}", response_model=ProfessionalClinicResponse)
+  L45: raise HTTPException(
+  L46: status_code=404,
+  L51: raise HTTPException(
+  L52: status_code=404,
+  L57: raise HTTPException(
+  L58: status_code=409,
+  L63: @router.get("/", response_model=list[ProfessionalResponse])
+  L72: @router.get(
+  L74: response_model=ProfessionalResponse,
+  L91: raise HTTPException(
+  L92: status_code=404,
+  L99: @router.put(
+  L101: response_model=ProfessionalResponse,
+  L120: raise HTTPException(
+  L121: status_code=404,
+  L128: @router.delete(
+  L130: status_code=204,
+  L147: raise HTTPException(
+  L148: status_code=404,
+
+FILE: app\routes\professional_specialty_routes.py (1805 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L17: @router.post(
+  L19: response_model=ProfessionalSpecialtyResponse
+  L35: raise HTTPException(
+  L36: status_code=404,
+  L41: raise HTTPException(
+  L42: status_code=404,
+  L47: raise HTTPException(
+  L48: status_code=409,
+
+FILE: app\routes\role_permission_routes.py (1282 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L15: @router.post(
+  L17: response_model=RolePermissionResponse
+  L32: raise HTTPException(
+  L33: status_code=409,
+  L38: raise HTTPException(
+  L39: status_code=404,
+
+FILE: app\routes\role_routes.py (2474 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L14: @router.post("/", response_model=RoleResponse)
+  L29: @router.get("/", response_model=list[RoleResponse])
+  L39: @router.get(
+  L41: response_model=RoleResponse,
+  L59: raise HTTPException(
+  L60: status_code=404,
+  L67: @router.put(
+  L69: response_model=RoleResponse,
+  L89: raise HTTPException(
+  L90: status_code=404,
+  L97: @router.delete(
+  L99: status_code=204,
+  L116: raise HTTPException(
+  L117: status_code=404,
+
+FILE: app\routes\specialty_routes.py (3308 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L17: @router.post(
+  L19: response_model=SpecialtyResponse,
+  L38: raise HTTPException(
+  L39: status_code=409,
+  L46: @router.get("/", response_model=list[SpecialtyResponse])
+  L59: @router.get(
+  L61: response_model=SpecialtyResponse,
+  L79: raise HTTPException(
+  L80: status_code=404,
+  L88: @router.put(
+  L90: response_model=SpecialtyResponse,
+  L109: raise HTTPException(
+  L110: status_code=409,
+  L117: @router.delete(
+  L119: status_code=204,
+  L136: raise HTTPException(
+  L137: status_code=404,
+
+FILE: app\routes\study_routes.py (3670 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L16: @router.post(
+  L18: response_model=StudyResponse,
+  L35: raise HTTPException(
+  L36: status_code=404,
+  L40: raise HTTPException(
+  L41: status_code=404,
+  L45: raise HTTPException(
+  L46: status_code=404,
+  L50: raise HTTPException(
+  L51: status_code=404,
+  L56: @router.get("/", response_model=list[StudyResponse])
+  L63: @router.get(
+  L65: response_model=StudyResponse,
+  L84: raise HTTPException(
+  L85: status_code=404,
+  L90: @router.put(
+  L92: response_model=StudyResponse,
+  L113: raise HTTPException(
+  L114: status_code=404,
+  L119: @router.delete(
+  L121: status_code=204,
+  L138: raise HTTPException(
+  L139: status_code=404,
+
+FILE: app\routes\system_logs_routes.py (1462 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L13: @router.post(
+  L15: response_model=SystemLogResponse
+  L29: @router.get("/", response_model=list[SystemLogResponse])
+  L38: @router.get(
+  L40: response_model=SystemLogResponse,
+  L57: raise HTTPException(
+  L58: status_code=404,
+
+FILE: app\routes\tenant_routes.py (3318 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L13: @router.post("/", response_model=TenantResponse)
+  L26: raise HTTPException(
+  L27: status_code=409,
+  L32: @router.get("/", response_model=list[TenantResponse])
+  L39: @router.get(
+  L41: response_model=TenantResponse,
+  L59: raise HTTPException(
+  L60: status_code=404,
+  L66: raise HTTPException(
+  L67: status_code=409,
+  L72: @router.put(
+  L74: response_model=TenantResponse,
+  L93: raise HTTPException(
+  L94: status_code=404,
+  L100: raise HTTPException(
+  L101: status_code=404,
+  L105: @router.delete(
+  L107: status_code=204,
+  L125: raise HTTPException(
+  L126: status_code=404,
+  L130: raise HTTPException(
+  L131: status_code=404,
+
+FILE: app\routes\user_clinic_routes.py (1254 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L15: @router.post(
+  L17: response_model=UserClinicResponse
+  L32: raise HTTPException(
+  L33: status_code=409,
+  L38: raise HTTPException(
+  L39: status_code=404,
+
+FILE: app\routes\user_role_routes.py (1160 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L15: @router.post(
+  L17: response_model=UserRoleResponse
+  L32: raise HTTPException(
+  L33: status_code=409,
+  L38: raise HTTPException(
+  L39: status_code=404,
+
+FILE: app\routes\user_routes.py (2368 bytes)
+  L1: from fastapi import APIRouter, Depends, HTTPException
+  L13: @router.post("/", response_model=UserResponse)
+  L27: @router.get("/", response_model=list[UserResponse])
+  L36: @router.get(
+  L38: response_model=UserResponse,
+  L56: raise HTTPException(
+  L57: status_code=404,
+  L64: @router.put(
+  L66: response_model=UserResponse,
+  L86: raise HTTPException(
+  L87: status_code=404,
+  L93: @router.delete(
+  L95: status_code=204,
+  L112: raise HTTPException(
+  L113: status_code=404,
+
+============================================================
+SERVICES
+============================================================
+
+FILE: app\services\active_ingredient_service.py (2499 bytes)
+  L5: from app.repositories.active_ingredient_repository import ActiveIngredientRepository
+  L10: active_ingredient_repository = ActiveIngredientRepository()
+  L12: def create_active_ingredient(
+  L21: active_ingredient = active_ingredient_repository.create(
+  L29: def get_active_ingredients(
+  L33: active_ingredients = active_ingredient_repository.get_active_ingredients(
+  L40: def get_active_ingredient(
+  L45: active_ingredient = active_ingredient_repository.get_by_id(
+  L53: def update_active_ingredient(
+  L59: active_ingredient = active_ingredient_repository.get_by_id(
+  L65: raise ActiveIngredientNotFoundException()
+  L70: active_ingredient = active_ingredient_repository.update(
+  L78: def delete_active_ingredient(
+  L83: active_ingredient = active_ingredient_repository.get_by_id(
+  L89: raise ActiveIngredientNotFoundException()
+  L91: return active_ingredient_repository.delete(
+
+FILE: app\services\appointment_service.py (9575 bytes)
+  L15: from app.repositories.appointment_repository import AppointmentRepository
+  L19: appointment_repository = AppointmentRepository()
+  L21: def create_appointment(
+  L29: raise PatientNotFoundError
+  L34: raise ProfessionalNotFoundError
+  L39: raise ClinicNotFoundError
+  L44: raise SpecialtyNotFoundError
+  L50: raise AppointmentAvailabilityError
+  L54: raise AppointmentAvailabilityError
+  L58: raise AppointmentAvailabilityError
+  L84: raise AppointmentAvailabilityError
+  L92: raise AppointmentAvailabilityError
+  L94: appointments = appointment_repository.get_appointments_by_professional_and_date(
+  L105: raise AppointmentConflictError
+  L125: appointment = appointment_repository.create(
+  L133: def get_appointments(db: Session) -> list[Appointment]:
+  L134: appointments = appointment_repository.get_appointments(
+  L141: def get_appointment(
+  L146: appointment = appointment_repository.get_by_id(
+  L154: def update_appointment(
+  L166: raise AppointmentNotFoundError
+  L169: raise AppointmentCancelledError
+  L215: raise AppointmentAvailabilityError
+  L232: raise AppointmentAvailabilityError
+  L234: appointments = appointment_repository.get_appointments_by_professional_and_date(
+  L258: raise AppointmentConflictError
+  L267: appointment = appointment_repository.update(
+  L275: def delete_appointment(
+  L288: return appointment_repository.delete(
+
+FILE: app\services\audit_log_service.py (1033 bytes)
+  L6: from app.repositories.audit_logs_repository import AuditLogRepository
+  L9: audit_log_repository =  AuditLogRepository()
+  L12: def create_audit_log(
+  L22: audit_log = audit_log_repository.create(
+  L30: def get_audit_logs(
+  L34: return audit_log_repository.get_audit_logs(
+  L39: def get_audit_log(
+  L44: return audit_log_repository.get_by_id(
+
+FILE: app\services\clinic_modules_service.py (2710 bytes)
+  L5: from app.repositories.clinic_modules_repository import ClinicModuleRepository
+  L6: from app.repositories.clinic_repository import ClinicRepository
+  L7: from app.repositories.module_repository import ModuleRepository
+  L10: clinic_module_repository = ClinicModuleRepository()
+  L11: clinic_repository = ClinicRepository()
+  L12: module_repository = ModuleRepository()
+  L15: def create_clinic_module(
+  L20: clinic = clinic_repository.get_by_id(
+  L28: module = module_repository.get_by_id(
+  L40: return clinic_module_repository.create(
+  L46: def get_clinic_modules(
+  L50: return clinic_module_repository.get_clinic_modules(
+  L55: def get_clinic_module(
+  L61: return clinic_module_repository.get_by_id(
+  L68: def update_clinic_module(
+  L89: raise ValueError("El estado no puede ser nulo.")
+  L94: return clinic_module_repository.update(
+  L100: def delete_clinic_module(
+  L115: return clinic_module_repository.delete(
+
+FILE: app\services\clinic_service.py (1393 bytes)
+  L4: from app.repositories.clinic_repository import ClinicRepository
+  L6: clinic_repository = ClinicRepository()
+  L9: def create_clinic(
+  L18: clinic = clinic_repository.create(
+  L27: def get_clinics(db: Session) -> list[Clinic]:
+  L29: clinics = clinic_repository.get_clinics(
+  L36: def get_clinic(db: Session, clinic_id: int) -> Clinic | None:
+  L38: clinic = clinic_repository.get_by_id(
+  L46: def update_clinic(db: Session, clinic_id: int, name: str) -> Clinic | None:
+  L58: clinic = clinic_repository.update(
+  L67: def delete_clinic(db: Session, clinic_id: int) -> bool:
+  L77: return clinic_repository.delete(
+
+FILE: app\services\clinic_specialty_service.py (1658 bytes)
+  L5: from app.repositories.clinic_specialty_repository import ClinicSpecialtyRepository
+  L6: from app.repositories.clinic_repository import ClinicRepository
+  L7: from app.repositories.specialty_repository import SpecialtyRepository
+  L13: clinic_specialty_repository = ClinicSpecialtyRepository()
+  L14: clinic_repository = ClinicRepository()
+  L15: specialty_repository = SpecialtyRepository()
+  L17: def create_clinic_specialty(db: Session, clinic_id: int, specialty_id: int) -> ClinicSpecialty:
+  L19: clinic = clinic_repository.get_by_id(
+  L25: raise ClinicNotFoundError
+  L27: specialty = specialty_repository.get_by_id(
+  L33: raise SpecialtyNotFoundError
+  L35: existing = clinic_specialty_repository.get_by_clinic_and_specialty(
+  L42: raise ClinicSpecialtyAlreadyAssociatedError
+  L49: clinic_specialty = clinic_specialty_repository.create_clinic_specialty(
+
+FILE: app\services\clinical_evolution_service.py (2070 bytes)
+  L5: from app.repositories.clinical_evolution_repository import ClinicalEvolutionRerpository
+  L6: from app.repositories.medical_record_repository import MedicalRecordRepository
+  L7: from app.repositories.professional_repository import ProfessionalRepository
+  L8: from app.repositories.appointment_repository import AppointmentRepository
+  L10: clinical_evolution_repository = ClinicalEvolutionRerpository()
+  L11: medical_record_repository = MedicalRecordRepository()
+  L12: professional_repository = ProfessionalRepository()
+  L13: appointment_repository = AppointmentRepository()
+  L16: def create_clinical_evolution(
+  L24: medical_record = medical_record_repository.get_by_id(
+  L32: professional = professional_repository.get_by_id(
+  L40: appointment = appointment_repository.get_by_id(
+  L48: existing = clinical_evolution_repository.get_by_medical_professional_appointment(
+  L65: clinical_evolution = clinical_evolution_repository.create(
+
+FILE: app\services\insurance_plan_service.py (2107 bytes)
+  L5: from app.repositories.insurance_plan_repository import InsurancePlanRepository
+  L6: from app.repositories.insurance_repository import InsuranceRepository
+  L7: from app.repositories.plan_repository import PlanRepository
+  L11: insurance_plan_repository = InsurancePlanRepository()
+  L12: insurance_repository = InsuranceRepository()
+  L13: plan_repository = PlanRepository()
+  L15: def create_insurance_plan(
+  L21: insurance = insurance_repository.get_by_id(
+  L27: raise InsuranceNotFoundException()
+  L29: plan = plan_repository.get_by_id(
+  L35: raise PlanNotFoundException()
+  L38: existing = insurance_plan_repository.get_by_insurance_and_plan_name(
+  L45: raise InsurancePlanAlreadyExistsException()
+  L52: insurance_plan = insurance_plan_repository.create(
+  L60: def get_insurance_plans(db: Session) -> list[InsurancePlan]:
+  L62: insurance_plans = insurance_plan_repository.get_insurance_plans(
+  L69: def get_insurance_plan(db: Session, insurance_plan_id: int) -> InsurancePlan:
+  L71: insurance_plan = insurance_plan_repository.get_by_id(
+  L77: raise InsurancePlanNotFoundException()
+
+FILE: app\services\insurance_service.py (2398 bytes)
+  L4: from app.repositories.insurance_repository import InsuranceRepository
+  L9: insurance_repository = InsuranceRepository()
+  L12: def create_insurance(
+  L18: existing_insurance = insurance_repository.get_by_registration(
+  L24: raise InsuranceAlreadyExistsException()
+  L32: insurance = insurance_repository.create(
+  L40: def get_insurances(db: Session) -> list[Insurance]:
+  L42: insurances = insurance_repository.get_insurances(
+  L49: def get_insurance(db: Session, insurance_id: int) -> Insurance | None:
+  L51: insurance = insurance_repository.get_by_id(
+  L59: def update_insurance(db: Session, insurance_id: int, insurance_data: InsuranceUpdate) -> Insurance | None:
+  L69: existing_insurance = insurance_repository.get_by_registration(
+  L77: raise InsuranceAlreadyExistsException()
+  L82: insurance = insurance_repository.update(
+  L90: def delete_insurance(
+  L103: return insurance_repository.delete(
+
+FILE: app\services\medical_document_service.py (4602 bytes)
+  L5: from app.repositories.medical_document_repository import MedicalDocumentRepository
+  L6: from app.repositories.patient_repository import PatientRepository
+  L7: from app.repositories.professional_repository import ProfessionalRepository
+  L8: from app.repositories.clinic_repository import ClinicRepository
+  L9: from app.repositories.medical_record_repository import MedicalRecordRepository
+  L14: medical_document_repository = MedicalDocumentRepository()
+  L15: patient_repository = PatientRepository()
+  L16: professional_repository = ProfessionalRepository()
+  L17: clinic_repository = ClinicRepository()
+  L18: medical_record_repository = MedicalRecordRepository()
+  L20: def create_medical_document(
+  L29: patient = patient_repository.get_by_id(
+  L35: raise PatientNotFoundError()
+  L38: professional = professional_repository.get_by_id(
+  L44: raise ProfessionalNotFoundError()
+  L46: clinic = clinic_repository.get_by_id(
+  L52: raise ClinicNotFoundError()
+  L54: medical_record = medical_record_repository.get_by_id(
+  L60: raise MedicalRecordNotFoundException()
+  L62: existing = medical_document_repository.get_by_patient_professional_clinic_medical_record(
+  L71: raise MedicalDocumentAlreadyExistsException()
+  L83: medical_document = medical_document_repository.create(
+  L90: def get_medical_documents(
+  L94: medical_documents = medical_document_repository.get_medical_documents(
+  L101: def get_medical_document(
+  L106: medical_document = medical_document_repository.get_by_id(
+  L112: raise MedicalDocumentNotFoundException()
+  L117: def update_medical_document(
+  L132: medical_document = medical_document_repository.update(
+  L140: def delete_medical_document(
+  L150: return medical_document_repository.delete(
+
+FILE: app\services\medical_record_service.py (3290 bytes)
+  L4: from app.repositories.medical_record_repository import MedicalRecordRepository
+  L5: from app.repositories.patient_repository import PatientRepository
+  L6: from app.repositories.clinic_repository import ClinicRepository
+  L10: medical_record_repository = MedicalRecordRepository()
+  L11: patient_repository = PatientRepository()
+  L12: clinic_repository = ClinicRepository()
+  L15: def create_medical_record(
+  L22: patient = patient_repository.get_by_id(
+  L27: raise PatientNotFoundError()
+  L29: clinic = clinic_repository.get_by_id(
+  L34: raise ClinicNotFoundError()
+  L36: existing = medical_record_repository.get_patient_clinic(
+  L42: raise MedicalRecordAlreadyExistsException()
+  L49: return medical_record_repository.create(
+  L55: def get_medical_records(db: Session) -> list[MedicalRecord]:
+  L56: return medical_record_repository.get_medical_records(db=db)
+  L59: def get_medical_record(db: Session, medical_record_id: int) -> MedicalRecord:
+  L60: medical_record = medical_record_repository.get_by_id(
+  L65: raise MedicalRecordNotFoundException()
+  L70: def update_medical_record(
+  L80: patient = patient_repository.get_by_id(
+  L85: raise PatientNotFoundError()
+  L87: clinic = clinic_repository.get_by_id(
+  L92: raise ClinicNotFoundError()
+  L94: existing = medical_record_repository.get_patient_clinic(
+  L100: raise MedicalRecordAlreadyExistsException()
+  L105: return medical_record_repository.update(
+
+FILE: app\services\medication_active_ingredient_service.py (5500 bytes)
+  L5: from app.repositories.medication_active_ingredient_repository import MedicationActiveIngredientRepository
+  L6: from app.repositories.medication_repository import MedicationRepository
+  L7: from app.repositories.active_ingredient_repository import ActiveIngredientRepository
+  L16: medication_active_ingredient_repository = MedicationActiveIngredientRepository()
+  L17: medication_repository = MedicationRepository()
+  L18: active_ingredient_repository = ActiveIngredientRepository()
+  L20: def create_medication_active_ingredient(
+  L27: medication = medication_repository.get_by_id(
+  L33: raise MedicationNotFoundException()
+  L35: active_ingredient = active_ingredient_repository.get_by_id(
+  L41: raise ActiveIngredientNotFoundException()
+  L44: existing = medication_active_ingredient_repository.get_by_medication_active_ingredient(
+  L51: raise MedicationActiveIngredientAlreadyExistsException()
+  L59: medication_active_ingredient = medication_active_ingredient_repository.create(
+  L67: def get_medication_active_ingredients(
+  L71: medication_active_ingredients = medication_active_ingredient_repository.get_medication_active_ingredients(
+  L78: def get_medication_active_ingredient(
+  L84: medication_active_ingredient = medication_active_ingredient_repository.get_by_medication_active_ingredient(
+  L91: raise MedicationActiveIngredientNotFoundException()
+  L96: def update_medication_active_ingredient(
+  L103: medication_active_ingredient = medication_active_ingredient_repository.get_by_medication_active_ingredient(
+  L110: raise MedicationActiveIngredientNotFoundException()
+  L112: medication = medication_repository.get_by_id(
+  L117: raise MedicationNotFoundException()
+  L119: active_ingredient = active_ingredient_repository.get_by_id(
+  L124: raise ActiveIngredientNotFoundException()
+  L126: existing = medication_active_ingredient_repository.get_by_medication_active_ingredient(
+  L132: raise MedicationActiveIngredientAlreadyExistsException()
+  L137: return medication_active_ingredient_repository.update(
+  L143: def delete_medication_active_ingredient(
+  L155: return medication_active_ingredient_repository.delete(
+
+FILE: app\services\medication_presentation_service.py (3879 bytes)
+  L5: from app.repositories.medication_presentation_repository import MedicationPresentationRepository
+  L6: from app.repositories.medication_repository import MedicationRepository
+  L11: medication_presentation_repository = MedicationPresentationRepository()
+  L12: medication_repository = MedicationRepository()
+  L15: def create_medication_presentation(
+  L21: medication = medication_repository.get_by_id(
+  L27: raise MedicationNotFoundException()
+  L38: medication_presentation = medication_presentation_repository.create(
+  L49: def get_medication_presentations(
+  L53: return medication_presentation_repository.get_medication_presentations(
+  L58: def get_medication_presentation(
+  L63: return medication_presentation_repository.get_by_id(
+  L69: def medication_presentation(
+  L80: def update_medication_presentation(
+  L86: medication_presentation = medication_presentation_repository.get_by_id(
+  L92: raise MedicationPresentationNotFoundException()
+  L100: medication_presentation = medication_presentation_repository.update(
+  L108: def delete_medication_presentation(
+  L119: raise MedicationPresentationNotFoundException()
+  L121: return medication_presentation_repository.delete(
+
+FILE: app\services\medication_service.py (2232 bytes)
+  L5: from app.repositories.medication_repository import MedicationRepository
+  L10: medication_repository = MedicationRepository()
+  L12: def create_medication(
+  L27: medication = medication_repository.create(
+  L35: def get_medications(
+  L39: medications = medication_repository.get_medications(
+  L46: def get_medication(
+  L51: medication = medication_repository.get_by_id(
+  L59: def update_medication(
+  L71: raise MedicationNotFoundException()
+  L78: medication = medication_repository.update(
+  L86: def delete_medication(
+  L91: medication = medication_repository.get_by_id(
+  L97: raise MedicationNotFoundException()
+  L99: return medication_repository.delete(
+
+FILE: app\services\module_service.py (2659 bytes)
+  L6: from app.repositories.module_repository import ModuleRepository
+  L10: module_repository = ModuleRepository()
+  L13: def create_module(
+  L23: return module_repository.create(
+  L36: raise ModuleAlreadyExistsException(
+  L43: def get_modules(db: Session) -> list[Module]:
+  L44: return module_repository.get_modules(db=db)
+  L47: def get_module(
+  L51: module = module_repository.get_by_id(
+  L57: raise ModuleNotFoundException(
+  L64: def update_module(
+  L81: return module_repository.update(
+  L94: raise ModuleAlreadyExistsException(
+  L101: def delete_module(
+  L111: return module_repository.delete(
+
+FILE: app\services\patient_clinic_service.py (1517 bytes)
+  L3: from app.repositories.patient_clinics_repository import PatientClinicRepository
+  L4: from app.repositories.patient_repository import PatientRepository
+  L6: from app.repositories.clinic_repository import ClinicRepository
+  L14: patient_clinics_repository = PatientClinicRepository()
+  L15: patient_repository = PatientRepository()
+  L16: clinic_repository = ClinicRepository()
+  L18: def create(db: Session, patient_id: int, clinic_id: int) -> PatientClinic:
+  L20: patient = patient_repository.get_by_id(
+  L26: raise PatientNotFoundError
+  L28: clinic = clinic_repository.get_by_id(
+  L34: raise ClinicNotFoundError
+  L36: existing = patient_clinics_repository.get_by_patient_and_clinic(
+  L43: raise PatientAlreadyAssociatedError
+  L51: patient_clinic = patient_clinics_repository.create(
+
+FILE: app\services\patient_contact_service.py (2518 bytes)
+  L4: from app.repositories.patient_repository import PatientRepository
+  L7: from app.repositories.patient_contact_repository import PatientContactRepository
+  L9: patient_contact_repository = PatientContactRepository()
+  L10: patient_repository = PatientRepository()
+  L12: def create_patient_contact(
+  L17: patient = patient_repository.get_by_id(
+  L28: patient_contact = patient_contact_repository.create(
+  L36: def get_patient_contacts(
+  L40: patient_contacts = patient_contact_repository.get_patient_contacts(
+  L47: def get_patient_contact(
+  L52: patient_contact = patient_contact_repository.get_by_id(
+  L60: def update_patient_contact(
+  L78: patient_contact = patient_contact_repository.update(
+  L86: def delete_patient_contacts(
+  L99: return patient_contact_repository.delete(
+
+FILE: app\services\patient_insurance_plan_service.py (1843 bytes)
+  L5: from app.repositories.patient_insurance_plan_repository import PatientInsurancePlanRepository
+  L6: from app.repositories.patient_repository import PatientRepository
+  L7: from app.repositories.insurance_repository import InsuranceRepository
+  L8: from app.repositories.plan_repository import PlanRepository
+  L10: patient_insurance_plan_repository = PatientInsurancePlanRepository()
+  L11: patient_repository =  PatientRepository()
+  L12: insurance_repository = InsuranceRepository()
+  L13: plan_repository = PlanRepository()
+  L15: def create_patient_insurance_plan(
+  L22: patient = patient_repository.get_by_id(
+  L30: insurance = insurance_repository.get_by_id(
+  L38: plan = plan_repository.get_by_id(
+  L46: existing = patient_insurance_plan_repository.get_by_patient_insurance_plan(
+  L62: patient_insurance_plan = patient_insurance_plan_repository.create(
+
+FILE: app\services\patient_service.py (1973 bytes)
+  L5: from app.repositories.patient_repository import PatientRepository
+  L7: patient_repository = PatientRepository()
+  L9: def create_patient(
+  L25: patient = patient_repository.create(
+  L33: def get_patients(db: Session, clinic_id: int | None = None) -> list[Patient]:
+  L35: patients = patient_repository.get_patients(
+  L44: def get_patient(db: Session, patient_id: int) -> Patient | None:
+  L46: patient = patient_repository.get_by_id(
+  L55: def update_patient(db: Session, patient_id: int, patient_data: PatientUpdate) -> Patient | None:
+  L70: patient = patient_repository.update(
+  L79: def delete_patient(db: Session, patient_id: int) -> bool:
+  L89: return patient_repository.delete(
+
+FILE: app\services\permission_service.py (2035 bytes)
+  L4: from app.repositories.permission_repository import PermissionRepository
+  L6: permission_repository = PermissionRepository()
+  L8: def create_permission(
+  L24: permission = permission_repository.create(
+  L32: def get_permissions(
+  L36: permissions = permission_repository.get_permissions(
+  L43: def get_permission(
+  L48: permission = permission_repository.get_by_id(
+  L56: def update_permission(
+  L78: permission = permission_repository.update(
+  L86: def delete_permission(
+  L99: return permission_repository.delete(
+
+FILE: app\services\plan_service.py (1578 bytes)
+  L4: from app.repositories.plan_repository import PlanRepository
+  L7: plan_repository = PlanRepository()
+  L10: def create_plan(
+  L22: plan = plan_repository.create(
+  L29: def get_plans(
+  L33: plans = plan_repository.get_plans(
+  L39: def get_plan(
+  L44: plan = plan_repository.get_by_id(
+  L51: def update_plan(
+  L68: plan = plan_repository.update(
+  L75: def delete_plan(
+  L80: plan = plan_repository.get_by_id(
+  L88: return plan_repository.delete(
+
+FILE: app\services\prescription_item_service.py (3094 bytes)
+  L9: from app.repositories.prescription_item_repository import PrescriptionItemRepository
+  L13: prescription_item_repository = PrescriptionItemRepository()
+  L15: def create_prescription_item(
+  L24: raise PrescriptionNotFoundException()
+  L28: raise MedicationNotFoundException()
+  L39: prescription_item = prescription_item_repository.create(
+  L47: def get_prescription_items(
+  L51: return prescription_item_repository.get_prescription_items(
+  L56: def get_prescription_item(
+  L61: return prescription_item_repository.get_by_id(
+  L67: def update_prescription_item(
+  L79: raise PrescriptionItemNotFoundException()
+  L86: prescription_item = prescription_item_repository.update(
+  L94: def delete_prescription_item(
+  L105: raise PrescriptionItemNotFoundException()
+  L107: return prescription_item_repository.delete(
+
+FILE: app\services\prescription_service.py (3456 bytes)
+  L11: from app.repositories.prescription_repository import PrescriptionRepository
+  L15: prescription_repository = PrescriptionRepository()
+  L17: def create_prescription(
+  L28: raise PatientNotFoundError()
+  L32: raise ProfessionalNotFoundError()
+  L36: raise MedicalRecordNotFoundException()
+  L40: raise AppointmentNotFoundError()
+  L52: prescription = prescription_repository.create(
+  L60: def prescriptions(
+  L64: prescriptions = prescription_repository.get_prescriptions(
+  L71: def get_prescription(
+  L77: prescription = prescription_repository.get_by_id(
+  L85: def update_prescription(
+  L97: raise PrescriptionNotFoundException()
+  L106: prescription = prescription_repository.update(
+  L114: def delete_prescription(
+  L125: raise PrescriptionNotFoundException()
+  L127: return prescription_repository.delete(
+
+FILE: app\services\professional_service.py (4056 bytes)
+  L8: from app.repositories.professional_repository import ProfessionalRepository
+  L9: from app.repositories.clinic_repository import ClinicRepository
+  L10: from app.repositories.professional_clinic_repository import ProfessionalClinicRepository
+  L17: professional_repository = ProfessionalRepository()
+  L18: clinic_repository = ClinicRepository()
+  L19: professional_clinic_repository = ProfessionalClinicRepository()
+  L22: def create_professional(
+  L42: professional = professional_repository.create(
+  L50: def get_professionals(db: Session) -> list[Professional]:
+  L52: professionals = professional_repository.get_professionals(
+  L59: def get_professional(
+  L64: professional = professional_repository.get_by_id(
+  L72: def update_professional(
+  L91: professional = professional_repository.update(
+  L99: def delete_professional(
+  L112: return professional_repository.delete(
+  L118: def add_clinic_to_professional(
+  L130: raise ProfessionalNotFoundError
+  L132: clinic = clinic_repository.get_by_id(
+  L138: raise ClinicNotFoundError
+  L140: existing = professional_clinic_repository.get_by_professional_and_clinic(
+  L147: raise ProfessionalAlreadyAssociatedError
+  L149: professional_clinic = professional_clinic_repository.create(
+
+FILE: app\services\professional_specialty_service.py (1878 bytes)
+  L5: from app.repositories.professional_specialty_repository import ProfessionalSpecialtyRepository
+  L6: from app.repositories.professional_repository import ProfessionalRepository
+  L7: from app.repositories.specialty_repository import SpecialtyRepository
+  L14: professional_specialty_repository = ProfessionalSpecialtyRepository()
+  L15: professional_repository = ProfessionalRepository()
+  L16: specialty_repository = SpecialtyRepository()
+  L18: def create_professional_specialty( db: Session, professional_id: int, specialty_id: int) -> ProfessionalSpecialty:
+  L20: professional = professional_repository.get_by_id(
+  L26: raise ProfessionalNotFoundError
+  L28: specialty = specialty_repository.get_by_id(
+  L34: raise SpecialtyNotFoundError
+  L37: existing = professional_specialty_repository.get_by_professional_and_specialty(
+  L44: raise ProfessionalSpecialtyAlreadyAssociatedError
+  L51: professional_specialty = professional_specialty_repository.create_professional_specialty(
+
+FILE: app\services\role_permission_service.py (1495 bytes)
+  L5: from app.repositories.role_permission_repository import RolePermissionRepository
+  L6: from app.repositories.role_repository import RoleRepository
+  L7: from app.repositories.permission_repository import PermissionRepository
+  L11: role_permission_repository = RolePermissionRepository()
+  L12: role_repository = RoleRepository()
+  L13: permission_repository = PermissionRepository()
+  L15: def create_role_permission(
+  L21: role = role_repository.get_by_id(
+  L29: permission = permission_repository.get_by_id(
+  L37: existing = role_permission_repository.get_by_role_and_permission(
+  L44: raise RolePermissionAlreadyAssociatedError()
+  L51: role_permission = role_permission_repository.create(
+
+FILE: app\services\role_service.py (1476 bytes)
+  L4: from app.repositories.role_repository import RoleRepository
+  L6: role_repository = RoleRepository()
+  L8: def create_role(
+  L20: role = role_repository.create(
+  L28: def get_roles(
+  L32: roles = role_repository.get_roles(
+  L39: def get_role(
+  L44: role = role_repository.get_by_id(
+  L52: def update_role(
+  L70: role = role_repository.update(
+  L78: def delete_role(
+  L91: return role_repository.delete(
+
+FILE: app\services\specialty_service.py (2614 bytes)
+  L8: from app.repositories.specialty_repository import SpecialtyRepository
+  L11: specialty_repository = SpecialtyRepository()
+  L14: def create_specialty(
+  L28: specialty = specialty_repository.create(
+  L37: raise SpecialtySNOMEDAlreadyExistsError
+  L42: def get_specialties(db: Session) -> list[Specialty]:
+  L44: specialties = specialty_repository.get_specialties(
+  L51: def get_specialty(
+  L56: specialty = specialty_repository.get_by_id(
+  L64: def update_specialty(
+  L84: specialty = specialty_repository.update(
+  L93: raise SpecialtySNOMEDAlreadyExistsError
+  L98: def delete_specialty(
+  L111: return specialty_repository.delete(
+
+FILE: app\services\study_service.py (2752 bytes)
+  L9: from app.repositories.study_repository import StudyRepository
+  L12: study_repository = StudyRepository()
+  L15: def create_study(db: Session, study_data: StudyCreate) -> Study:
+  L18: raise PatientNotFoundError()
+  L22: raise ProfessionalNotFoundError()
+  L26: raise MedicalRecordNotFoundException()
+  L30: raise AppointmentNotFoundError()
+  L44: return study_repository.create(
+  L50: def get_studies(db: Session) -> list[Study]:
+  L51: return study_repository.get_studies(db=db)
+  L54: def get_study(db: Session, study_id: int) -> Study:
+  L55: study = study_repository.get_by_id(
+  L60: raise StudyNotFoundException()
+  L65: def update_study(
+  L81: return study_repository.update(
+  L87: def delete_study(db: Session, study_id: int) -> bool:
+  L93: return study_repository.delete(
+
+FILE: app\services\system_log_service.py (1036 bytes)
+  L6: from app.repositories.system_logs_repository import SystemLogRepository
+  L9: system_log_repository = SystemLogRepository()
+  L12: def create_system_log(
+  L22: system_log = system_log_repository.create(
+  L30: def get_system_logs(
+  L34: return system_log_repository.get_system_logs(
+  L39: def get_system_log(
+  L44: return system_log_repository.get_by_id(
+
+FILE: app\services\tenant_service.py (1501 bytes)
+  L4: from app.repositories.tenant_repository import TenantRepository
+  L6: tenant_repository = TenantRepository()
+  L8: def create_tenant(
+  L19: tenant = tenant_repository.create(
+  L27: def get_tenants(db: Session) -> list[Tenant]:
+  L29: tenants = tenant_repository.get_tenants(
+  L36: def get_tenant(db: Session, tenant_id: int) -> Tenant | None:
+  L38: tenant = tenant_repository.get_by_id(
+  L46: def update_tenant(db: Session, tenant_id: int, name: str, status: str) -> Tenant | None:
+  L59: tenant = tenant_repository.update(
+  L67: def delete_tenant(db: Session, tenant_id: int) -> bool:
+  L77: return tenant_repository.delete(
+
+FILE: app\services\user_clinic_service.py (1359 bytes)
+  L5: from app.repositories.user_clinic_repository import UserClinicRepository
+  L6: from app.repositories.user_repository import UserRepository
+  L7: from app.repositories.clinic_repository import ClinicRepository
+  L11: user_clinic_repository = UserClinicRepository()
+  L12: user_repository = UserRepository()
+  L13: clinic_repository = ClinicRepository()
+  L16: def create_user_clinic(
+  L23: user = user_repository.get_by_id(
+  L31: clinic = clinic_repository.get_by_id(
+  L39: existing = user_clinic_repository.get_by_user_and_clinic(
+  L46: raise UserClinicAlreadyAssociatedError()
+  L53: user_clinic = user_clinic_repository.create(
+
+FILE: app\services\user_role_service.py (1267 bytes)
+  L5: from app.repositories.user_role_repository import UserRoleRepository
+  L6: from app.repositories.user_repository import UserRepository
+  L7: from app.repositories.role_repository import RoleRepository
+  L11: user_role_repository = UserRoleRepository()
+  L12: user_repository = UserRepository()
+  L13: role_repository = RoleRepository()
+  L15: def create_user_role(
+  L22: user = user_repository.get_by_id(
+  L30: role = role_repository.get_by_id(
+  L38: existing = user_role_repository.get_by_user_and_role(
+  L45: raise UserRoleAlreadyAssociatedError()
+  L52: user_role = user_role_repository.create(
+
+FILE: app\services\user_service.py (1473 bytes)
+  L4: from app.repositories.user_repository import UserRepository
+  L7: user_repository = UserRepository()
+  L10: def create_user(
+  L20: user = user_repository.create(
+  L28: def get_users(
+  L32: users = user_repository.get_users(
+  L39: def get_user(
+  L44: user = user_repository.get_by_id(
+  L52: def update_user(
+  L68: user = user_repository.update(
+  L76: def delete_user(
+  L89: return user_repository.delete(
+
+============================================================
+REPOSITORIES
+============================================================
+
+FILE: app\repositories\active_ingredient_repository.py (1703 bytes)
+  L8: def get_by_id(self, db: Session, active_ingredient_id: int) -> ActiveIngredient | None:
+  L10: select(ActiveIngredient)
+  L13: result = db.execute(statement)
+  L19: def get_active_ingredients(self, db: Session) -> list[ActiveIngredient]:
+  L20: statement = select(ActiveIngredient)
+  L21: result = db.execute(statement)
+  L27: def create(self, db: Session, active_ingredient: ActiveIngredient) -> ActiveIngredient:
+  L29: db.add(active_ingredient)
+  L30: db.commit()
+  L35: db.rollback()
+  L39: def update(self, db: Session, active_ingredient: ActiveIngredient) -> ActiveIngredient:
+  L41: db.commit()
+  L46: db.rollback()
+  L50: def delete(self, db: Session, active_ingredient: ActiveIngredient) -> bool:
+  L52: db.delete(active_ingredient)
+  L53: db.commit()
+  L58: db.rollback()
+
+FILE: app\repositories\appointment_repository.py (2857 bytes)
+  L9: def get_by_id(self, db: Session, appointment_id: int) -> Appointment | None:
+  L11: select(Appointment)
+  L21: result = db.execute(statement)
+  L27: def get_appointments(self, db: Session) -> list[Appointment]:
+  L29: select(Appointment)
+  L37: result = db.execute(statement)
+  L43: def create(self, db: Session, appointment: Appointment) -> Appointment:
+  L46: db.add(appointment)
+  L47: db.commit()
+  L53: db.rollback()
+  L57: def update(self, db: Session, appointment: Appointment) -> Appointment:
+  L60: db.commit()
+  L66: db.rollback()
+  L70: def delete(self, db: Session, appointment: Appointment) -> bool:
+  L73: db.delete(appointment)
+  L74: db.commit()
+  L79: db.rollback()
+  L83: def get_appointments_by_professional_and_date(
+  L91: select(Appointment)
+  L98: result = db.execute(statement)
+
+FILE: app\repositories\audit_logs_repository.py (986 bytes)
+  L7: def get_by_id(self, db: Session, audit_log_id: int) -> AuditLog | None:
+  L9: select(AuditLog)
+  L12: result = db.execute(statement)
+  L18: def get_audit_logs(self, db: Session) -> list[AuditLog]:
+  L19: statement = select(AuditLog)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, audit_log: AuditLog) -> AuditLog:
+  L28: db.add(audit_log)
+  L29: db.commit()
+  L34: db.rollback()
+
+FILE: app\repositories\clinic_modules_repository.py (1733 bytes)
+  L7: def get_by_id(self, db: Session, clinic_id: int, module_id: int) -> ClinicModule | None:
+  L9: select(ClinicModule)
+  L15: result = db.execute(statement)
+  L21: def get_clinic_modules(self, db: Session) -> list[ClinicModule]:
+  L22: statement = select(ClinicModule)
+  L23: result = db.execute(statement)
+  L29: def create(self, db: Session, clinic_module: ClinicModule) -> ClinicModule:
+  L31: db.add(clinic_module)
+  L32: db.commit()
+  L37: db.rollback()
+  L41: def update(self, db: Session, clinic_module: ClinicModule) -> ClinicModule:
+  L43: db.commit()
+  L48: db.rollback()
+  L52: def delete(self, db: Session, clinic_module: ClinicModule) -> bool:
+  L54: db.delete(clinic_module)
+  L55: db.commit()
+  L60: db.rollback()
+
+FILE: app\repositories\clinic_repository.py (1745 bytes)
+  L8: def get_by_id(self, db: Session, clinic_id: int) -> Clinic | None:
+  L10: select(Clinic)
+  L17: result = db.execute(statement)
+  L23: def get_clinics(self, db: Session) -> list[Clinic]:
+  L25: select(Clinic)
+  L31: result = db.execute(statement)
+  L37: def create(self, db: Session, clinic: Clinic) -> Clinic:
+  L40: db.add(clinic)
+  L41: db.commit()
+  L47: db.rollback()
+  L51: def update(self, db: Session, clinic: Clinic)-> Clinic:
+  L54: db.commit()
+  L60: db.rollback()
+  L64: def delete(self, db: Session, clinic: Clinic) -> bool:
+  L67: db.delete(clinic)
+  L68: db.commit()
+  L73: db.rollback()
+
+FILE: app\repositories\clinic_specialty_repository.py (918 bytes)
+  L8: def create_clinic_specialty(self, db: Session, clinic_specialty: ClinicSpecialty) -> ClinicSpecialty:
+  L11: db.add(clinic_specialty)
+  L12: db.commit()
+  L18: db.rollback()
+  L21: def get_by_clinic_and_specialty(self, db: Session, clinic_id: int, specialty_id: int) -> ClinicSpecialty | None:
+  L22: statement = select(ClinicSpecialty).where(ClinicSpecialty.clinic_id == clinic_id, ClinicSpecialty.specialty_id == specialty_id)
+  L23: result = db.execute(statement)
+
+FILE: app\repositories\clinical_evolution_repository.py (2429 bytes)
+  L7: def get_by_id(self, db: Session, clinical_evolution_id: int) -> ClinicalEvolution | None:
+  L9: select(ClinicalEvolution)
+  L12: result = db.execute(statement)
+  L18: def get_clinical_evolutions(self, db: Session) -> list[ClinicalEvolution]:
+  L19: statement = select(ClinicalEvolution)
+  L20: result = db.execute(statement)
+  L25: def get_by_medical_professional_appointment(
+  L33: statement = select(ClinicalEvolution).where(
+  L38: result = db.execute(statement)
+  L44: def create(self, db: Session, clinical_evolution: ClinicalEvolution) -> ClinicalEvolution:
+  L46: db.add(clinical_evolution)
+  L47: db.commit()
+  L52: db.rollback()
+  L56: def update(self, db: Session, clinical_evolution: ClinicalEvolution) -> ClinicalEvolution:
+  L58: db.commit()
+  L63: db.rollback()
+  L67: def delete(self, db: Session, clinical_evolution: ClinicalEvolution) -> bool:
+  L69: db.delete(clinical_evolution)
+  L70: db.commit()
+  L75: db.rollback()
+
+FILE: app\repositories\insurance_plan_repository.py (2467 bytes)
+  L9: def get_by_id(self, db: Session, insurance_plan_id: int) -> InsurancePlan | None:
+  L11: select(InsurancePlan)
+  L14: result = db.execute(statement)
+  L20: def get_insurance_plans(self, db: Session) -> list[InsurancePlan]:
+  L21: statement =  select(InsurancePlan)
+  L22: result = db.execute(statement)
+  L28: def create(
+  L35: db.add(insurance_plan)
+  L36: db.commit()
+  L41: db.rollback()
+  L45: def get_by_insurance_plan(
+  L52: statement = select(InsurancePlan).where(
+  L56: result = db.execute(statement)
+  L63: def get_by_insurance_and_plan_name(
+  L71: select(InsurancePlan)
+  L78: result = db.execute(statement)
+  L85: def delete(self, db: Session, insurance_plan_data: InsurancePlan) -> bool:
+  L87: db.delete(insurance_plan_data)
+  L88: db.commit()
+  L93: db.rollback()
+
+FILE: app\repositories\insurance_repository.py (1881 bytes)
+  L7: def get_by_id(self, db: Session, insurance_id: int) -> Insurance | None:
+  L9: select(Insurance)
+  L12: result = db.execute(statement)
+  L18: def get_by_registration(
+  L25: select(Insurance)
+  L29: result = db.execute(statement)
+  L35: def get_insurances(self, db: Session) -> list[Insurance]:
+  L36: statement = select(Insurance)
+  L37: result = db.execute(statement)
+  L43: def create(self, db: Session, insurance: Insurance) -> Insurance:
+  L45: db.add(insurance)
+  L46: db.commit()
+  L51: db.rollback()
+  L55: def update(self, db: Session, insurance: Insurance) -> Insurance:
+  L57: db.commit()
+  L62: db.rollback()
+  L66: def delete(self, db: Session, insurance: Insurance) -> bool:
+  L68: db.delete(insurance)
+  L69: db.commit()
+  L74: db.rollback()
+
+FILE: app\repositories\medical_document_repository.py (2455 bytes)
+  L7: def get_by_id(self, db: Session, medical_document_id: int) -> MedicalDocument | None:
+  L9: select(MedicalDocument)
+  L12: result = db.execute(statement)
+  L18: def get_medical_documents(self, db: Session) -> list[MedicalDocument]:
+  L19: statement = select(MedicalDocument)
+  L20: result = db.execute(statement)
+  L26: def get_by_patient_professional_clinic_medical_record(
+  L35: statement = select(MedicalDocument).where(
+  L41: result = db.execute(statement)
+  L47: def create(self, db: Session, medical_document: MedicalDocument) -> MedicalDocument:
+  L49: db.add(medical_document)
+  L50: db.commit()
+  L55: db.rollback()
+  L59: def update(self, db: Session, medical_document: MedicalDocument) -> MedicalDocument:
+  L61: db.commit()
+  L66: db.rollback()
+  L70: def delete(self, db: Session, medical_document: MedicalDocument) -> bool:
+  L72: db.delete(medical_document)
+  L73: db.commit()
+  L78: db.rollback()
+
+FILE: app\repositories\medical_record_repository.py (2103 bytes)
+  L7: def get_by_id(self, db: Session, medical_record_id: int) -> MedicalRecord | None:
+  L9: select(MedicalRecord)
+  L12: result = db.execute(statement)
+  L18: def get_medical_records(self, db: Session) -> list[MedicalRecord]:
+  L19: statement = select(MedicalRecord)
+  L20: result = db.execute(statement)
+  L26: def get_patient_clinic(
+  L33: statement = select(MedicalRecord).where(
+  L37: result = db.execute(statement)
+  L43: def create(self, db: Session, medical_record: MedicalRecord) -> MedicalRecord:
+  L45: db.add(medical_record)
+  L46: db.commit()
+  L51: db.rollback()
+  L55: def update(self, db: Session, medical_record: MedicalRecord) -> MedicalRecord:
+  L57: db.commit()
+  L62: db.rollback()
+  L66: def delete(self, db: Session, medical_record: MedicalRecord) -> bool:
+  L68: db.delete(medical_record)
+  L69: db.commit()
+  L74: db.rollback()
+
+FILE: app\repositories\medication_active_ingredient_repository.py (2278 bytes)
+  L8: def create(self, db: Session, medication_active_ingredient: MedicationActiveIngredient) -> MedicationActiveIngredient:
+  L10: db.add(medication_active_ingredient)
+  L11: db.commit()
+  L17: db.rollback()
+  L21: def get_by_medication_active_ingredient(
+  L28: select(MedicationActiveIngredient)
+  L34: result = db.execute(statement)
+  L40: def get_medication_active_ingredients(
+  L45: statement = select(MedicationActiveIngredient)
+  L46: result = db.execute(statement)
+  L53: def update(self, db: Session, medication_active_ingredient: MedicationActiveIngredient) -> MedicationActiveIngredient:
+  L55: db.commit()
+  L60: db.rollback()
+  L64: def delete(self, db: Session, medication_active_ingredient: MedicationActiveIngredient) -> bool:
+  L66: db.delete(medication_active_ingredient)
+  L67: db.commit()
+  L72: db.rollback()
+
+FILE: app\repositories\medication_presentation_repository.py (2326 bytes)
+  L8: def get_by_id(self, db: Session, medication_presentation_id: int) -> MedicationPresentation | None:
+  L10: select(MedicationPresentation)
+  L13: result = db.execute(statement)
+  L19: def get_medication_presentations(self, db: Session) -> list[MedicationPresentation]:
+  L20: statement = select(MedicationPresentation)
+  L21: result = db.execute(statement)
+  L27: def get_by_medication_id(
+  L33: statement = select(MedicationPresentation).where(
+  L36: result = db.execute(statement)
+  L43: def create(self, db: Session, medication_presentation: MedicationPresentation) -> MedicationPresentation:
+  L45: db.add(medication_presentation)
+  L46: db.commit()
+  L51: db.rollback()
+  L55: def update(self, db: Session, medication_presentation: MedicationPresentation) -> MedicationPresentation:
+  L57: db.commit()
+  L62: db.rollback()
+  L65: def delete(self, db: Session, medication_presentation: MedicationPresentation) -> bool:
+  L67: db.delete(medication_presentation)
+  L68: db.commit()
+  L73: db.rollback()
+
+FILE: app\repositories\medication_repository.py (1530 bytes)
+  L7: def get_by_id(self, db: Session, medication_id: int) -> Medication | None:
+  L9: select(Medication)
+  L12: result = db.execute(statement)
+  L18: def get_medications(self, db: Session) -> list[Medication]:
+  L19: statement = select(Medication)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, medication: Medication) -> Medication:
+  L28: db.add(medication)
+  L29: db.commit()
+  L34: db.rollback()
+  L38: def update(self, db: Session, medication: Medication) -> Medication:
+  L40: db.commit()
+  L45: db.rollback()
+  L49: def delete(self, db: Session, medication: Medication) -> bool:
+  L51: db.delete(medication)
+  L52: db.commit()
+  L57: db.rollback()
+
+FILE: app\repositories\module_repository.py (1429 bytes)
+  L7: def get_by_id(self, db: Session, module_id: int) -> Module | None:
+  L9: select(Module)
+  L12: result = db.execute(statement)
+  L18: def get_modules(self, db: Session) -> list[Module]:
+  L19: statement =  select(Module)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, module: Module) -> Module:
+  L28: db.add(module)
+  L29: db.commit()
+  L34: db.rollback()
+  L38: def update(self, db: Session, module: Module) -> Module:
+  L40: db.commit()
+  L45: db.rollback()
+  L49: def delete(self, db: Session, module: Module) -> bool:
+  L51: db.delete(module)
+  L52: db.commit()
+  L57: db.rollback()
+
+FILE: app\repositories\patient_clinics_repository.py (868 bytes)
+  L9: def create(self, db: Session, patient_clinic: PatientClinic) -> PatientClinic:
+  L12: db.add(patient_clinic)
+  L13: db.commit()
+  L19: db.rollback()
+  L23: def get_by_patient_and_clinic(self, db: Session, patient_id: int, clinic_id: int) -> PatientClinic | None:
+  L24: statement = select(PatientClinic).where(PatientClinic.patient_id == patient_id, PatientClinic.clinic_id == clinic_id)
+  L25: result = db.execute(statement)
+
+FILE: app\repositories\patient_contact_repository.py (1723 bytes)
+  L7: def get_by_id(self, db: Session, patient_contacts_id: int) -> PatientContact | None:
+  L9: select(PatientContact)
+  L12: result = db.execute(statement)
+  L18: def get_patient_contacts(self, db: Session) -> list[PatientContact]:
+  L19: statement = select(PatientContact)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, patient_contacts: PatientContact) -> PatientContact:
+  L28: db.add(patient_contacts)
+  L29: db.commit()
+  L34: db.rollback()
+  L38: def update(self, db: Session, patient_contacts: PatientContact) -> PatientContact:
+  L40: db.commit()
+  L45: db.rollback()
+  L49: def delete(self, db: Session, patient_contacts: PatientContact) -> bool:
+  L51: db.delete(patient_contacts)
+  L52: db.commit()
+  L57: db.rollback()
+
+FILE: app\repositories\patient_insurance_plan_repository.py (1407 bytes)
+  L9: def create(self, db: Session, patient_insurance_plan: PatientInsurancePlan) -> PatientInsurancePlan:
+  L11: db.add(patient_insurance_plan)
+  L12: db.commit()
+  L17: db.rollback()
+  L21: def get_by_patient_insurance_plan(
+  L28: statement = select(PatientInsurancePlan).where(
+  L32: result = db.execute(statement)
+  L38: def delete(self, db: Session, patient_insurance_plan: PatientInsurancePlan) -> bool:
+  L40: db.delete(patient_insurance_plan)
+  L41: db.commit()
+  L46: db.rollback()
+
+FILE: app\repositories\patient_repository.py (1732 bytes)
+  L8: def get_by_id(self, db: Session, patient_id: int) -> Patient | None:
+  L9: statement = select(Patient).options(selectinload(Patient.clinics)).where(Patient.id == patient_id)
+  L10: result = db.execute(statement)
+  L16: def get_patients(self, db: Session, clinic_id: int | None = None) -> list[Patient]:
+  L17: statement = select(Patient).options(selectinload(Patient.clinics))
+  L24: result = db.execute(statement)
+  L30: def create(self, db: Session, patient: Patient) -> Patient:
+  L33: db.add(patient)
+  L34: db.commit()
+  L40: db.rollback()
+  L44: def update(self, db: Session, patient: Patient) -> Patient:
+  L47: db.commit()
+  L53: db.rollback()
+  L57: def delete(self, db: Session, patient: Patient) -> bool:
+  L60: db.delete(patient)
+  L61: db.commit()
+  L66: db.rollback()
+
+FILE: app\repositories\permission_repository.py (1518 bytes)
+  L7: def get_by_id(self, db: Session, permission_id: int) -> Permission | None:
+  L9: select(Permission)
+  L12: result = db.execute(statement)
+  L18: def get_permissions(self, db: Session) -> list[Permission]:
+  L19: statement = select(Permission)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, permission: Permission) -> Permission:
+  L28: db.add(permission)
+  L29: db.commit()
+  L34: db.rollback()
+  L38: def update(self, db: Session, permission: Permission) -> Permission:
+  L40: db.commit()
+  L45: db.rollback()
+  L49: def delete(self, db: Session, permission: Permission) -> bool:
+  L51: db.delete(permission)
+  L52: db.commit()
+  L57: db.rollback()
+
+FILE: app\repositories\plan_repository.py (1398 bytes)
+  L7: def get_by_id(self, db: Session, plan_id: int) -> Plan | None:
+  L9: select(Plan)
+  L12: result = db.execute(statement)
+  L17: def get_plans(self, db: Session) -> list[Plan]:
+  L18: statement = select(Plan)
+  L19: result = db.execute(statement)
+  L25: def create(self, db: Session, plan: Plan) -> Plan:
+  L27: db.add(plan)
+  L28: db.commit()
+  L33: db.rollback()
+  L37: def update(self, db: Session, plan: Plan) -> Plan:
+  L39: db.commit()
+  L44: db.rollback()
+  L48: def delete(self, db: Session, plan: Plan) -> bool:
+  L50: db.delete(plan)
+  L51: db.commit()
+  L56: db.rollback()
+
+FILE: app\repositories\prescription_item_repository.py (1723 bytes)
+  L8: def get_by_id(self, db: Session, prescription_item_id: int) -> PrescriptionItem | None:
+  L10: select(PrescriptionItem)
+  L13: result = db.execute(statement)
+  L19: def get_prescription_items(self, db: Session) -> list[PrescriptionItem]:
+  L20: statement = select(PrescriptionItem)
+  L21: result = db.execute(statement)
+  L27: def create(self, db: Session, prescription_item: PrescriptionItem) -> PrescriptionItem:
+  L29: db.add(prescription_item)
+  L30: db.commit()
+  L35: db.rollback()
+  L39: def update(self, db: Session, prescription_item: PrescriptionItem) -> PrescriptionItem:
+  L41: db.commit()
+  L46: db.rollback()
+  L50: def delete(self, db: Session, prescription_item: PrescriptionItem) -> bool:
+  L52: db.delete(prescription_item)
+  L53: db.commit()
+  L58: db.rollback()
+
+FILE: app\repositories\prescription_repository.py (1576 bytes)
+  L7: def get_by_id(self, db: Session, prescription_id: int) -> Prescription | None:
+  L9: select(Prescription)
+  L12: result = db.execute(statement)
+  L18: def get_prescriptions(self, db: Session) -> list[Prescription]:
+  L19: statement = select(Prescription)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, prescription: Prescription) -> Prescription:
+  L28: db.add(prescription)
+  L29: db.commit()
+  L34: db.rollback()
+  L38: def update(self, db: Session, prescription: Prescription) -> Prescription:
+  L40: db.commit()
+  L45: db.rollback()
+  L49: def delete(self, db: Session, prescription: Prescription) -> bool:
+  L51: db.delete(prescription)
+  L52: db.commit()
+  L57: db.rollback()
+
+FILE: app\repositories\professional_clinic_repository.py (1058 bytes)
+  L9: def create(
+  L16: db.add(professional_clinic)
+  L17: db.commit()
+  L23: db.rollback()
+  L26: def get_by_professional_and_clinic(
+  L33: statement = select(ProfessionalClinic).where(
+  L38: result = db.execute(statement)
+
+FILE: app\repositories\professional_repository.py (1640 bytes)
+  L7: def get_by_id(self, db: Session, professional_id: int) -> Professional | None:
+  L8: statement = select(Professional).options(selectinload(Professional.clinics)).where(Professional.id == professional_id)
+  L9: result = db.execute(statement)
+  L15: def get_professionals(self, db: Session) -> list[Professional]:
+  L16: statement = select(Professional).options(selectinload(Professional.clinics))
+  L17: result = db.execute(statement)
+  L23: def create(self, db: Session, professional: Professional) -> Professional:
+  L26: db.add(professional)
+  L27: db.commit()
+  L33: db.rollback()
+  L37: def update(self, db: Session, professional: Professional) -> Professional:
+  L40: db.commit()
+  L46: db.rollback()
+  L50: def delete(self, db: Session, professional: Professional) -> bool:
+  L53: db.delete(professional)
+  L54: db.commit()
+  L59: db.rollback()
+
+FILE: app\repositories\professional_specialty_repository.py (1041 bytes)
+  L8: def create_professional_specialty(self, db: Session, professional_specialty: ProfessionalSpecialty) -> ProfessionalSpecialty:
+  L11: db.add(professional_specialty)
+  L12: db.commit()
+  L18: db.rollback()
+  L21: def get_by_professional_and_specialty(self, db: Session, professional_id: int, specialty_id: int) -> ProfessionalSpecialty | None:
+  L22: statement = select(ProfessionalSpecialty).where(ProfessionalSpecialty.professional_id == professional_id, ProfessionalSpecialty.specialty_id == specialty_id)
+  L23: result = db.execute(statement)
+
+FILE: app\repositories\role_permission_repository.py (1285 bytes)
+  L8: def create(
+  L15: db.add(role_permission)
+  L16: db.commit()
+  L22: db.rollback()
+  L26: def get_by_role_and_permission(
+  L33: statement = select(RolePermission).where(
+  L37: result = db.execute(statement)
+  L43: def delete(self, db: Session, role_permission_data: RolePermission) -> bool:
+  L46: db.delete(role_permission_data)
+  L47: db.commit()
+  L52: db.rollback()
+
+FILE: app\repositories\role_repository.py (1344 bytes)
+  L7: def get_by_id(self, db: Session, role_id: int) -> Role | None:
+  L9: select(Role)
+  L12: result = db.execute(statement)
+  L18: def get_roles(self, db: Session) -> list[Role]:
+  L19: statement = select(Role)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, role: Role) -> Role:
+  L28: db.add(role)
+  L29: db.commit()
+  L34: db.rollback()
+  L38: def update(self, db: Session, role: Role) -> Role:
+  L40: db.commit()
+  L45: db.rollback()
+  L49: def delete(self, db: Session, role: Role) -> bool:
+  L51: db.delete(role)
+  L52: db.commit()
+  L57: db.rollback()
+
+FILE: app\repositories\schedule_avilability_repository.py (140 bytes)
+
+FILE: app\repositories\specialty_repository.py (1518 bytes)
+  L7: def get_by_id(self, db: Session, specialty_id: int) -> Specialty | None:
+  L8: statement = select(Specialty).where(Specialty.id == specialty_id)
+  L9: result = db.execute(statement)
+  L15: def get_specialties(self, db: Session) -> list[Specialty]:
+  L16: statement = select(Specialty)
+  L17: result = db.execute(statement)
+  L23: def create(self, db: Session, specialty: Specialty) -> Specialty:
+  L26: db.add(specialty)
+  L27: db.commit()
+  L33: db.rollback()
+  L37: def update(self, db: Session, specialty: Specialty) -> Specialty:
+  L40: db.commit()
+  L46: db.rollback()
+  L50: def delete(self, db: Session, specialty: Specialty) -> bool:
+  L53: db.delete(specialty)
+  L54: db.commit()
+  L59: db.rollback()
+
+FILE: app\repositories\study_repository.py (1372 bytes)
+  L7: def get_by_id(self, db: Session, study_id: int) -> Study | None:
+  L9: select(Study)
+  L12: result = db.execute(statement)
+  L18: def get_studies(self, db: Session) -> list[Study]:
+  L19: statement = select(Study)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, study: Study) -> Study:
+  L28: db.add(study)
+  L29: db.commit()
+  L34: db.rollback()
+  L38: def update(self, db: Session, study: Study) -> Study:
+  L40: db.commit()
+  L45: db.rollback()
+  L49: def delete(self, db: Session, study: Study) -> bool:
+  L51: db.delete(study)
+  L52: db.commit()
+  L57: db.rollback()
+
+FILE: app\repositories\system_logs_repository.py (993 bytes)
+  L7: def get_by_id(self, db: Session, system_log_id: int) -> SystemLog | None:
+  L9: select(SystemLog)
+  L12: result = db.execute(statement)
+  L18: def get_system_logs(self, db: Session) -> list[SystemLog]:
+  L19: statement = select(SystemLog)
+  L20: result = db.execute(statement)
+  L25: def create(self, db: Session, system_log: SystemLog) -> SystemLog:
+  L27: db.add(system_log)
+  L28: db.commit()
+  L33: db.rollback()
+
+FILE: app\repositories\tenant_repository.py (1398 bytes)
+  L7: def get_by_id(self, db: Session, tenant_id: int) -> Tenant | None:
+  L9: select(Tenant)
+  L12: result = db.execute(statement)
+  L18: def get_tenants(self, db: Session) -> list[Tenant]:
+  L19: statement = select(Tenant)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, tenant: Tenant) -> Tenant:
+  L28: db.add(tenant)
+  L29: db.commit()
+  L34: db.rollback()
+  L38: def update(self, db: Session, tenant: Tenant) -> Tenant:
+  L40: db.commit()
+  L45: db.rollback()
+  L49: def delete(self, db: Session, tenant: Tenant) -> bool:
+  L51: db.delete(tenant)
+  L52: db.commit()
+  L57: db.rollback()
+
+FILE: app\repositories\user_clinic_repository.py (1222 bytes)
+  L8: def create(
+  L15: db.add(user_clinic)
+  L16: db.commit()
+  L22: db.rollback()
+  L26: def get_by_user_and_clinic(
+  L33: statement = select(UserClinic).where(
+  L37: result = db.execute(statement)
+  L43: def delete(self, db: Session, user_clinic_data: UserClinic) -> bool:
+  L46: db.delete(user_clinic_data)
+  L47: db.commit()
+  L52: db.rollback()
+
+FILE: app\repositories\user_repository.py (1366 bytes)
+  L7: def get_by_id(self, db: Session, user_id: int) -> User | None:
+  L9: select(User)
+  L12: result = db.execute(statement)
+  L18: def get_users(self, db: Session) -> list[User]:
+  L19: statement = select(User)
+  L20: result = db.execute(statement)
+  L26: def create(self, db: Session, user: User) -> User:
+  L28: db.add(user)
+  L29: db.commit()
+  L34: db.rollback()
+  L38: def update(self, db: Session, user: User) -> User:
+  L40: db.commit()
+  L46: db.rollback()
+  L50: def delete(self, db: Session, user: User) -> bool:
+  L52: db.delete(user)
+  L53: db.commit()
+  L58: db.rollback()
+
+FILE: app\repositories\user_role_repository.py (1178 bytes)
+  L8: def create(
+  L15: db.add(user_role)
+  L16: db.commit()
+  L22: db.rollback()
+  L26: def get_by_user_and_role(
+  L33: statement = select(UserRole).where(
+  L37: result = db.execute(statement)
+  L43: def delete(self, db: Session, user_role_data: UserRole) -> bool:
+  L46: db.delete(user_role_data)
+  L47: db.commit()
+  L52: db.rollback()
+
+============================================================
+SCHEMAS
+============================================================
+
+FILE: app\schemas\active_ingredient_schema.py (711 bytes)
+  L5: class ActiveIngredientCreate(BaseModel):
+  L12: class ActiveIngredientUpdate(BaseModel):
+  L19: class ActiveIngredientPatch(BaseModel):
+  L26: class ActiveIngredientResponse(BaseModel):
+
+FILE: app\schemas\appointment_schema.py (1547 bytes)
+  L9: class AppointmentCreate(BaseModel):
+  L27: class AppointmentUpdate(BaseModel):
+  L38: class AppointmentResponse(BaseModel):
+
+FILE: app\schemas\audit_logs_schema.py (789 bytes)
+  L3: from pydantic import BaseModel, ConfigDict
+  L6: class AuditLogCreate(BaseModel):
+  L19: class AuditLogResponse(BaseModel):
+  L35: model_config = ConfigDict(from_attributes = True)
+
+FILE: app\schemas\clinic_modules_schema.py (490 bytes)
+  L8: class ClinicModuleCreate(BaseModel):
+  L13: class ClinicModuleUpdate(BaseModel):
+  L18: class ClinicModuleResponse(BaseModel):
+
+FILE: app\schemas\clinic_schema.py (555 bytes)
+  L7: class ClinicCreate(BaseModel):
+  L11: class ClinicUpdate(BaseModel):
+  L15: class ClinicResponse(BaseModel):
+
+FILE: app\schemas\clinic_specialty_schema.py (270 bytes)
+  L4: class ClinicSpecialtyCreate(BaseModel):
+  L8: class ClinicSpecialtyResponse(BaseModel):
+
+FILE: app\schemas\clinical_access_grant_schema.py (568 bytes)
+  L5: class ClinicalAccessGrantCreate(BaseModel):
+  L8: class ClinicalAccessGrantUpdate(BaseModel):
+  L11: class ClinicalAccessGrantResponse(BaseModel):
+
+FILE: app\schemas\clinical_access_grant_scope_schema.py (206 bytes)
+  L3: class ClinicalAccessGrantScopeResponse(BaseModel):
+
+FILE: app\schemas\clinical_access_scope_schema.py (410 bytes)
+  L3: class ClinicalAccessScopeCreate(BaseModel):
+  L8: class ClinicalAccessScopeUpdate(BaseModel):
+  L13: class ClinicalAccessScopeResponse(BaseModel):
+
+FILE: app\schemas\clinical_evolution_schema.py (498 bytes)
+  L5: class ClinicalEvolutionModelCreate(BaseModel):
+  L9: class ClinicalEvolutionUpdate(BaseModel):
+  L12: class ClinicalEvolutionModelResponse(BaseModel):
+
+FILE: app\schemas\insurance_plan_schema.py (381 bytes)
+  L3: class InsurancePlanCreate(BaseModel):
+  L8: class InsurancePlanUpdate(BaseModel):
+  L13: class InsurancePlanResponse(BaseModel):
+
+FILE: app\schemas\insurance_schema.py (367 bytes)
+  L3: class InsuranceCreate(BaseModel):
+  L7: class InsuranceUpdate(BaseModel):
+  L11: class InsuranceResponse(BaseModel):
+
+FILE: app\schemas\medical_document_schema.py (702 bytes)
+  L6: class MedicalDocumentCreate(BaseModel):
+  L15: class MedicalDocumentUpdate(BaseModel):
+  L20: class MedicalDocumentResponse(BaseModel):
+
+FILE: app\schemas\medical_record_schema.py (456 bytes)
+  L5: class MedicalRecordCreate(BaseModel):
+  L10: class MedicalRecordUpdate(BaseModel):
+  L14: class MedicalRecordResponse(BaseModel):
+
+FILE: app\schemas\medication_active_ingredient_schema.py (434 bytes)
+  L3: class MadicationActiveIngredientCreate(BaseModel):
+  L8: class MedicationActiveIngredientUpdate(BaseModel):
+  L13: class MedicationActiveIngredientResponse(BaseModel):
+
+FILE: app\schemas\medication_presentation_schema.py (636 bytes)
+  L4: class MedicationPresentationCreate(BaseModel):
+  L11: class MedicationPresentationUpdate(BaseModel):
+  L18: class MedicationPresentationResponse(BaseModel):
+
+FILE: app\schemas\medication_schema.py (535 bytes)
+  L4: class MedicationCreate(BaseModel):
+  L10: class MedicationUpdate(BaseModel):
+  L16: class MedicationResponse(BaseModel):
+
+FILE: app\schemas\module_schema.py (483 bytes)
+  L4: from pydantic import BaseModel, ConfigDict
+  L7: class ModuleCreate(BaseModel):
+  L13: class ModuleUpdate(BaseModel):
+  L19: class ModuleResponse(BaseModel):
+  L27: model_config = ConfigDict(from_attributes=True)
+
+FILE: app\schemas\patient_contact_schema.py (794 bytes)
+  L5: class PatientContactCreate(BaseModel):
+  L14: class PatientContactUpdate(BaseModel):
+  L22: class PatientContactResponse(BaseModel):
+
+FILE: app\schemas\patient_insurance_plan_schema.py (716 bytes)
+  L8: class PatientInsurancePlanCreate(BaseModel):
+  L14: class PatientInsurancePlanUpdate(BaseModel):
+  L20: class PatientInsurancePlanResponse(BaseModel):
+
+FILE: app\schemas\patient_schema.py (1433 bytes)
+  L8: class PatientSummary(BaseModel):
+  L18: class ClinicResponse(BaseModel):
+  L26: class PatientClinicResponse(BaseModel):
+  L34: class PatientCreate(BaseModel):
+  L44: class PatientUpdate(BaseModel):
+  L54: class PatientResponse(BaseModel):
+
+FILE: app\schemas\permission_schema.py (900 bytes)
+  L7: class PermissionSummary(BaseModel):
+  L19: class PermissionCreate(BaseModel):
+  L26: class PermissionUpdate(BaseModel):
+  L34: class PermissionResponse(BaseModel):
+
+FILE: app\schemas\plan_schema.py (349 bytes)
+  L3: class PlanCreate(BaseModel):
+  L7: class PlanUpdate(BaseModel):
+  L11: class PlanResponse(BaseModel):
+
+FILE: app\schemas\prescription_item_schema.py (530 bytes)
+  L3: class PrescriptionItemCreate(BaseModel):
+  L9: class PrescriptionItemUpdate(BaseModel):
+  L15: class PrescriptionItemResponse(BaseModel):
+
+FILE: app\schemas\prescription_schema.py (685 bytes)
+  L4: class PrescriptionCreate(BaseModel):
+  L9: class PrescriptionUpdate(BaseModel):
+  L14: class PrescriptionResponse(BaseModel):
+
+FILE: app\schemas\professional_schema.py (1901 bytes)
+  L10: class ProfessionalSummary(BaseModel):
+  L20: class ProfessionalClinicResponse(BaseModel):
+  L28: class ClinicResponse(BaseModel):
+  L36: class ProfessionalCreate(BaseModel):
+  L51: class ProfessionalUpdate(BaseModel):
+  L64: class ProfessionalResponse(BaseModel):
+
+FILE: app\schemas\professional_specialty_schema.py (294 bytes)
+  L4: class ProfessionalSpecialtyCreate(BaseModel):
+  L8: class ProfessionalSpecialtyResponse(BaseModel):
+
+FILE: app\schemas\role_permission_schema.py (270 bytes)
+  L3: class RolePermissionCreate(BaseModel):
+  L8: class RolePermissionResponse(BaseModel):
+
+FILE: app\schemas\role_schema.py (704 bytes)
+  L8: class RoleSummary(BaseModel):
+  L18: class RoleCreate(BaseModel):
+  L23: class RoleUpdate(BaseModel):
+  L29: class RoleResponse(BaseModel):
+
+FILE: app\schemas\schedule_availability_schema.py (1087 bytes)
+  L6: class ScheduleAvailabilityCreate(BaseModel):
+  L18: class ScheduleAvailabilityUpdate(BaseModel):
+  L27: class ScheduleAvailabilityResponse(BaseModel):
+
+FILE: app\schemas\specialty_schema.py (732 bytes)
+  L5: class SpecialtyCreate(BaseModel):
+  L13: class SpecialtyUpdate(BaseModel):
+  L21: class SpecialtyResponse(BaseModel):
+
+FILE: app\schemas\study_schema.py (913 bytes)
+  L4: class StudyCreate(BaseModel):
+  L15: class StudyUpdate(BaseModel):
+  L22: class StudyResponse(BaseModel):
+
+FILE: app\schemas\system_logs_schema.py (708 bytes)
+  L3: from pydantic import BaseModel, ConfigDict
+  L6: class SystemLogCreate(BaseModel):
+  L15: class SystemLogResponse(BaseModel):
+  L32: model_config = ConfigDict(from_attributes = True)
+
+FILE: app\schemas\tenant_schema.py (398 bytes)
+  L6: class TenantCreate(BaseModel):
+  L10: class TenantUpdate(BaseModel):
+  L14: class TenantResponse(BaseModel):
+
+FILE: app\schemas\user_clinic_schema.py (262 bytes)
+  L3: class UserClinicCreate(BaseModel):
+  L8: class UserClinicResponse(BaseModel):
+
+FILE: app\schemas\user_role_schema.py (246 bytes)
+  L3: class UserRoleCreate(BaseModel):
+  L8: class UserRoleResponse(BaseModel):
+
+FILE: app\schemas\user_schema.py (511 bytes)
+  L5: class UserSummary(BaseModel):
+  L14: class UserCreate(BaseModel):
+  L17: class UserUpdate(BaseModel):
+  L20: class UserResponse(BaseModel):
+
+============================================================
+MODELS
+============================================================
+
+FILE: app\models\__init__.py (2271 bytes)
+
+FILE: app\models\active_ingredient_model.py (1000 bytes)
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L12: __tablename__ = "active_ingredients"
+  L14: id: Mapped[int] = mapped_column(primary_key=True)
+  L15: name: Mapped[str] = mapped_column(nullable=False)
+  L16: description: Mapped[str] = mapped_column(nullable=False)
+  L17: code: Mapped[str] = mapped_column(unique=True, nullable=False)
+  L18: status: Mapped[str] = mapped_column(nullable=False)
+  L19: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L20: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L22: medication_active_ingredients: Mapped[list["MedicationActiveIngredient"]] = relationship(
+
+FILE: app\models\appointment_model.py (3304 bytes)
+  L6: from sqlalchemy import Date, ForeignKey, Numeric, Time
+  L7: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L23: __tablename__ = "appointments"
+  L25: id: Mapped[int] = mapped_column(primary_key=True)
+  L26: reservation_code: Mapped[str] = mapped_column(nullable=False, unique=True)
+  L27: appointment_date: Mapped[date] = mapped_column(Date, nullable=False)
+  L28: appointment_hour: Mapped[time] = mapped_column(Time, nullable=False)
+  L29: consulting_duration: Mapped[int] = mapped_column(nullable=False)
+  L30: consulting_mode: Mapped[str] = mapped_column(nullable=False)
+  L31: appointment_state: Mapped[str] = mapped_column(nullable=False)
+  L32: consulting_reason: Mapped[str] = mapped_column(nullable=False)
+  L33: cancelation_reason: Mapped[str | None] = mapped_column(nullable=True)
+  L34: amount_paid: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False, default=0)
+  L35: payment_status: Mapped[str] = mapped_column(nullable=False)
+  L38: clinic_id: Mapped[int] = mapped_column(
+  L39: ForeignKey("clinics.id"),
+  L40: nullable=False
+  L43: patient_id: Mapped[int] = mapped_column(
+  L44: ForeignKey("patients.id"),
+  L45: nullable=False
+  L48: professional_id: Mapped[int] = mapped_column(
+  L49: ForeignKey("professionals.id"),
+  L50: nullable=False
+  L53: specialty_id: Mapped[int] = mapped_column(
+  L54: ForeignKey("specialties.id"),
+  L55: nullable=False
+  L58: schedule_availability_id: Mapped[int] = mapped_column(
+  L59: ForeignKey("schedule_availabilities.id"),
+  L60: nullable=False
+  L63: clinic: Mapped["Clinic"] = relationship(
+  L67: patient: Mapped["Patient"] = relationship(
+  L71: professional: Mapped["Professional"] = relationship(
+  L75: specialty: Mapped["Specialty"] = relationship(
+  L79: schedule_availability: Mapped["ScheduleAvailability"] = relationship(
+  L83: clinical_access_grants: Mapped[list["ClinicalAccessGrant"]] = relationship(
+  L87: clinical_evolutions: Mapped[list["ClinicalEvolution"]] = relationship(
+  L91: studies: Mapped[list["Study"]] = relationship(
+  L95: prescriptions: Mapped[list["Prescription"]] = relationship(
+
+FILE: app\models\audit_logs_model.py (1760 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L17: __tablename__ = "audit_logs"
+  L19: id: Mapped[int] = mapped_column(primary_key=True)
+  L20: action: Mapped[str] = mapped_column(nullable=False)
+  L21: resource_type: Mapped[str] = mapped_column(nullable=False)
+  L22: resource_id: Mapped[str] = mapped_column(nullable=True)
+  L23: outcome: Mapped[str] = mapped_column(nullable=False)
+  L24: occurred_at: Mapped[datetime] = mapped_column(nullable=False)
+  L25: ip_address: Mapped[str] = mapped_column(nullable=True)
+  L26: user_agent: Mapped[str] = mapped_column(nullable=True)
+  L27: request_id: Mapped[str] = mapped_column(nullable=True)
+  L28: metadata_: Mapped[dict] = mapped_column("metadata", JSONB, default=dict, nullable=False)
+  L31: tenant: Mapped["Tenant | None"] = relationship(
+  L35: clinic: Mapped["Clinic | None"] = relationship(
+  L39: user: Mapped["User | None"] = relationship(
+  L43: tenant_id: Mapped[int] = mapped_column(
+  L44: ForeignKey("tenants.id"),
+  L45: nullable=True
+  L48: clinic_id: Mapped[int] = mapped_column(
+  L49: ForeignKey("clinics.id"),
+  L50: nullable=True
+  L53: actor_user_id: Mapped[int] = mapped_column(
+  L54: ForeignKey("users.id"),
+  L55: nullable=True
+
+FILE: app\models\clinic_model.py (2861 bytes)
+  L3: from sqlalchemy import ForeignKey
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L24: __tablename__ = "clinics"
+  L26: id: Mapped[int] = mapped_column(primary_key=True)
+  L27: name: Mapped[str] = mapped_column(nullable=False)
+  L29: tenant_id: Mapped[int] = mapped_column(
+  L30: ForeignKey("tenants.id"),
+  L31: nullable=False
+  L34: patients: Mapped[list["Patient"]] = relationship(
+  L39: professionals: Mapped[list["Professional"]] = relationship(
+  L44: users: Mapped[list["User"]] = relationship(
+  L49: medical_records: Mapped[list["MedicalRecord"]] = relationship(
+  L53: specialties: Mapped[list["Specialty"]] = relationship(
+  L58: appointments: Mapped[list["Appointment"]] = relationship(
+  L62: schedule_availabilities: Mapped[list["ScheduleAvailability"]] = relationship(
+  L66: clinical_access_grants: Mapped[list["ClinicalAccessGrant"]] = relationship(
+  L70: medical_documents: Mapped[list["MedicalDocument"]] = relationship(
+  L74: clinic_modules: Mapped[list["ClinicModule"]] = relationship(
+  L78: tenant: Mapped["Tenant"] = relationship(
+  L82: audit_logs: Mapped[list["AuditLog"]] = relationship(
+  L86: system_logs: Mapped[list["SystemLog"]] = relationship(
+
+FILE: app\models\clinic_modules_model.py (1082 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L16: __tablename__ = "clinic_modules"
+  L18: status: Mapped[str] = mapped_column(nullable=False)
+  L19: activated_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L20: deactivated_at: Mapped[datetime | None] = mapped_column(nullable=True)
+  L22: clinic_id: Mapped[int] = mapped_column(
+  L23: ForeignKey("clinics.id"),
+  L24: primary_key=True,
+  L25: nullable=False
+  L28: module_id: Mapped[int] = mapped_column(
+  L29: ForeignKey("modules.id"),
+  L30: primary_key=True,
+  L31: nullable=False
+  L34: clinic: Mapped["Clinic"] = relationship(
+  L38: module: Mapped["Module"] = relationship(
+
+FILE: app\models\clinic_specialty_model.py (571 bytes)
+  L1: from sqlalchemy.orm import Mapped, mapped_column
+  L4: from sqlalchemy import ForeignKey
+  L8: __tablename__ = "clinic_specialties"
+  L11: clinic_id: Mapped[int] = mapped_column(
+  L12: ForeignKey("clinics.id"),
+  L13: nullable=False,
+  L14: primary_key=True
+  L18: specialty_id: Mapped[int] = mapped_column(
+  L19: ForeignKey("specialties.id"),
+  L20: nullable=False,
+  L21: primary_key=True
+
+FILE: app\models\clinical_access_grant_model.py (2281 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L17: __tablename__ = "clinical_access_grants"
+  L19: id: Mapped[int] = mapped_column(primary_key=True)
+  L20: status: Mapped[str] = mapped_column(nullable=False)
+  L21: requested_at: Mapped[datetime] = mapped_column(nullable=False)
+  L22: granted_at: Mapped[datetime] = mapped_column(nullable=True)
+  L23: expires_at: Mapped[datetime] = mapped_column(nullable=True)
+  L24: revoked_at: Mapped[datetime] = mapped_column(nullable=True)
+  L25: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L26: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L29: patient_id: Mapped[int] = mapped_column(
+  L30: ForeignKey("patients.id"),
+  L31: nullable=False
+  L34: professional_id: Mapped[int] = mapped_column(
+  L35: ForeignKey("professionals.id"),
+  L36: nullable=False
+  L39: clinic_id: Mapped[int] = mapped_column(
+  L40: ForeignKey("clinics.id"),
+  L41: nullable=False
+  L44: appointment_id: Mapped[int] = mapped_column(
+  L45: ForeignKey("appointments.id"),
+  L46: nullable=True
+  L49: patient: Mapped["Patient"] = relationship(
+  L53: professional: Mapped["Professional"] = relationship(
+  L57: clinic: Mapped["Clinic"] = relationship(
+  L61: appointment: Mapped["Appointment"] = relationship(
+  L65: clinical_access_grant_scopes: Mapped[list["ClinicalAccessGrantScope"]] = relationship(
+
+FILE: app\models\clinical_access_grant_scope_model.py (1028 bytes)
+  L3: from sqlalchemy import ForeignKey
+  L4: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L11: __tablename__ = "clinical_access_grant_scopes"
+  L13: clinical_access_grant_id: Mapped[int] = mapped_column(
+  L14: ForeignKey("clinical_access_grants.id"),
+  L15: primary_key=True,
+  L16: nullable=False
+  L19: scope_id: Mapped[int] = mapped_column(
+  L20: ForeignKey("clinical_access_scopes.id"),
+  L21: primary_key=True,
+  L22: nullable=False
+  L25: scope: Mapped["ClinicalAccessScope"] = relationship(
+  L29: clinical_access_grant: Mapped["ClinicalAccessGrant"] = relationship(
+
+FILE: app\models\clinical_access_scope_model.py (702 bytes)
+  L3: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L10: __tablename__ = "clinical_access_scopes"
+  L12: id: Mapped[int] = mapped_column(primary_key=True)
+  L13: code: Mapped[str] = mapped_column(unique=True, nullable=False)
+  L14: name: Mapped[str] = mapped_column(nullable=False)
+  L15: description: Mapped[str] = mapped_column(nullable=False)
+  L17: clinical_access_grant_scopes: Mapped[list["ClinicalAccessGrantScope"]] = relationship(
+
+FILE: app\models\clinical_evolution_model.py (1513 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L16: __tablename__ = "clinical_evolutions"
+  L18: id: Mapped[int] = mapped_column(primary_key=True)
+  L19: content: Mapped[str] = mapped_column(nullable=False)
+  L20: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L21: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L23: medical_record_id: Mapped[int] = mapped_column(
+  L24: ForeignKey("medical_records.id"),
+  L25: nullable=False
+  L28: professional_id: Mapped[int] = mapped_column(
+  L29: ForeignKey("professionals.id"),
+  L30: nullable=False
+  L33: appointment_id: Mapped[int] = mapped_column(
+  L34: ForeignKey("appointments.id"),
+  L35: nullable=False
+  L38: medical_record: Mapped["MedicalRecord"] = relationship(
+  L42: professional: Mapped["Professional"] = relationship(
+  L46: appointment: Mapped["Appointment"] = relationship(
+
+FILE: app\models\insurance_model.py (652 bytes)
+  L3: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L10: __tablename__ = "insurances"
+  L12: id: Mapped[int] = mapped_column(primary_key=True)
+  L13: name: Mapped[str] = mapped_column(nullable=False)
+  L14: registration: Mapped[str] = mapped_column(unique= True, nullable=False)
+  L15: is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
+  L18: insurance_plans: Mapped[list["InsurancePlan"]] = relationship(
+
+FILE: app\models\insurance_plan_model.py (1068 bytes)
+  L3: from sqlalchemy import ForeignKey
+  L4: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L13: __tablename__ = "insurance_plans"
+  L15: id: Mapped[int] = mapped_column(primary_key=True)
+  L17: insurance_id: Mapped[int] = mapped_column(
+  L18: ForeignKey("insurances.id"),
+  L19: nullable=False
+  L22: plan_id: Mapped[int] = mapped_column(
+  L23: ForeignKey("plans.id"),
+  L24: nullable=False
+  L27: plan: Mapped["Plan"] = relationship(
+  L31: insurance: Mapped["Insurance"] = relationship(
+  L35: patient_insurance_plans: Mapped[list["PatientInsurancePlan"]] = relationship(
+
+FILE: app\models\medical_document_model.py (1860 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L16: __tablename__ = "medical_documents"
+  L18: id: Mapped[int] = mapped_column(primary_key=True)
+  L19: name: Mapped[str] = mapped_column(nullable=False)
+  L20: file_path: Mapped[str] = mapped_column(nullable=False)
+  L21: document_type: Mapped[str] = mapped_column(nullable=False)
+  L22: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L23: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L26: patient_id: Mapped[int] = mapped_column(
+  L27: ForeignKey("patients.id"),
+  L28: nullable=False
+  L31: medical_record_id: Mapped[int] = mapped_column(
+  L32: ForeignKey("medical_records.id"),
+  L33: nullable=False
+  L36: professional_id: Mapped[int] = mapped_column(
+  L37: ForeignKey("professionals.id"),
+  L38: nullable=False
+  L41: clinic_id: Mapped[int] = mapped_column(
+  L42: ForeignKey("clinics.id"),
+  L43: nullable=False
+  L46: patient: Mapped["Patient"] = relationship(
+  L50: medical_record: Mapped["MedicalRecord"] = relationship(
+  L54: professional: Mapped["Professional"] = relationship(
+  L58: clinic: Mapped["Clinic"] = relationship(
+
+FILE: app\models\medical_record_model.py (1895 bytes)
+  L5: from sqlalchemy import ForeignKey, UniqueConstraint
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L18: __tablename__ = "medical_records"
+  L21: UniqueConstraint("patient_id", "clinic_id"),
+  L24: id: Mapped[int] = mapped_column(primary_key=True)
+  L25: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L26: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L28: patient_id: Mapped[int] = mapped_column(
+  L29: ForeignKey("patients.id"),
+  L30: nullable=False
+  L33: clinic_id: Mapped[int] = mapped_column(
+  L34: ForeignKey("clinics.id"),
+  L35: nullable=False
+  L38: patient: Mapped["Patient"] = relationship(
+  L42: clinic: Mapped["Clinic"] = relationship(
+  L46: clinical_evolutions: Mapped[list["ClinicalEvolution"]] = relationship(
+  L50: medical_documents: Mapped[list["MedicalDocument"]] = relationship(
+  L54: studies: Mapped[list["Study"]] = relationship(
+  L58: prescriptions: Mapped[list["Prescription"]] = relationship(
+
+FILE: app\models\medical_specialty_model.py (593 bytes)
+  L1: from sqlalchemy.orm import Mapped, mapped_column
+  L4: from sqlalchemy import ForeignKey
+  L7: __tablename__ = "professional_specialties"
+  L9: professional_id: Mapped[int] = mapped_column(
+  L10: ForeignKey("professionals.id"),
+  L11: nullable=False,
+  L12: primary_key=True
+  L15: specialty_id: Mapped[int] = mapped_column(
+  L16: ForeignKey("specialties.id"),
+  L17: nullable=False,
+  L18: primary_key=True
+
+FILE: app\models\medication_active_ingredient_model.py (982 bytes)
+  L4: from sqlalchemy import ForeignKey
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L13: __tablename__ = "medication_active_ingredients"
+  L15: medication_id: Mapped[int] = mapped_column(
+  L16: ForeignKey("medications.id"),
+  L17: primary_key=True,
+  L18: nullable=False
+  L21: active_ingredients_id: Mapped[int] = mapped_column(
+  L22: ForeignKey("active_ingredients.id"),
+  L23: primary_key=True,
+  L24: nullable=False
+  L27: medication: Mapped["Medication"] = relationship(
+  L31: active_ingredient: Mapped["ActiveIngredient"] = relationship(
+
+FILE: app\models\medication_model.py (1383 bytes)
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L14: __tablename__ = "medications"
+  L16: id: Mapped[int] = mapped_column(primary_key=True)
+  L17: name: Mapped[str] = mapped_column(nullable=False)
+  L18: description: Mapped[str] = mapped_column(nullable=False)
+  L19: laboratory: Mapped[str] = mapped_column(nullable=False)
+  L20: status: Mapped[str] = mapped_column(nullable=False)
+  L21: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L22: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L25: prescription_items: Mapped[list["PrescriptionItem"]] = relationship(
+  L29: medication_presentations: Mapped[list["MedicationPresentation"]] = relationship(
+  L33: medication_active_ingredients: Mapped[list["MedicationActiveIngredient"]] = relationship(
+
+FILE: app\models\medication_presentation_model.py (1051 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L13: __tablename__ = "medication_presentations"
+  L15: id: Mapped[int] = mapped_column(primary_key=True)
+  L16: presentation: Mapped[str] = mapped_column(nullable=False)
+  L17: concentration: Mapped[str] = mapped_column(nullable=False)
+  L18: quantity: Mapped[str] = mapped_column(nullable=False)
+  L19: unit: Mapped[str] = mapped_column(nullable=False)
+  L20: status: Mapped[str] = mapped_column(nullable=False)
+  L21: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L23: medication_id: Mapped[int] = mapped_column(
+  L24: ForeignKey("medications.id"),
+  L25: nullable=False
+  L28: medication: Mapped["Medication"] = relationship(
+
+FILE: app\models\module_model.py (858 bytes)
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L14: __tablename__ = "modules"
+  L16: id: Mapped[int] = mapped_column(primary_key=True)
+  L17: name: Mapped[str] = mapped_column(unique=True, nullable=False)
+  L18: description: Mapped[str] = mapped_column(nullable=False)
+  L19: is_active: Mapped[bool] = mapped_column(nullable=False)
+  L20: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L21: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L23: clinic_modules: Mapped[list["ClinicModule"]] = relationship(
+
+FILE: app\models\patient_clinics_model.py (471 bytes)
+  L1: from sqlalchemy.orm import Mapped, mapped_column
+  L4: from sqlalchemy import ForeignKey
+  L7: __tablename__ = "patient_clinics"
+  L9: patient_id: Mapped[int] = mapped_column(
+  L10: ForeignKey("patients.id"),
+  L11: nullable=False,
+  L12: primary_key=True
+  L15: clinic_id: Mapped[int] = mapped_column(
+  L16: ForeignKey("clinics.id"),
+  L17: nullable=False,
+  L18: primary_key=True
+
+FILE: app\models\patient_contacts_model.py (948 bytes)
+  L3: from sqlalchemy import ForeignKey
+  L4: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L12: __tablename__ = "patient_contacts"
+  L14: id: Mapped[int] =mapped_column(primary_key=True)
+  L15: first_name: Mapped[str] = mapped_column(nullable=False)
+  L16: last_name: Mapped[str] = mapped_column(nullable=False)
+  L17: relationship_type: Mapped[str] = mapped_column(nullable=False)
+  L18: phone: Mapped[str] = mapped_column(nullable=False)
+  L19: email: Mapped[str] = mapped_column(nullable=False)
+  L20: is_emergency: Mapped[bool] = mapped_column(nullable=False)
+  L22: patient_id: Mapped[int] = mapped_column(
+  L23: ForeignKey("patients.id"),
+  L24: nullable=False
+  L27: patient: Mapped["Patient"] = relationship(
+
+FILE: app\models\patient_insurance_plan_model.py (1215 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L14: __tablename__ = "patient_insurance_plans"
+  L16: id: Mapped[int] = mapped_column(primary_key=True)
+  L17: policy_number: Mapped[str] = mapped_column(nullable=False)
+  L18: is_primary: Mapped[bool] = mapped_column(nullable=False)
+  L19: expiration_date: Mapped[date] = mapped_column(nullable=False)
+  L20: status: Mapped[str] = mapped_column(nullable=False)
+  L22: patient_id: Mapped[int] = mapped_column(
+  L23: ForeignKey("patients.id"),
+  L24: nullable=False
+  L27: insurance_plan_id: Mapped[int] = mapped_column(
+  L28: ForeignKey("insurance_plans.id"),
+  L29: nullable=False
+  L32: patient: Mapped["Patient"] = relationship(
+  L36: insurance_plan: Mapped["InsurancePlan"] = relationship(
+
+FILE: app\models\patient_model.py (2668 bytes)
+  L4: from sqlalchemy import ForeignKey
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L21: __tablename__ = "patients"
+  L23: id: Mapped[int] = mapped_column(primary_key=True)
+  L24: name: Mapped[str] = mapped_column(nullable=False)
+  L25: last_name: Mapped[str] = mapped_column(nullable=False)
+  L26: dni: Mapped[str] = mapped_column(nullable=False)
+  L27: email: Mapped[str] = mapped_column(nullable=False)
+  L28: phone: Mapped[str] = mapped_column(nullable=False)
+  L29: address: Mapped[str] = mapped_column(nullable=False)
+  L30: insurance: Mapped[str] = mapped_column(nullable=False)
+  L32: birth_date: Mapped[date | None] = mapped_column(nullable=True)
+  L34: user_id: Mapped[int] = mapped_column(
+  L35: ForeignKey('users.id'),
+  L36: nullable=True,
+  L40: user: Mapped["User"] = relationship(
+  L44: clinics: Mapped[list["Clinic"]] = relationship(
+  L49: medical_records: Mapped[list["MedicalRecord"]] = relationship(
+  L53: studies: Mapped[list["Study"]] = relationship(
+  L57: prescriptions: Mapped[list["Prescription"]] = relationship(
+  L61: appointments: Mapped[list["Appointment"]] = relationship(
+  L65: patient_insurance_plans: Mapped[list["PatientInsurancePlan"]] = relationship(
+  L69: patient_contacts: Mapped[list["PatientContact"]] = relationship(
+  L73: clinical_access_grants: Mapped[list["ClinicalAccessGrant"]] = relationship(
+  L77: medical_documents: Mapped[list["MedicalDocument"]] = relationship(
+
+FILE: app\models\permission_model.py (990 bytes)
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L14: __tablename__ = "permissions"
+  L16: id: Mapped[int] = mapped_column(primary_key=True)
+  L17: name: Mapped[str] = mapped_column(nullable=False)
+  L18: description: Mapped[str] = mapped_column(nullable=False)
+  L19: resource: Mapped[str] = mapped_column(nullable=False)
+  L20: action: Mapped[str] = mapped_column(nullable=False)
+  L21: is_active: Mapped[bool] = mapped_column(nullable=False)
+  L22: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L23: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L25: roles: Mapped[list["Role"]] = relationship(
+
+FILE: app\models\plan_model.py (626 bytes)
+  L3: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L10: __tablename__ = "plans"
+  L12: id: Mapped[int] = mapped_column(primary_key=True)
+  L13: name: Mapped[str] = mapped_column(nullable=False)
+  L14: description: Mapped[str] = mapped_column(nullable=False)
+  L15: is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
+  L17: insurance_plans: Mapped[list["InsurancePlan"]] = relationship(
+
+FILE: app\models\prescription_item_model.py (1164 bytes)
+  L3: from sqlalchemy import ForeignKey
+  L4: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L13: __tablename__ = "prescription_items"
+  L15: id: Mapped[int] = mapped_column(primary_key=True)
+  L16: dosage: Mapped[str] = mapped_column(nullable=False)
+  L17: frequency: Mapped[str] = mapped_column(nullable=False)
+  L18: duration: Mapped[str] = mapped_column(nullable=False)
+  L19: instructions: Mapped[str] = mapped_column(nullable=False)
+  L21: prescription_id: Mapped[int] = mapped_column(
+  L22: ForeignKey("prescriptions.id"),
+  L23: nullable=False
+  L26: medication_id: Mapped[int] = mapped_column(
+  L27: ForeignKey("medications.id"),
+  L28: nullable=False
+  L31: prescription: Mapped["Prescription"] = relationship(
+  L35: medication: Mapped["Medication"] = relationship(
+
+FILE: app\models\prescription_model.py (2102 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L18: __tablename__ = "prescriptions"
+  L20: id: Mapped[int] = mapped_column(primary_key=True)
+  L21: prescription_date: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L22: instructions: Mapped[str] = mapped_column(nullable=False)
+  L23: status: Mapped[str] = mapped_column(nullable=False)
+  L24: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L25: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L27: patient_id: Mapped[int] = mapped_column(
+  L28: ForeignKey("patients.id"),
+  L29: nullable=False
+  L32: professional_id: Mapped[int] = mapped_column(
+  L33: ForeignKey("professionals.id"),
+  L34: nullable=False
+  L37: medical_record_id: Mapped[int] = mapped_column(
+  L38: ForeignKey("medical_records.id"),
+  L39: nullable=False
+  L42: appointment_id: Mapped[int] = mapped_column(
+  L43: ForeignKey("appointments.id"),
+  L44: nullable=False
+  L47: patient: Mapped["Patient"] = relationship(
+  L51: professional: Mapped["Professional"] = relationship(
+  L55: medical_record: Mapped["MedicalRecord"] = relationship(
+  L59: appointment: Mapped["Appointment"] = relationship(
+  L63: prescription_items: Mapped[list["PrescriptionItem"]] = relationship(
+
+FILE: app\models\professional_clinic_model.py (519 bytes)
+  L1: from sqlalchemy.orm import Mapped, mapped_column
+  L4: from sqlalchemy import ForeignKey
+  L7: __tablename__ = "professional_clinics"
+  L9: professional_id: Mapped[int] = mapped_column(
+  L10: ForeignKey("professionals.id"),
+  L11: nullable=False,
+  L12: primary_key=True
+  L15: clinic_id: Mapped[int] = mapped_column(
+  L16: ForeignKey("clinics.id"),
+  L17: nullable=False,
+  L18: primary_key=True
+
+FILE: app\models\professional_model.py (3108 bytes)
+  L5: from sqlalchemy import Date, ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L23: __tablename__ = "professionals"
+  L25: id: Mapped[int] = mapped_column(primary_key=True)
+  L26: name: Mapped[str] = mapped_column(nullable=False)
+  L27: last_name: Mapped[str] = mapped_column(nullable=False)
+  L28: gender: Mapped[str] = mapped_column(nullable=False)
+  L29: birth_date: Mapped[date] = mapped_column(Date, nullable=False)
+  L30: phone: Mapped[str] = mapped_column(nullable=False)
+  L31: email: Mapped[str] = mapped_column(nullable=False)
+  L32: credential: Mapped[str] = mapped_column(nullable=False)
+  L33: credential_expiration: Mapped[date] = mapped_column(Date, nullable=False)
+  L34: dni: Mapped[str] = mapped_column(nullable=False)
+  L35: address: Mapped[str] = mapped_column(nullable=False)
+  L36: medical_facility: Mapped[str] = mapped_column(nullable=False)
+  L37: working_insurance: Mapped[str] = mapped_column(nullable=False)
+  L40: user_id: Mapped[int] = mapped_column(
+  L41: ForeignKey('users.id'),
+  L42: nullable=True,
+  L46: user: Mapped["User"] = relationship(
+  L50: clinics: Mapped[list["Clinic"]] = relationship(
+  L55: specialties: Mapped[list["Specialty"]] = relationship(
+  L60: appointments: Mapped[list["Appointment"]] = relationship(
+  L64: studies: Mapped[list["Study"]] = relationship(
+  L68: prescriptions: Mapped[list["Prescription"]] = relationship(
+  L72: schedule_availabilities: Mapped[list["ScheduleAvailability"]] = relationship(
+  L76: clinical_access_grants: Mapped[list["ClinicalAccessGrant"]] = relationship(
+  L80: medical_documents: Mapped[list["MedicalDocument"]] = relationship(
+  L84: clinical_evolutions: Mapped[list["ClinicalEvolution"]] = relationship(
+
+FILE: app\models\role_model.py (1200 bytes)
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L18: __tablename__ = "roles"
+  L20: id: Mapped[int] = mapped_column(primary_key=True)
+  L21: name: Mapped[str] =mapped_column(nullable=False)
+  L22: description: Mapped[str] = mapped_column(nullable=False)
+  L23: is_active: Mapped[bool] = mapped_column(nullable=False)
+  L24: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L25: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L27: users: Mapped[list["User"]] = relationship(
+  L32: permissions: Mapped[list["Permission"]] = relationship(
+
+FILE: app\models\role_permission_model.py (489 bytes)
+  L1: from sqlalchemy import ForeignKey
+  L2: from sqlalchemy.orm import Mapped, mapped_column
+  L6: __tablename__ = "role_permissions"
+  L8: role_id: Mapped[int] = mapped_column(
+  L9: ForeignKey("roles.id"),
+  L10: nullable=False,
+  L11: primary_key=True
+  L14: permission_id: Mapped[int] = mapped_column(
+  L15: ForeignKey("permissions.id"),
+  L16: nullable=False,
+  L17: primary_key=True
+
+FILE: app\models\schedule_availability_model.py (1876 bytes)
+  L5: from sqlalchemy import Date, ForeignKey, Time
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L17: __tablename__ = "schedule_availabilities"
+  L19: id: Mapped[int] = mapped_column(primary_key=True)
+  L20: weekday: Mapped[int] = mapped_column(nullable=False)
+  L21: start_hour: Mapped[time] = mapped_column(Time, nullable=False)
+  L22: end_hour: Mapped[time] = mapped_column(Time, nullable=False)
+  L23: consulting_duration: Mapped[int] = mapped_column(nullable=False)
+  L24: valid_from: Mapped[date] = mapped_column(Date, nullable=False)
+  L25: valid_until: Mapped[date] = mapped_column(Date, nullable=True)
+  L26: activity_status: Mapped[str] = mapped_column(nullable=False)
+  L29: professional_id: Mapped[int] = mapped_column(
+  L30: ForeignKey("professionals.id"),
+  L31: nullable=False
+  L34: clinic_id: Mapped[int] = mapped_column(
+  L35: ForeignKey("clinics.id"),
+  L36: nullable=False
+  L39: specialty_id: Mapped[int] = mapped_column(
+  L40: ForeignKey("specialties.id"),
+  L41: nullable=False
+  L44: professional: Mapped["Professional"] = relationship(
+  L48: clinic: Mapped["Clinic"] = relationship(
+  L52: specialty: Mapped["Specialty"] = relationship(
+  L56: appointments: Mapped[list["Appointment"]] = relationship(
+
+FILE: app\models\specialty_model.py (1430 bytes)
+  L3: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L14: __tablename__ = "specialties"
+  L16: id: Mapped[int] = mapped_column(primary_key=True)
+  L17: official_name: Mapped[str] = mapped_column(nullable=False)
+  L18: alternative_name: Mapped[str] = mapped_column(nullable=False)
+  L19: short_description: Mapped[str] = mapped_column(nullable=False)
+  L20: snomed_code: Mapped[str] = mapped_column(nullable=False, unique=True)
+  L21: medical_exercise: Mapped[str] = mapped_column(nullable=False)
+  L24: clinics: Mapped[list["Clinic"]] = relationship(
+  L30: professionals: Mapped[list["Professional"]] = relationship(
+  L35: appointments: Mapped[list["Appointment"]] = relationship(
+  L39: schedule_availabilities: Mapped[list["ScheduleAvailability"]] = relationship(
+
+FILE: app\models\study_model.py (1977 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L17: __tablename__ = "studies"
+  L19: id: Mapped[int] = mapped_column(primary_key=True)
+  L20: study_type: Mapped[str] = mapped_column(nullable=False)
+  L21: file_path: Mapped[str] = mapped_column(nullable=False)
+  L22: status: Mapped[str] = mapped_column(nullable=False)
+  L23: requested_at: Mapped[datetime] = mapped_column(nullable=False)
+  L24: completed_at: Mapped[datetime | None] = mapped_column(nullable=True)
+  L25: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L26: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L29: patient_id: Mapped[int] = mapped_column(
+  L30: ForeignKey("patients.id"),
+  L31: nullable=False
+  L34: professional_id: Mapped[int] = mapped_column(
+  L35: ForeignKey("professionals.id"),
+  L36: nullable=False
+  L39: medical_record_id: Mapped[int] = mapped_column(
+  L40: ForeignKey("medical_records.id"),
+  L41: nullable=False
+  L44: appointment_id: Mapped[int] = mapped_column(
+  L45: ForeignKey("appointments.id"),
+  L46: nullable=False
+  L49: patient: Mapped["Patient"] = relationship(
+  L53: professional: Mapped["Professional"] = relationship(
+  L57: medical_record: Mapped["MedicalRecord"] = relationship(
+  L61: appointment: Mapped["Appointment"] = relationship(
+
+FILE: app\models\system_logs_model.py (1838 bytes)
+  L5: from sqlalchemy import ForeignKey
+  L6: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L17: __tablename__ = "system_logs"
+  L19: id: Mapped[int] = mapped_column(primary_key=True)
+  L20: level: Mapped[str] = mapped_column(nullable=False)
+  L21: event_type: Mapped[str] = mapped_column(nullable=False)
+  L22: message: Mapped[str] = mapped_column(nullable=False)
+  L23: source: Mapped[str] = mapped_column(nullable=False)
+  L24: occurred_at: Mapped[datetime] = mapped_column(nullable=False)
+  L25: request_id: Mapped[str] = mapped_column(nullable=True)
+  L26: correlation_id: Mapped[str] = mapped_column(nullable=True)
+  L27: exception_type: Mapped[str] = mapped_column(nullable=True)
+  L28: stack_trace: Mapped[str] = mapped_column(nullable=True)
+  L29: metadata_: Mapped[dict] = mapped_column("metadata", JSONB, default=dict, nullable=False)
+  L31: tenant: Mapped["Tenant | None"] = relationship(
+  L35: clinic: Mapped["Clinic | None"] = relationship(
+  L39: user: Mapped["User | None"] = relationship(
+  L44: tenant_id: Mapped[int] = mapped_column(
+  L45: ForeignKey("tenants.id"),
+  L46: nullable=True
+  L49: clinic_id: Mapped[int] = mapped_column(
+  L50: ForeignKey("clinics.id"),
+  L51: nullable=True
+  L54: actor_user_id: Mapped[int] = mapped_column(
+  L55: ForeignKey("users.id"),
+  L56: nullable=True
+
+FILE: app\models\tenant_model.py (1072 bytes)
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L16: __tablename__ = "tenants"
+  L18: id: Mapped[int] = mapped_column(primary_key=True)
+  L19: name: Mapped[str] = mapped_column(nullable=False)
+  L20: status: Mapped[str] = mapped_column(nullable=False)
+  L21: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L22: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L24: clinics: Mapped[list["Clinic"]] = relationship(
+  L28: audit_logs: Mapped[list["AuditLog"]] = relationship(
+  L32: system_logs: Mapped[list["SystemLog"]] = relationship(
+
+FILE: app\models\user_clinic_model.py (461 bytes)
+  L1: from sqlalchemy import ForeignKey
+  L2: from sqlalchemy.orm import Mapped, mapped_column
+  L6: __tablename__ = "user_clinics"
+  L8: user_id: Mapped[int] = mapped_column(
+  L9: ForeignKey("users.id"),
+  L10: nullable=False,
+  L11: primary_key=True
+  L14: clinic_id: Mapped[int] = mapped_column(
+  L15: ForeignKey("clinics.id"),
+  L16: nullable=False,
+  L17: primary_key=True
+
+FILE: app\models\user_model.py (1602 bytes)
+  L5: from sqlalchemy.orm import Mapped, mapped_column, relationship
+  L18: __tablename__ = "users"
+  L20: id: Mapped[int] = mapped_column(primary_key=True)
+  L21: email: Mapped[str] = mapped_column(nullable=False, unique=True)
+  L22: is_active: Mapped[bool] = mapped_column(nullable=False)
+  L23: created_at: Mapped[datetime] = mapped_column(default=datetime.now, nullable=False)
+  L24: updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now, nullable=False)
+  L27: professional: Mapped["Professional"] = relationship(
+  L31: patient: Mapped["Patient"] = relationship(
+  L35: clinics: Mapped[list["Clinic"]] = relationship(
+  L40: roles: Mapped[list["Role"]] =relationship(
+  L45: audit_logs: Mapped[list["AuditLog"]] = relationship(
+  L49: system_logs: Mapped[list["SystemLog"]] = relationship(
+
+FILE: app\models\user_role_model.py (461 bytes)
+  L1: from sqlalchemy import ForeignKey
+  L2: from sqlalchemy.orm import Mapped, mapped_column
+  L6: __tablename__ = "user_roles"
+  L8: user_id: Mapped[int] = mapped_column(
+  L9: ForeignKey("users.id"),
+  L10: nullable=False,
+  L11: primary_key=True
+  L14: role_id: Mapped[int] = mapped_column(
+  L15: ForeignKey("roles.id"),
+  L16: nullable=False,
+  L17: primary_key=True
+
+============================================================
+TESTS
+============================================================
+
+FILE: tests\api\test_audit_logs.py (2070 bytes)
+  L2: def test_list_audit_logs_returns_200_and_empty_list(client):
+  L3: response = client.get("/audit_logs/")
+  L5: assert response.status_code == 200
+  L6: assert response.json() == []
+  L9: def test_get_audit_log_not_found_returns_404(client):
+  L10: response = client.get("/audit_logs/999999")
+  L12: assert response.status_code == 404
+  L13: assert response.json() == {
+  L17: def test_create_audit_log_returns_200_or_201(client):
+  L24: response = client.post("/audit_logs/", json=payload)
+  L26: assert response.status_code in (200, 201)
+  L30: assert data["id"] is not None
+  L31: assert data["action"] == payload["action"]
+  L32: assert data["resource_type"] == payload["resource_type"]
+  L33: assert data["outcome"] == payload["outcome"]
+  L34: assert data["occurred_at"] is not None
+  L35: assert data["resource_id"] is None
+  L36: assert data["request_id"] is None
+  L37: assert data["metadata_"] == {}
+  L40: def test_get_audit_log_by_id_returns_200(client):
+  L47: create_response = client.post("/audit_logs/", json=payload)
+  L49: assert create_response.status_code in (200, 201)
+  L53: response = client.get(f"/audit_logs/{audit_log_id}")
+  L55: assert response.status_code == 200
+  L59: assert data["id"] == audit_log_id
+  L60: assert data["action"] == payload["action"]
+  L61: assert data["resource_type"] == payload["resource_type"]
+  L62: assert data["outcome"] == payload["outcome"]
+  L63: assert data["occurred_at"] is not None
+  L66: def test_create_audit_log_without_required_fields_returns_422(client):
+  L71: response = client.post("/audit_logs/", json=payload)
+  L73: assert response.status_code == 422
+
+FILE: tests\api\test_system_logs.py (434 bytes)
+  L2: def test_list_system_logs_returns_200_and_empty_list(client):
+  L3: response = client.get("/system_logs/")
+  L5: assert response.status_code == 200
+  L6: assert response.json() == []
+  L9: def test_get_system_log_not_found_returns_404(client):
+  L10: response = client.get("/system_logs/999999")
+  L12: assert response.status_code == 404
+  L13: assert response.json() == {
+
+FILE: tests\conftest.py (2635 bytes)
+  L15: TEST_DB_NAME = "medical_cms_test"
+  L28: # Protección: no permitir una base distinta de medical_cms_test.
+  L41: raise RuntimeError("Conexión bloqueada: la base no es medical_cms_test.")
+  L61: Base.metadata.create_all(bind=test_engine)
+
+FILE: tests\services\test_medication_presentation_service.py (1386 bytes)
+  L8: def test_create_medication_presentation_assigns_fields_and_medication_id():
+  L34: assert created is not None
+  L35: assert created.presentation == "Caja"
+  L36: assert created.concentration == "500 mg"
+  L37: assert created.quantity == "10"
+  L38: assert created.unit == "comprimidos"
+  L39: assert created.status == "active"
+  L40: assert created.medication_id == 7
+
+FILE: tests\services\test_prescription_item_service.py (534 bytes)
+  L7: def test_get_prescription_items_returns_list():
+  L16: assert result == items
+  L17: assert isinstance(result, list)
+
+FILE: tests\test_global_exception_handler.py (1136 bytes)
+  L9: def test_global_exception_handler_returns_generic_500(caplog):
+  L35: assert response.status_code == 500
+  L36: assert response.body == b'{"detail":"Error interno del servidor"}'
+  L37: assert "Detalle interno que no debe exponerse" in caplog.text
+
+============================================================
+MIGRATIONS
+============================================================
+
+FILE: alembic\versions\01ad26dedfb1_add_modules_entities.py (4156 bytes)
+  L22: def upgrade() -> None:
+  L26: op.create_table(
+  L39: op.create_table(
+  L50: op.execute(
+  L63: op.create_table(
+  L77: op.add_column(
+  L83: op.execute(
+  L95: op.alter_column(
+  L103: op.create_foreign_key(
+  L112: op.alter_column(
+  L120: def downgrade() -> None:
+  L124: op.alter_column(
+  L132: op.drop_constraint(
+  L138: op.drop_column('clinics', 'tenant_id')
+  L141: op.drop_table('clinic_modules')
+  L142: op.drop_table('tenants')
+  L143: op.drop_table('modules')
+
+FILE: alembic\versions\0647abec7932_add_schedule_availability_to_.py (1117 bytes)
+  L21: def upgrade() -> None:
+  L24: op.add_column('appointments', sa.Column('schedule_availability_id', sa.Integer(), nullable=False))
+  L25: op.create_foreign_key(None, 'appointments', 'schedule_availabilities', ['schedule_availability_id'], ['id'])
+  L29: def downgrade() -> None:
+  L32: op.drop_constraint(None, 'appointments', type_='foreignkey')
+  L33: op.drop_column('appointments', 'schedule_availability_id')
+
+FILE: alembic\versions\093b7c709426_update_audit_and_system_logs_models.py (3258 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table('audit_logs',
+  L43: op.create_table('system_logs',
+  L63: op.alter_column('studies', 'completed_at',
+  L69: def downgrade() -> None:
+  L72: op.alter_column('studies', 'completed_at',
+  L75: op.drop_table('system_logs')
+  L76: op.drop_table('audit_logs')
+
+FILE: alembic\versions\0d4d7b8dbd9c_add_medical_record_fk_to_studies.py (1025 bytes)
+  L21: def upgrade() -> None:
+  L23: op.add_column(
+  L27: op.create_foreign_key(
+  L36: def downgrade() -> None:
+  L38: op.drop_constraint('fk_studies_medical_record_id', 'studies', type_='foreignkey')
+  L39: op.drop_column('studies', 'medical_record_id')
+
+FILE: alembic\versions\37b5f932db3a_create_appointments_and_schedule_.py (3132 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table('appointments',
+  L47: op.create_table('schedule_availabilities',
+  L67: def downgrade() -> None:
+  L70: op.drop_table('schedule_availabilities')
+  L71: op.drop_table('appointments')
+
+FILE: alembic\versions\3dce91a62490_add_birth_date_to_patients.py (602 bytes)
+  L22: def upgrade() -> None:
+  L24: pass
+  L27: def downgrade() -> None:
+  L29: pass
+
+FILE: alembic\versions\420c6cc931ec_add_users_roles_and_permissions.py (4314 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table('permissions',
+  L35: op.create_table('roles',
+  L44: op.create_table('users',
+  L53: op.create_table('role_permissions',
+  L60: op.create_table('user_clinics',
+  L67: op.create_table('user_roles',
+  L74: op.alter_column('appointments', 'consulting_reason',
+  L77: op.add_column('patients', sa.Column('user_id', sa.Integer(), nullable=True))
+  L78: op.create_unique_constraint(None, 'patients', ['user_id'])
+  L79: op.create_foreign_key(None, 'patients', 'users', ['user_id'], ['id'])
+  L80: op.add_column('professionals', sa.Column('user_id', sa.Integer(), nullable=True))
+  L81: op.create_unique_constraint(None, 'professionals', ['user_id'])
+  L82: op.create_foreign_key(None, 'professionals', 'users', ['user_id'], ['id'])
+  L86: def downgrade() -> None:
+  L89: op.drop_constraint(None, 'professionals', type_='foreignkey')
+  L90: op.drop_constraint(None, 'professionals', type_='unique')
+  L91: op.drop_column('professionals', 'user_id')
+  L92: op.drop_constraint(None, 'patients', type_='foreignkey')
+  L93: op.drop_constraint(None, 'patients', type_='unique')
+  L94: op.drop_column('patients', 'user_id')
+  L95: op.alter_column('appointments', 'consulting_reason',
+  L98: op.drop_table('user_roles')
+  L99: op.drop_table('user_clinics')
+  L100: op.drop_table('role_permissions')
+  L101: op.drop_table('users')
+  L102: op.drop_table('roles')
+  L103: op.drop_table('permissions')
+
+FILE: alembic\versions\4806aec454fe_add_birth_date_to_patients.py (886 bytes)
+  L21: def upgrade() -> None:
+  L24: op.add_column('patients', sa.Column('birth_date', sa.String(), nullable=True))
+  L28: def downgrade() -> None:
+  L31: op.drop_column('patients', 'birth_date')
+
+FILE: alembic\versions\486fd1b508d3_add_clinical_accesss_models.py (2719 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table('clinical_access_scopes',
+  L32: op.create_table('clinical_access_grants',
+  L51: op.create_table('clinical_access_grant_scopes',
+  L61: def downgrade() -> None:
+  L64: op.drop_table('clinical_access_grant_scopes')
+  L65: op.drop_table('clinical_access_grants')
+  L66: op.drop_table('clinical_access_scopes')
+
+FILE: alembic\versions\625f66a87ce8_add_medical_records.py (1333 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table('medical_records',
+  L38: def downgrade() -> None:
+  L41: op.drop_table('medical_records')
+
+FILE: alembic\versions\69a19fdf25d3_remove_age_and_convert_birth_date_to_.py (758 bytes)
+  L21: def upgrade() -> None:
+  L23: op.drop_column("patients", "age")
+  L25: op.alter_column(
+  L33: def downgrade() -> None:
+  L35: pass
+
+FILE: alembic\versions\78cec85b25b0_update_entity_insurance_plan_model_.py (922 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_unique_constraint(None, 'insurances', ['registration'])
+  L28: def downgrade() -> None:
+  L31: op.drop_constraint(None, 'insurances', type_='unique')
+
+FILE: alembic\versions\9648c16ca3ee_create_patient_clinic_model_association.py (2048 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table("patient_clinics",
+  L32: op.execute(
+  L38: op.drop_constraint(op.f('fk_patients_clinic_id'), 'patients', type_='foreignkey')
+  L39: op.drop_column('patients', 'clinic_id')
+  L43: def downgrade() -> None:
+  L46: op.add_column(
+  L56: op.execute(
+  L62: op.alter_column(
+  L68: op.create_foreign_key(op.f('fk_patients_clinic_id'), 'patients', 'clinics', ['clinic_id'], ['id'])
+  L70: op.drop_table('patient_clinics')
+
+FILE: alembic\versions\a9e9623db998_add_medical_entities.py (7311 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table('active_ingredients',
+  L35: op.create_table('medications',
+  L45: op.create_table('medication_active_ingredients',
+  L52: op.create_table('medication_presentations',
+  L64: op.create_table('medical_documents',
+  L81: op.create_table('clinical_evolutions',
+  L94: op.create_table('prescriptions',
+  L111: op.create_table('studies',
+  L128: op.create_table('prescription_items',
+  L143: def downgrade() -> None:
+  L146: op.drop_table('prescription_items')
+  L147: op.drop_table('studies')
+  L148: op.drop_table('prescriptions')
+  L149: op.drop_table('clinical_evolutions')
+  L150: op.drop_table('medical_documents')
+  L151: op.drop_table('medication_presentations')
+  L152: op.drop_table('medication_active_ingredients')
+  L153: op.drop_table('medications')
+  L154: op.drop_table('active_ingredients')
+
+FILE: alembic\versions\d70ca4a12526_add_clinic_relationship_to_patients.py (1251 bytes)
+  L21: def upgrade() -> None:
+  L24: op.add_column(
+  L33: op.execute(
+  L37: op.alter_column(
+  L43: op.create_foreign_key(
+  L53: def downgrade() -> None:
+  L56: op.drop_constraint(
+  L62: op.drop_column(
+
+FILE: alembic\versions\deb0300ead23_make_snomed_code_unique.py (885 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_unique_constraint(None, 'specialties', ['snomed_code'])
+  L28: def downgrade() -> None:
+  L31: op.drop_constraint(None, 'specialties', type_='unique')
+
+FILE: alembic\versions\e77fa800c1b4_create_professional_clinics_association.py (1181 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table('professional_clinics',
+  L34: def downgrade() -> None:
+  L37: op.drop_table('professional_clinics')
+
+FILE: alembic\versions\ea8a58837a42_add_specialties_and_specialty_.py (2231 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table('specialties',
+  L33: op.create_table('clinic_specialties',
+  L40: op.create_table('professional_specialties',
+  L47: op.drop_column('professionals', 'specialty')
+  L51: def downgrade() -> None:
+  L54: op.add_column('professionals', sa.Column('specialty', sa.VARCHAR(), autoincrement=False, nullable=False))
+  L55: op.drop_table('professional_specialties')
+  L56: op.drop_table('clinic_specialties')
+  L57: op.drop_table('specialties')
+
+FILE: alembic\versions\f603ac435298_add_insurance_plan_insurance_plan_models.py (3151 bytes)
+  L21: def upgrade() -> None:
+  L24: op.create_table('insurances',
+  L31: op.create_table('plans',
+  L38: op.create_table('insurance_plans',
+  L46: op.create_table('patient_contacts',
+  L58: op.create_table('patient_insurance_plans',
+  L73: def downgrade() -> None:
+  L76: op.drop_table('patient_insurance_plans')
+  L77: op.drop_table('patient_contacts')
+  L78: op.drop_table('insurance_plans')
+  L79: op.drop_table('plans')
+  L80: op.drop_table('insurances')
+
+============================================================
+EMPTY PYTHON FILES
+============================================================
+app\api\v1\api.py
+app\api\v1\endpoints\appointments.py
+app\api\v1\endpoints\auth.py
+app\api\v1\endpoints\chatbot.py
+app\api\v1\endpoints\clinics.py
+app\api\v1\endpoints\finance.py
+app\api\v1\endpoints\inventory.py
+app\api\v1\endpoints\medical_records.py
+app\api\v1\endpoints\notifications.py
+app\api\v1\endpoints\patients.py
+app\api\v1\endpoints\payments.py
+app\api\v1\endpoints\professionals.py
+app\api\v1\endpoints\scraping.py
+app\api\v1\endpoints\specialties.py
+app\api\v1\endpoints\suppliers.py
+app\api\v1\endpoints\users.py
+app\routes\patient_insurance_plan_routes.py

@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 
 from app.models.user_model import User
 from app.repositories.user_repository import UserRepository
+from app.schemas.user_schema import UserUpdate
 
 user_repository = UserRepository()
 
@@ -51,7 +52,7 @@ def get_user(
 def update_user(
     db: Session,
     user_id: int,
-    email: str
+    user_data: UserUpdate
 ) -> User | None:
     
     user = get_user(
@@ -62,7 +63,7 @@ def update_user(
     if user is None:
         return None
     
-    user.email = email
+    user.email = user_data.email
     
     user = user_repository.update(
         db=db,

@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.models.clinic_model import Clinic
+from app.models.tenant_model import Tenant
 from app.repositories.clinic_repository import ClinicRepository
 
 clinic_repository = ClinicRepository()
@@ -8,19 +9,23 @@ clinic_repository = ClinicRepository()
 
 def create_clinic(
     db: Session,
-    name: str
-) -> Clinic:
+    name: str,
+    tenant_id: int,
+) -> Clinic | None:
+    tenant = db.get(Tenant, tenant_id)
+
+    if tenant is None:
+        return None
 
     clinic = Clinic(
-        name=name
+        name=name,
+        tenant_id=tenant_id,
     )
 
-    clinic = clinic_repository.create(
-            db=db,
-            clinic=clinic
-        )
-
-    return clinic
+    return clinic_repository.create(
+        db=db,
+        clinic=clinic,
+    )
 
 
 

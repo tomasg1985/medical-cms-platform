@@ -6,6 +6,7 @@ from app.schemas.user_schema import UserSummary
 
 class ClinicCreate(BaseModel):
     name: str
+    tenant_id: int
 
 
 class ClinicUpdate(BaseModel):

@@ -15,7 +15,7 @@ class Settings(BaseSettings):
 
     app_name: str = "Medical CMS Platform API"
     app_version: str = "0.1.0"
-    debug: bool = True
+    debug: bool = False
 
     db_host: str = "localhost"
     db_port: int = 5432

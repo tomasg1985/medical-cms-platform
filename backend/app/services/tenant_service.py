@@ -72,7 +72,7 @@ def delete_tenant(db: Session, tenant_id: int) -> bool:
     )
     
     if tenant is None:
-        return None
+        return False
     
     return tenant_repository.delete(
         db=db,

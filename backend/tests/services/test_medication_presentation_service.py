@@ -2,10 +2,10 @@ from types import SimpleNamespace
 from unittest.mock import patch
 
 from app.schemas.medication_presentation_schema import MedicationPresentationCreate
-from app.services.medication_presentation_service import create_medical_presentation
+from app.services.medication_presentation_service import create_medication_presentation
 
 
-def test_create_medical_presentation_assigns_fields_and_medication_id():
+def test_create_medication_presentation_assigns_fields_and_medication_id():
     medication = SimpleNamespace(id=7)
     payload = MedicationPresentationCreate(
         presentation="Caja",
@@ -25,7 +25,7 @@ def test_create_medical_presentation_assigns_fields_and_medication_id():
         "app.services.medication_presentation_service.medication_presentation_repository.create",
         side_effect=fake_create,
     ):
-        created = create_medical_presentation(
+        created = create_medication_presentation(
             db=None,
             medication_id=7,
             presentation_data=payload,
@@ -38,3 +38,4 @@ def test_create_medical_presentation_assigns_fields_and_medication_id():
     assert created.unit == "comprimidos"
     assert created.status == "active"
     assert created.medication_id == 7
+
